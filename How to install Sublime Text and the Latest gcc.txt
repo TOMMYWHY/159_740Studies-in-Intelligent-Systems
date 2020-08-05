@@ -1,0 +1,42 @@
+How to install Sublime Text 3 and gcc (v.9.2.0)
+
+1.  Download and install gcc v.9.2
+* gcc for 64-bit Windows: https://nuwen.net/mingw.html  
+* make sure that the environment variable (i.e. Path), contains the directory of the gcc binary files you've just installed.
+* To test if g++ is accessible in your system, open a command shell and type the following command:  g++ --version 
+* For more information, see the accompanying file in our stream website, named "installation_instructions_for_gcc_9.2.txt"
+
+2. Download the latest recommended version of Sublime Text to use (Sublime Text 3)
+* https://www.sublimetext.com/
+
+3. Configure Sublime Text
+
+* From the menu, select Tools/Build System/New Build System
+
+* Copy and paste this:
+
+
+{
+               "cmd": ["mingw32-make"],
+               "file_regex": "^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$",
+               "working_dir": "${project_path:${folder:${file_path}}}",
+               "selector": "source.makefile",
+
+               "variants":
+               [
+                              {
+                                             "name": "Clean",
+                                             "cmd": ["mingw32-make", "clean"]
+                              }
+               ]
+}
+
+
+
+* Save into file (assign a name that you prefer).
+* From the menu, select Tools/Build System
+    - select the name of Build settings that you have just created.
+
+4. You may now load the start-up codes for the assignment into Sublime Text.
+5. Press Ctrl+B to build (compile and link) your codes.
+
