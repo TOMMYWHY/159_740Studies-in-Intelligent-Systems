@@ -183,12 +183,12 @@ extern int cellHeight;
 
 struct LpaStarCell
 {
-    LpaStarCell* move[DIRECTIONS];
+    LpaStarCell* move[DIRECTIONS]; //todo copy maze
     LpaStarCell* predecessor[DIRECTIONS];
-	 double linkCost[DIRECTIONS];
-    LpaStarCell* parent;
-    LpaStarCell* trace;
-    short obstacle;
+	 double linkCost[DIRECTIONS]; // =1
+    LpaStarCell* parent;//useless
+    LpaStarCell* trace; //useless
+    short obstacle; //useless
     int x, y;
 
 	 double g;

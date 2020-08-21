@@ -27,8 +27,8 @@ public:
     friend void copyDisplayMapToMaze(GridWorld &gWorld, LpaStar* lpa);
 
 private:
-	
-    vector<vector<LpaStarCell> > maze;   
+
+    vector<vector<LpaStarCell> > maze;
     LpaStarCell l;
     vector<LpaStarCell* > U; //Priority Queue
     LpaStarCell* start;
