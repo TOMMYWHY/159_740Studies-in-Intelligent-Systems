@@ -356,7 +356,7 @@ void runSimulation(char *fileName){
 					  //F7
 					   //~ algorithmSelection = LPASTAR_ALGORITHM;
 						lpa_star->computeShortestPath();
-						// copyMazeToDisplayMap(grid_world,lpa_star); //todo
+						 copyMazeToDisplayMap(grid_world,lpa_star); //todo
 						action = -1;
 						Sleep(200);
 						break;

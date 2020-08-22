@@ -30,7 +30,7 @@ public:
 
     double* calculateKey(LpaStarCell *cell);
     double* getU_TopKey();
-    void  removeElementInU(LpaStarCell *u);
+    void  removeElementFromU(LpaStarCell *u);
     void updateVertex(LpaStarCell *u);
     void computeShortestPath();
     void replanning();
