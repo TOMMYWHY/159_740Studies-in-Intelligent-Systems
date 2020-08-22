@@ -3,8 +3,6 @@
 
 #include <vector> 
 #include "globalVariables.h"
-#include <queue>
-
 
 class GridWorld; //forward declare class GridWorld to be able to create the friend functions later
 
@@ -28,32 +26,16 @@ public:
     friend void copyMazeToDisplayMap(GridWorld &gWorld, LpaStar* lpa);
     friend void copyDisplayMapToMaze(GridWorld &gWorld, LpaStar* lpa);
 
-    double* calculateKey(LpaStarCell *cell);
-    double* getU_TopKey();
-    void  removeElementInU(LpaStarCell *u);
-    void updateVertex(LpaStarCell *u);
-    void computeShortestPath();
-    void replanning();
 private:
 	
     vector<vector<LpaStarCell> > maze;   
     LpaStarCell l;
-//    vector<LpaStarCell* > U; //Priority Queue
-    struct CompareKey{
-        bool operator()(LpaStarCell *cell_a,LpaStarCell * cell_b){
-            return cell_a->key[0] >=cell_b->key[0] ||
-            (cell_a->key[0]== cell_b->key[0] &&
-            cell_a->key[1]>=cell_b->key[1]);
-        }
-    };
-    priority_queue<LpaStarCell,vector <LpaStarCell*>,CompareKey> U; //02
+    vector<LpaStarCell* > U; //Priority Queue
     LpaStarCell* start;
     LpaStarCell* goal;
 
     int rows;
     int cols;
-    int vertexAccess;
-    int MaxQlength;
 
 };
 

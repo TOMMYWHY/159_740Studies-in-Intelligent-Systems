@@ -7,8 +7,6 @@
 #include "gridworld.h"
 
 
-
-
  LpaStar::LpaStar(int rows_, int cols_){
 		 rows = rows_;
 	    cols = cols_;

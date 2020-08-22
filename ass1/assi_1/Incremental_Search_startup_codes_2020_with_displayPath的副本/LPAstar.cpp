@@ -135,18 +135,17 @@ void LpaStar::updateAllKeyValues(){
 	calcKey(goal);
 }
 
-/*=======++++++++++++++=========*/
-//01
-double* LpaStar::calculateKey(LpaStarCell *cell){
+/*================*/
+double* LpaStar::CalculateVertexKeyValue(LpaStarCell *cell){
 	calcKey(cell);
 	static double ret[2] = {cell->key[0],cell->key[1]};
 	return ret;
 }
 
-double* LpaStar:: getU_TopKey(){
+double* LpaStar:: getUTopkey(){
 	if(U.empty()){
-	   static double ret[2] = {INF,INF};
-		 return ret;
+		static double ret[2] = {INF,INF};
+		return ret;
 	}
 	LpaStarCell *u = U.top();
 	static double ret[2] = {u->key[0],u->key[1] } ;
@@ -183,19 +182,19 @@ void LpaStar::updateVertex(LpaStarCell *u){
 		//06
 		for(int i = 0; i<DIRECTIONS; i++){
 			LpaStarCell *pred = u->predecessor[i];
-//			cout << "start update vertex step1 pred type" <<i<<" ; " << pred->type<< endl;
-			if(pred !=NULL && pred->type!='1' && u->rhs > ( pred->g + u ->linkCost[i]) )//TODO
+			cout << "start update vertex step1 pred type" <<i<<" ; " << pred->type<< endl;
+			if(pred !=NULL && pred->type!='1' && u->rhs >  pred->g + u ->linkCost[i] )//TODO
 			{
-//			cout << "start update vertex step1 pred" <<i<<" ; " << pred->g <<" "<< u->linkCost[i] <<endl;
+			cout << "start update vertex step1 pred" <<i<<" ; " << pred->g <<" "<< u->linkCost[i] <<endl;
 				u->rhs = pred->g + u -> linkCost[i];//06
 			}
 		}
-//		cout << "start update vertex step1 rhs"<< u->rhs <<endl;
-//		cout << "start update vertex step1 g"  << u->g   <<endl;
+		cout << "start update vertex step1 rhs"<< u->rhs <<endl;
+		cout << "start update vertex step1 g"  << u->g   <<endl;
 	}
-	cout << "start update vertex step2  removeElementInU  before"  << u->y << ","<< u->x <<endl;
+	cout << "start update vertex step2 "  << u->y << ","<< u->x <<endl;
 	removeElementInU(u);//07
-	cout << "start update vertex step3 removeElementInU after"  << u->y << ","<< u->x <<endl;
+	cout << "start update vertex step3 "  << u->y << ","<< u->x <<endl;
 	//08
 	if(u->g != u->rhs){
 		cout << "queue size : "<<U.size() <<endl;
@@ -213,17 +212,9 @@ void LpaStar::updateVertex(LpaStarCell *u){
 void LpaStar::computeShortestPath(){
 	cout << "computeShortestPath now"  <<endl;
 	vertexAccess=0;
-    cout <<"getU_TopKey()[0]:"<<getU_TopKey()[0]<<endl;
-    cout <<"calculateKey(S goal):"
-    <<calculateKey(&maze[goal->y][goal->x])[0]<<endl;
-   
-   // cout << "" calculateKey(&maze[goal->y][goal->x])[1]
-    // << endl;
-	cout << "rhs(Sgoal)" <<endl; 
-	cout << "g(Sgoal)" <<endl;
-	/*while(getU_TopKey()[0] < calculateKey(&maze[goal->y][goal->x])[0]||
-	(getUTopkey()[0] == calculateKey(&maze[goal->y][goal->x])[0] &&
-	getUTopkey()[1]<calculateKey(&maze[goal->y][goal->x])[1])||
+	while(getUTopkey()[0] < CalculateVertexKeyValue(&maze[goal->y][goal->x])[0]||
+	(getUTopkey()[0] == CalculateVertexKeyValue(&maze[goal->y][goal->x])[0] &&
+	getUTopkey()[1]<CalculateVertexKeyValue(&maze[goal->y][goal->x])[1])||
 	maze[goal->y][goal->x].rhs != maze[goal->y][goal->x].g)//09
 	{
         LpaStarCell *u = U.top();
@@ -256,9 +247,9 @@ void LpaStar::computeShortestPath(){
                 }
             }
         }
-    }*/
+    }
 	cout << "vertex accesses"<< vertexAccess <<endl;
-	// cout << "Max Q length"<< maxQLength <<endl;
+	cout << "Max Q length"<< maxQLength <<endl;
 }
 
 

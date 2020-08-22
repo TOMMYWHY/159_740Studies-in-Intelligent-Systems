@@ -8,7 +8,7 @@
 //	 	       Description: start-up code for simulating LPA* and D*Lite
 //                        - implements a gridworld that can be loaded from file, and 
 //                          modified through a user-interface 
-//s
+//
 //        Run Parameters: 
 //
 //    Keys for Operation: 
@@ -21,6 +21,7 @@
 //      Start-up code by:    n.h.reyes@massey.ac.nz
 //
 ///////////////////////////////////////////////////////////////////////////////////////////
+
 
 #include <windows.h>
 #include <stddef.h>
@@ -114,27 +115,14 @@ void copyMazeToDisplayMap(GridWorld &gWorld, LpaStar* lpa){
 //--------------------------------------------------------------
 //copy map (of GridWorld)to maze (of LPA*)
 void copyDisplayMapToMaze(GridWorld &gWorld, LpaStar* lpa){
-	LpaStarCell* originLpaStarC;//--
 	for(int i=0; i < gWorld.getGridWorldRows(); i++){
 	   for(int j=0; j < gWorld.getGridWorldCols(); j++){
 			lpa->maze[i][j].type = gWorld.map[i][j].type;
 			lpa->maze[i][j].x = gWorld.map[i][j].col;
 			lpa->maze[i][j].y = gWorld.map[i][j].row;
 			
-			for (int m = 0; m < DIRECTIONS; m++)
-			{
-//				cout <<"vertex:"<<m <<endl;
-				lpa->maze[i][j].linkCost[m]=gWorld.map[i][j].linkCost[m];//--
-				if(gWorld.map[i][j].move[m]!=NULL){
-					int row = gWorld.map[i][j].move[m]->row;//--
-					int col = gWorld.map[i][j].move[m]->col;//--
-//					cout<< "vertex row col:" <<row << "," << col <<endl;
-					lpa->maze[i][j].move[m] = &lpa->maze[row][col];////-- update: child = parent
-				}
-			}
 		   //lpa->maze[i][j].g = gWorld.map[i][j].g;
 			//lpa->maze[i][j].rhs = gWorld.map[i][j].rhs;
-
 		}
 	}
 	
@@ -344,30 +332,26 @@ void runSimulation(char *fileName){
 						break;
 				
 				case 105: 
-					   grid_world.displayMapWithKeyDetails();//F5
+					   grid_world.displayMapWithKeyDetails();
 						break;
 				
 				case 106: 
-					  	//F6
+					  
 					   //~ algorithmSelection = ASTAR_ALGORITHM;
 						break;
 				
 				case 107: 
-					  //F7
+					  
 					   //~ algorithmSelection = LPASTAR_ALGORITHM;
-						lpa_star->computeShortestPath();
-						// copyMazeToDisplayMap(grid_world,lpa_star); //todo
-						action = -1;
-						Sleep(200);
 						break;
 				
 				case 108: 
-					  //F8
+					  
 					   //~ algorithmSelection = DSTAR_ALGORITHM;
 						break;
 				
 				case 15:
-					 //key-C
+					 
 					   if( rowSelected != -1 && colSelected != -1){
 							grid_world.displayVertexConnections(colSelected-1, rowSelected-1);
 						   //cout << "display connections" << endl;
@@ -382,7 +366,7 @@ void runSimulation(char *fileName){
 					    break;
 						
 				case 16:
-					 //key-M
+					 
 					   if(grid_world.isGridMapInitialised()){
 							grid_world.displayMapConnections();
 						   //cout << "display connections" << endl;
@@ -396,7 +380,7 @@ void runSimulation(char *fileName){
 					   action = -1;
 					    break;		
 				
-				case 6: //set cell as new START vertex //key-S
+				case 6: //set cell as new START vertex 
 				   {
 					   //--------------------------------------------
 				      // retrieve current START vertex
@@ -413,23 +397,23 @@ void runSimulation(char *fileName){
 				      //--------------------------------------------
 						//set selected cell as the NEW START VERTEX
 					   if( rowSelected != -1 && colSelected != -1){
-						    grid_world.setMapTypeValue(rowSelected-1, colSelected-1, '6');
-						    s.row = rowSelected-1;
+						   grid_world.setMapTypeValue(rowSelected-1, colSelected-1, '6');
+						   s.row = rowSelected-1;
 							s.col = colSelected-1;
 							grid_world.setStartVertex(s);
 							
-						    rowSelected=-1;
-						    colSelected=-1;
+						   rowSelected=-1;
+						   colSelected=-1;
 					   } else {
-						 	cout << "invalid new START vertex, please select a new START vertex first." << endl;
-						 	break;
+							cout << "invalid new START vertex, please select a new START vertex first." << endl;
+							break;
 						}
 						//--------------------------------------------
 					   action = -1;
 						break;
 					}
 				
-				case 7: //set cell as new GOAL vertex // key-X
+				case 7: //set cell as new GOAL vertex 
 				   {
 					   //--------------------------------------------
 				      // retrieve current GOAL vertex
@@ -447,14 +431,14 @@ void runSimulation(char *fileName){
 				      //--------------------------------------------
 						//set selected cell as the NEW GOAL VERTEX
 					   if( rowSelected != -1 && colSelected != -1){
-					   		grid_world.setMapTypeValue(rowSelected-1, colSelected-1, '7');
-						    s.row = rowSelected-1;
+						   grid_world.setMapTypeValue(rowSelected-1, colSelected-1, '7');
+						   s.row = rowSelected-1;
 							s.col = colSelected-1;
 							grid_world.setGoalVertex(s);
 							grid_world.initialiseMapConnections(); 
 							
-						    rowSelected=-1;
-						    colSelected=-1;
+						   rowSelected=-1;
+						   colSelected=-1;
 					   } else {
 							cout << "invalid new GOAL vertex, please select a new GOAL vertex first." << endl;
 							action = -1;
@@ -466,36 +450,34 @@ void runSimulation(char *fileName){
 					}
 							
             case 109:					
-					  //F9
-					  copyDisplayMapToMaze(grid_world, lpa_star);
+					   copyDisplayMapToMaze(grid_world, lpa_star);
 				      cout << "copied display map to algorithm's maze" << endl;
 				      action = -1;
 				      break;
 				
-			case 110:	
-					//F10				
-					  lpa_star->updateHValues();
-					  copyMazeToDisplayMap(grid_world, lpa_star);
+				case 110:					
+					   lpa_star->updateHValues();
+					   copyMazeToDisplayMap(grid_world, lpa_star);
 				      cout << "copied algorithm's maze to display map" << endl;
 				      action = -1;
 				      break;
 				
-				case 9: //display g-values only......//key-G
+				case 9: //display g-values only
 					   grid_world.displayMapWithSelectedDetails(true, false, false, false);  //(bool display_g, bool display_rhs, bool display_h, bool display_key) 
 				      action = -1;
 						break;
-            case 10: //display h-values only //key-H
+            case 10: //display h-values only
 					   grid_world.displayMapWithSelectedDetails(false, false, true, false);  //(bool display_g, bool display_rhs, bool display_h, bool display_key) 
 				 		action = -1;
 				      break;
-				case 11: //display key-values only //key-K
+				case 11: //display key-values only
 					   lpa_star->updateAllKeyValues();
 				      copyMazeToDisplayMap(grid_world, lpa_star);
 					   grid_world.displayMapWithSelectedDetails(false, false, false, true);  //(bool display_g, bool display_rhs, bool display_h, bool display_key) 
 						action = -1;
 				      break;
 				
-				case 12: //make cell Traversable //key-U
+				case 12: //make cell Traversable
 			 
 					 if( rowSelected != -1 && colSelected != -1){
 						 grid_world.setMapTypeValue(rowSelected-1, colSelected-1, '0');

@@ -123,12 +123,12 @@ void copyDisplayMapToMaze(GridWorld &gWorld, LpaStar* lpa){
 			
 			for (int m = 0; m < DIRECTIONS; m++)
 			{
-//				cout <<"vertex:"<<m <<endl;
+				cout <<"vertex:"<<m <<endl;
 				lpa->maze[i][j].linkCost[m]=gWorld.map[i][j].linkCost[m];//--
 				if(gWorld.map[i][j].move[m]!=NULL){
 					int row = gWorld.map[i][j].move[m]->row;//--
 					int col = gWorld.map[i][j].move[m]->col;//--
-//					cout<< "vertex row col:" <<row << "," << col <<endl;
+					cout<< "vertex row col:" <<row << "," << col <<endl;
 					lpa->maze[i][j].move[m] = &lpa->maze[row][col];////-- update: child = parent
 				}
 			}
