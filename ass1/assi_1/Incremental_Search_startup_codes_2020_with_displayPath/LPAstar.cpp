@@ -155,12 +155,12 @@ double* LpaStar:: getU_TopKey(){
 }
 void LpaStar:: removeElementFromU(LpaStarCell *u){
     priority_queue<LpaStarCell, vector<LpaStarCell*>, CompareKey> tmp;
-    cout << " removeElementFromU: " << u->y << "," << u->x <<endl;
+    cout << " removeElementFromU(*u): " << u->y << "," << u->x <<endl;
     cout <<"removeElementFromU Q size:"<< U.size()<<endl;
 	while(!U.empty()){
 		LpaStarCell *v = U.top();
 		U.pop();
-		cout <<"removeElementFromU " <<u->y<<","<<u->x <<endl;
+		// cout <<"removeElementFromU " <<u->y<<","<<u->x <<endl;
 		cout <<"Queue is empty:" <<U.empty()<<endl;
 		cout <<"Queue size" <<U.size()<<endl;
 		if(v->y == u->y && v->x == u->x){
@@ -192,9 +192,9 @@ void LpaStar::updateVertex(LpaStarCell *u){
 		}
 		cout << "updateVertex g,hrs:" << u->g << "," << u->rhs<<endl;
 	}
-	cout << "  removeElementFromU "  << u->y << ","<< u->x <<endl;
+	cout << "  remove before"  << u->y << ","<< u->x <<"; U.size:"<< U.size() <<endl;
 	removeElementFromU(u);//07
-//	cout << "removeElementFromU after"  << u->y << ","<< u->x <<endl;
+	cout << "remove after"  << u->y << ","<< u->x <<endl;
 	//08
 	if(u->g != u->rhs){
 		cout << "updateVertex:u->g != u->rhs queue size : "<<U.size() <<endl;
@@ -226,13 +226,13 @@ void LpaStar::computeShortestPath(){
 	maze[goal->y][goal->x].rhs != maze[goal->y][goal->x].g)//09
 	{
         LpaStarCell *u = U.top();
-        /*for (int i = 0; i < rows; i++) {
+        for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 cout << maze[i][j].g <<" , ";
                 cout << maze[i][j].rhs <<" ; ";
             }
             cout <<endl;
-        }*/
+        }
         U.pop();//10
         if(u->g > u->rhs)//11
         {
@@ -246,9 +246,11 @@ void LpaStar::computeShortestPath(){
                     updateVertex(succ);
                 }
             }
+            cout << "DIRECTIONS done"<<endl;
 
         }
         else{//14
+        	cout << "else...."<<endl;
             u->g = INF;//15
             updateVertex(u);
 
