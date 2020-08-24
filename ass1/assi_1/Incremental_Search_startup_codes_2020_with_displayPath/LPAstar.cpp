@@ -181,16 +181,30 @@ void LpaStar::updateVertex(LpaStarCell *u){
 	cout << " updateVertex: " << u->y << "," << u->x <<endl;
 	if(u->x != start->x || u->y !=start->y) //06
 	{
+		cout << "dashabi~!!!!!"<< endl;
+
 		u->rhs = INF;
 		//06
 		for(int i = 0; i<DIRECTIONS; i++){
 			LpaStarCell *pred = u->predecessor[i];
-			if(pred !=NULL && pred->type!='1' && u->rhs > pred->g + u ->linkCost[i] )//TODO
+			cout << "zhendema ~~~~~~!"<< "pred->type:pred->type"<< pred->type <<endl;
+
+			/*if(pred !=NULL && pred->type!='1' && u->rhs > pred->g + u ->linkCost[i] )//TODO
 			{
+				cout << "woshinidaye"<< endl;
 				u->rhs = pred->g + u -> linkCost[i];//06
+			}*/
+			if(pred !=NULL && pred->type!='1'){
+				cout << "woshinidaye"<< endl;
+				cout<< u->rhs << ","<< pred->g<<","<< u ->linkCost[i]<<endl;
+				if( u->rhs > ( pred->g + u ->linkCost[i])){
+				cout << "xxxxxxxxx"<< endl;
+				u->rhs = pred->g + u -> linkCost[i];//06
+
+				}	
 			}
 		}
-		cout << "updateVertex g,hrs:" << u->g << "," << u->rhs<<endl;
+		cout << "!!!updateVertex g,hrs:" << u->g << "," << u->rhs<<endl;
 	}
 	cout << "  remove before"  << u->y << ","<< u->x <<"; U.size:"<< U.size() <<endl;
 	removeElementFromU(u);//07
