@@ -130,6 +130,7 @@ void copyDisplayMapToMaze(GridWorld &gWorld, LpaStar* lpa){
 					int col = gWorld.map[i][j].move[m]->col;//--
 //					cout<< "vertex row col:" <<row << "," << col <<endl;
 					lpa->maze[i][j].move[m] = &lpa->maze[row][col];////-- update: child = parent
+					lpa->maze[i][j].predecessor[m] = &lpa->maze[row][col];
 				}
 			}
 		   //lpa->maze[i][j].g = gWorld.map[i][j].g;

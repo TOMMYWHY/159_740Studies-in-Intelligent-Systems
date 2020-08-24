@@ -187,7 +187,7 @@ struct LpaStarCell
     LpaStarCell* predecessor[DIRECTIONS];
 	 double linkCost[DIRECTIONS];
     LpaStarCell* parent;
-    LpaStarCell* trace;
+    LpaStarCell* trace;//?
     short obstacle;
     int x, y;
 

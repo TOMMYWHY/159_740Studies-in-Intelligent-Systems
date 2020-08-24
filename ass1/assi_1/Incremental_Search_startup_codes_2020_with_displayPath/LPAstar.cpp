@@ -24,6 +24,7 @@ void LpaStar::initialise(int startX, int startY, int goalX, int goalY){
 	   for(int j=0; j < cols; j++){
 		   maze[i][j].g = INF;
 			maze[i][j].rhs = INF;
+
 		}
 	}
 	start = new LpaStarCell;
@@ -55,6 +56,8 @@ void LpaStar::initialise(int startX, int startY, int goalX, int goalY){
 	cout << "priority Queue size : "<<U.size()<<endl;
 	start = &maze[start->y][start->x];
 	goal = &maze[goal->y][goal->x];
+
+
 	vertexAccess=0;//TODO
     maxQLength=0;//TODO
 
@@ -187,7 +190,10 @@ void LpaStar::updateVertex(LpaStarCell *u){
 		//06
 		for(int i = 0; i<DIRECTIONS; i++){
 			LpaStarCell *pred = u->predecessor[i];
-			cout << "zhendema ~~~~~~!"<< "pred->type:pred->type"<< pred->type <<endl;
+			cout << " ~~~~~~!"<<
+			" ; pred x,y: "<< pred->x << ","<<pred->y<<
+			 "pred->type:"<< pred->type<<
+			"; pred->g:"<< pred->g  <<endl;
 
 			/*if(pred !=NULL && pred->type!='1' && u->rhs > pred->g + u ->linkCost[i] )//TODO
 			{
@@ -225,6 +231,34 @@ void LpaStar::updateVertex(LpaStarCell *u){
 
 void LpaStar::computeShortestPath(){
 	cout << "computeShortestPath now"  <<endl;
+
+	cout<< "---testing---"<<endl;
+	 LpaStarCell *test_u = U.top();
+	cout<<"start to be u => g:"<<test_u->g<<
+	"; rhs:"<<test_u->rhs<<
+	"; h:"<<test_u->h<<
+	"; tpye:"<<test_u->type<<endl;
+	cout <<"-- succ" <<endl;
+	for (int i = 0; i < DIRECTIONS; ++i)
+	{
+		cout << "succ:"<<i<<
+		"; x,y:" << test_u->move[i]->x <<"," <<test_u->move[i]->y<<
+		"; g:"<< test_u->move[i]->g<<
+		"; rhs:"<< test_u->move[i]->rhs<<
+		"; h:"<< test_u->move[i]->h<<
+		"; tpye:"<< test_u->move[i]->type<<endl;
+	}
+	cout <<"-- pred" <<endl;
+	for (int i = 0; i < DIRECTIONS; ++i)
+	{
+		cout << "succ:"<<i<<
+		"; x,y:" << test_u->predecessor[i]->x <<"," <<test_u->predecessor[i]->y<<
+		"; g:"<< test_u->predecessor[i]->g<<
+		"; rhs:"<< test_u->predecessor[i]->rhs<<
+		"; h:"<< test_u->predecessor[i]->h<<
+		"; tpye:"<< test_u->predecessor[i]->type<<endl;
+	}
+
 	cout<< "----- start.rhs:"<<start->rhs<<endl;
 	// calcKey(maze[start->y][start->x]);
 
@@ -240,13 +274,13 @@ void LpaStar::computeShortestPath(){
 	maze[goal->y][goal->x].rhs != maze[goal->y][goal->x].g)//09
 	{
         LpaStarCell *u = U.top();
-        for (int i = 0; i < rows; i++) {
+        /*for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 cout << maze[i][j].g <<" , ";
                 cout << maze[i][j].rhs <<" ; ";
             }
             cout <<endl;
-        }
+        }*/
         U.pop();//10
         if(u->g > u->rhs)//11
         {
@@ -255,7 +289,7 @@ void LpaStar::computeShortestPath(){
             for (int i = 0; i < DIRECTIONS; i++)//13
             {
                 LpaStarCell * succ = u->move[i];
-                cout << " loop"  <<i << " succ-type"<< succ->type <<"; "<< succ->y << "," << succ->x <<endl;
+                cout << " loop"  <<i << " succ-type"<< succ->type <<"; y,x: "<< succ->y << "," << succ->x <<endl;
                 if(succ!=NULL && succ->type !='1'){
                     updateVertex(succ);
                 }
