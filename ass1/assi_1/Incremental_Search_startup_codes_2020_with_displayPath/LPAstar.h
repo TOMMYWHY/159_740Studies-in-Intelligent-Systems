@@ -28,9 +28,10 @@ public:
     friend void copyMazeToDisplayMap(GridWorld &gWorld, LpaStar* lpa);
     friend void copyDisplayMapToMaze(GridWorld &gWorld, LpaStar* lpa);
 
-    double* calculateKey(LpaStarCell *cell);
-    double* getU_TopKey();
+    vector <double>  calculateKey(LpaStarCell *cell);
+    vector <double>  getU_TopKey();// vector
     void  removeElementFromU(LpaStarCell *u);
+//    bool  removeElementFromU(LpaStarCell *u);
     void updateVertex(LpaStarCell *u);
     void computeShortestPath();
     void replanning();

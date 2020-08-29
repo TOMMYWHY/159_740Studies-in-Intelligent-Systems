@@ -24,7 +24,9 @@ void LpaStar::initialise(int startX, int startY, int goalX, int goalY){
 	   for(int j=0; j < cols; j++){
 		   maze[i][j].g = INF;
 			maze[i][j].rhs = INF;
-
+           for (int k = 0; k < DIRECTIONS; k++) {
+               maze[i][j].predecessor[k] = maze[i][j].move[k];
+           }
 		}
 	}
 	start = new LpaStarCell;
@@ -57,7 +59,7 @@ void LpaStar::initialise(int startX, int startY, int goalX, int goalY){
 	start = &maze[start->y][start->x];
 	goal = &maze[goal->y][goal->x];
 
-
+   
 	vertexAccess=0;//TODO
     maxQLength=0;//TODO
 
@@ -141,37 +143,43 @@ void LpaStar::updateAllKeyValues(){
 
 /*=======++++++++++++++=========*/
 //01
-double* LpaStar::calculateKey(LpaStarCell *cell){
-	calcKey(cell);
-	static double ret[2] = {cell->key[0],cell->key[1]};
+vector <double> LpaStar::calculateKey(LpaStarCell *cell){
+	vector <double> ret;
+    calcKey(cell);
+	ret.push_back(cell->key[0]);
+	ret.push_back(cell->key[1]);
 	return ret;
 }
 
-double* LpaStar:: getU_TopKey(){
-	if(U.empty()){
-	   static double ret[2] = {INF,INF};
+vector <double> LpaStar:: getU_TopKey(){
+    vector <double> ret;
+    if(U.empty()){
+        ret.push_back(INF);
+        ret.push_back(INF);
 		 return ret;
 	}
 	LpaStarCell *u = U.top();
-	static double ret[2] = {u->key[0],u->key[1] } ;
+    ret.push_back(u->key[0]);
+    ret.push_back(u->key[1]);
 	return ret;
 }
+
 void LpaStar:: removeElementFromU(LpaStarCell *u){
     priority_queue<LpaStarCell, vector<LpaStarCell*>, CompareKey> tmp;
-    cout << " removeElementFromU(*u): " << u->y << "," << u->x <<endl;
-    cout <<"removeElementFromU Q size:"<< U.size()<<endl;
+//    cout << " removeElementFromU(*u): " << u->y << "," << u->x <<endl;
+//    cout <<"removeElementFromU Q size:"<< U.size()<<endl;
 	while(!U.empty()){
 		LpaStarCell *v = U.top();
 		U.pop();
 		// cout <<"removeElementFromU " <<u->y<<","<<u->x <<endl;
-		cout <<"Queue is empty:" <<U.empty()<<endl;
-		cout <<"Queue size" <<U.size()<<endl;
+//		cout <<"Queue is empty:" <<U.empty()<<endl;
+//		cout <<"Queue size" <<U.size()<<endl;
 		if(v->y == u->y && v->x == u->x){
-			cout << "remove mode in queue"<<endl;
+//			cout << "remove mode in queue"<<endl;
 			break;
-		}
-		tmp.push(v);
-
+		}else{
+            tmp.push(v);
+        }
 	}
 	while(!tmp.empty()){
 	    U.push(tmp.top());
@@ -180,47 +188,47 @@ void LpaStar:: removeElementFromU(LpaStarCell *u){
 
 }
 
-void LpaStar::updateVertex(LpaStarCell *u){
-	cout << " updateVertex: " << u->y << "," << u->x <<endl;
-	if(u->x != start->x || u->y !=start->y) //06
-	{
-		cout << "dashabi~!!!!!"<< endl;
 
+
+void LpaStar::updateVertex(LpaStarCell *u){
+	cout << " updateVertex: " << u->y << "," << u->x << "; type:"<< u->type
+	<<"; U.size:"<<U.size() <<endl;
+	// if(u->x != start->x || u->y !=start->y) //06
+	if(u->type != '6')
+	{
 		u->rhs = INF;
 		//06
 		for(int i = 0; i<DIRECTIONS; i++){
 			LpaStarCell *pred = u->predecessor[i];
-			cout << " ~~~~~~!"<<
-			" ; pred x,y: "<< pred->x << ","<<pred->y<<
-			 "pred->type:"<< pred->type<<
-			"; pred->g:"<< pred->g  <<endl;
+			// cout << " ~~~~~~!"<<
+			// " ; pred x,y: "<< pred->x << ","<<pred->y<<
+			//  "pred->type:"<< pred->type<<
+			// "; pred->g:"<< pred->g  <<endl;
 
-			/*if(pred !=NULL && pred->type!='1' && u->rhs > pred->g + u ->linkCost[i] )//TODO
-			{
-				cout << "woshinidaye"<< endl;
-				u->rhs = pred->g + u -> linkCost[i];//06
-			}*/
 			if(pred !=NULL && pred->type!='1'){
-				cout << "woshinidaye"<< endl;
-				cout<< u->rhs << ","<< pred->g<<","<< u ->linkCost[i]<<endl;
+//				cout<< u->rhs << ","<< pred->g<<","<< u ->linkCost[i]<<endl;
 				if( u->rhs > ( pred->g + u ->linkCost[i])){
-				cout << "xxxxxxxxx"<< endl;
+//				cout << "xxxxxxxxx"<< endl;
 				u->rhs = pred->g + u -> linkCost[i];//06
-
-				}	
+				}
 			}
 		}
 		cout << "!!!updateVertex g,hrs:" << u->g << "," << u->rhs<<endl;
 	}
-	cout << "  remove before"  << u->y << ","<< u->x <<"; U.size:"<< U.size() <<endl;
+//	cout << "  remove before"  << u->y << ","<< u->x <<"; U.size:"<< U.size() <<endl;
 	removeElementFromU(u);//07
-	cout << "remove after"  << u->y << ","<< u->x <<endl;
+//	bool is_in_U = removeElementFromU(u);
+	cout <<"u->y,x:"<<  u->y << ","<< u->x
+	 // << " is_in_U :" <<is_in_U 
+	 <<"; U.size:"<< U.size() <<endl;
+//	cout << "remove after"  << u->y << ","<< u->x<<"; U.size:"<< U.size() <<endl;
 	//08
 	if(u->g != u->rhs){
-		cout << "updateVertex:u->g != u->rhs queue size : "<<U.size() <<endl;
+//		cout << "updateVertex:u->g != u->rhs queue size : "<<U.size() <<endl;
 		calcKey(u);
 		U.push(u);
-		cout << "updateVertex:u->g != u->rhs   after push to U  queue size : "<<U.size() <<endl;
+		cout << "updateVertex:u->g != u->rhs   after push to U  queue size : "<<U.size() 
+		<< "; cell key0,key1:"<< u->key[0]<<","<<u->key[1]<<endl;
 	}
 	vertexAccess ++;
 	if(U.size()>maxQLength){
@@ -238,7 +246,7 @@ void LpaStar::computeShortestPath(){
 	"; rhs:"<<test_u->rhs<<
 	"; h:"<<test_u->h<<
 	"; tpye:"<<test_u->type<<endl;
-	cout <<"-- succ" <<endl;
+	/*cout <<"-- succ" <<endl;
 	for (int i = 0; i < DIRECTIONS; ++i)
 	{
 		cout << "succ:"<<i<<
@@ -247,54 +255,50 @@ void LpaStar::computeShortestPath(){
 		"; rhs:"<< test_u->move[i]->rhs<<
 		"; h:"<< test_u->move[i]->h<<
 		"; tpye:"<< test_u->move[i]->type<<endl;
-	}
-	cout <<"-- pred" <<endl;
+	}*/
+	/*cout <<"-- pred" <<endl;
 	for (int i = 0; i < DIRECTIONS; ++i)
 	{
-		cout << "succ:"<<i<<
+		cout << "pred:"<<i<<
 		"; x,y:" << test_u->predecessor[i]->x <<"," <<test_u->predecessor[i]->y<<
 		"; g:"<< test_u->predecessor[i]->g<<
 		"; rhs:"<< test_u->predecessor[i]->rhs<<
 		"; h:"<< test_u->predecessor[i]->h<<
 		"; tpye:"<< test_u->predecessor[i]->type<<endl;
-	}
+	}*/
 
 	cout<< "----- start.rhs:"<<start->rhs<<endl;
 	// calcKey(maze[start->y][start->x]);
 
 	vertexAccess=0;
-    cout <<"getU_TopKey()[0]:"<<getU_TopKey()[0]<<endl;
+    cout <<"getU_TopKey()[0]:"<<getU_TopKey()[0] <<"; getU_TopKey()[1]:" << getU_TopKey()[1]<<endl;
     cout<< "start g:" << maze[start->y][start->x].g<<endl;//inf
     cout<< "start rhs:" << maze[start->y][start->x].rhs<<endl;//0
 
 
 	while(getU_TopKey()[0] < calculateKey(&maze[goal->y][goal->x])[0]||
-	(getU_TopKey()[0] == calculateKey(&maze[goal->y][goal->x])[0] &&
-	getU_TopKey()[1]<calculateKey(&maze[goal->y][goal->x])[1])||
+	( getU_TopKey()[1]<calculateKey(&maze[goal->y][goal->x])[1])||
 	maze[goal->y][goal->x].rhs != maze[goal->y][goal->x].g)//09
 	{
+        cout<< "; U.size:"<<U.size()<<endl;
         LpaStarCell *u = U.top();
-        /*for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                cout << maze[i][j].g <<" , ";
-                cout << maze[i][j].rhs <<" ; ";
-            }
-            cout <<endl;
-        }*/
+       
         U.pop();//10
         if(u->g > u->rhs)//11
         {
-            cout << " u-> x,y:"  << u->y << ","<< u->x <<endl;
+            cout << "selected--- u-> y,x:"  << u->y << ","<< u->x <<"; u->h:"<<u->h << 
+            "; u->key0,key1:"<<u->key[0] <<","<<u->key[1]<<
+            "; U.size:"<<U.size()<<endl;
             u->g = u->rhs;//12
             for (int i = 0; i < DIRECTIONS; i++)//13
             {
                 LpaStarCell * succ = u->move[i];
-                cout << " loop"  <<i << " succ-type"<< succ->type <<"; y,x: "<< succ->y << "," << succ->x <<endl;
+                // cout << " loop:"  <<i << " succ-type"<< succ->type <<"; y,x: "<< succ->y << "," << succ->x <<endl;
                 if(succ!=NULL && succ->type !='1'){
                     updateVertex(succ);
                 }
             }
-            cout << "DIRECTIONS done"<<endl;
+            cout << "DIRECTIONS 8 done; U size : "<< U.size()<<endl;
 
         }
         else{//14
@@ -305,7 +309,7 @@ void LpaStar::computeShortestPath(){
             for (int i = 0; i < DIRECTIONS; i++)//16
             {
                 LpaStarCell * succ = u->move[i];
-                cout << "else loop"  <<i << " succ-type"<< succ->type <<"; "<< succ->y << "," << succ->x <<endl;
+                cout << "else loop:"  <<i << " succ-type"<< succ->type <<"; "<< succ->y << "," << succ->x <<endl;
 
                 if(succ!=NULL && succ->type !='1'){
                     updateVertex(succ);
