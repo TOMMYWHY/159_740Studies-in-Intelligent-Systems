@@ -277,7 +277,7 @@ void LpaStar::computeShortestPath(){
 
 
 	while(getU_TopKey()[0] < calculateKey(&maze[goal->y][goal->x])[0]||
-	( getU_TopKey()[1]<calculateKey(&maze[goal->y][goal->x])[1])||
+	(getU_TopKey()[0]==calculateKey(&maze[goal->y][goal->x])[0] && getU_TopKey()[1]<calculateKey(&maze[goal->y][goal->x])[1])||
 	maze[goal->y][goal->x].rhs != maze[goal->y][goal->x].g)//09
 	{
         cout<< "; U.size:"<<U.size()<<endl;
@@ -319,5 +319,46 @@ void LpaStar::computeShortestPath(){
     }
 }
 
+void LpaStar::replanning() {
+//    vertexAccess=0;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if(maze[i][j].type == '8' && maze[i][j].g!=INF)//todo
+            {
+                cout << "change 8=>0 " <<endl;
+                maze[i][j].type='0';
+            }
+            if(maze[i][j].type == '9' && maze[i][j].g!=INF){
+                cout << "change 9=>1 " <<endl;
+                maze[i][j].type='1';
+                maze[i][j].g=INF;
+                for (int k = 0; k < DIRECTIONS; k++) {
+                    LpaStarCell* succ = maze[i][j].move[k];
+                    if(succ->type=='0' || succ->type=='8' || succ->type=='6' || succ->type=='7'){
+                        succ->linkCost[7-k]= INF;
+                        updateVertex(succ);
+                    }
+                }
+            }
+        }
+    }
+}
 
+bool LpaStar::hasUknowns(){
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if(maze[i][j].g!=INF && (maze[i][j].type=='8'||maze[i][j].type=='9')){
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
+void LpaStar::run(){
+    computeShortestPath();
+    while (hasUknowns()){
+        replanning();
+        computeShortestPath();
+    }
+}

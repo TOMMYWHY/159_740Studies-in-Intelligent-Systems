@@ -35,6 +35,8 @@ public:
     void updateVertex(LpaStarCell *u);
     void computeShortestPath();
     void replanning();
+    bool hasUknowns();
+    void run();
 private:
 	
     vector<vector<LpaStarCell> > maze;   

@@ -9,71 +9,73 @@ double sum(double a, double b){
 		}
     }
 //---
-void GridWorld::displayPath(vertex* currentVertex, vertex* min_neighbour){
+void GridWorld::displayPath(){
 
- 
+    vertex* currentVertex = &map[startVertex.row][startVertex.col];
 
-     currentVertex = &map[startVertex.row][startVertex.col];
+    //---
+    vertex* neighbour;
+//    vertex* originVertex;
 
-     //---
-     vertex* neighbour; 
-     vertex* originVertex;
+    double min_g_plus_c = INF;
+    double linkCost,g;
+    double min_linkCost,min_g;
+    //---
 
-     double min_g_plus_c = INF;
-     double linkCost,g;
-     double min_linkCost,min_g;
-     //---
+//    originVertex = currentVertex;
 
-     originVertex = currentVertex;
+    while(1){
+        min_g_plus_c = INF;
+        for(int m=0; m < DIRECTIONS; m++){
 
- while(1){
-     min_g_plus_c = INF;
-     for(int m=0; m < DIRECTIONS; m++){
+            neighbour = originVertex->move[m];
 
-           neighbour = originVertex->move[m];
+            if(neighbour != NULL && neighbour->type != '1'){
 
-           if(neighbour != NULL && neighbour->type != '1'){
-
-                                 linkCost = originVertex->linkCost[m];
+                linkCost = originVertex->linkCost[m];
 
                 g=(originVertex->move[m])->g;
 
-               if(min_g_plus_c > sum(g,linkCost)){
+                if(min_g_plus_c > sum(g,linkCost)){
 
-                       min_g_plus_c = sum(g,linkCost);
+                    min_g_plus_c = sum(g,linkCost);
 
-                                        min_g=g;
+                    min_g=g;
 
-                                        min_linkCost = linkCost; 
+                    min_linkCost = linkCost;
 
-                       min_neighbour = neighbour;
+                    min_neighbour = neighbour;
 
-                }              
+                }
 
-           }                   
+            }
 
-     }
+        }
 
- 
 
-     setcolor(RED);
 
-     setlinestyle(SOLID_LINE, 1, 1);
+        setcolor(RED);
 
-     line(min_neighbour->centre.x, min_neighbour->centre.y, currentVertex->centre.x, currentVertex->centre.y);
+        setlinestyle(SOLID_LINE, 1, 1);
 
- 
+        line(min_neighbour->centre.x, min_neighbour->centre.y, currentVertex->centre.x, currentVertex->centre.y);
 
-     if(currentVertex == &map[goalVertex.row][goalVertex.col])
+        /* red line*/
+        currentVertex=min_neighbour;
+//        originVertex=currentVertex;
 
-           break;
+        if(currentVertex == &map[goalVertex.row][goalVertex.col])
 
- }
+            break;
 
- 
+    }
+
+
 
 }
 //---
+
+
 
 void GridWorld::displayHeader(){
 		 int x,y;

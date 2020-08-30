@@ -273,6 +273,7 @@ void runSimulation(char *fileName){
    DevBoundaryType deviceBoundary; //duplicated in GridWorld
 	bool ANIMATE_MOUSE_FLAG=false;
 	bool validCellSelected=false;
+	bool Lpa_line = false;
 	static BOOL page=false;
 	int mX, mY;
 	float worldX, worldY;
@@ -331,6 +332,9 @@ void runSimulation(char *fileName){
 			 else
 			    grid_world.displayMap();
 			// getch();
+			if(Lpa_line){
+			    grid_world.displayPath();
+			}
 			 
 			 switch(action){
 				case 1: //Block selected cell
@@ -349,15 +353,19 @@ void runSimulation(char *fileName){
 						break;
 				
 				case 106: 
-					  	//F6
-					   //~ algorithmSelection = ASTAR_ALGORITHM;
-						break;
+					  	//F6 lpa replanning
+                     lpa_star->replanning();
+                     copyMazeToDisplayMap(grid_world,lpa_star);
+                     action = -1;
+                     Sleep(200);
+                     break;
 				
 				case 107: 
 					  //F7
 					   //~ algorithmSelection = LPASTAR_ALGORITHM;
 						lpa_star->computeShortestPath();
-						 copyMazeToDisplayMap(grid_world,lpa_star); //todo
+						 copyMazeToDisplayMap(grid_world,lpa_star);
+						 Lpa_line = true;
 						action = -1;
 						Sleep(200);
 						break;
