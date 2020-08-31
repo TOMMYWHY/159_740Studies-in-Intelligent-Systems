@@ -277,9 +277,7 @@ void LpaStar::computeShortestPath(){
 
 
 	while(getU_TopKey()[0] < calculateKey(&maze[goal->y][goal->x])[0]||
-	(
-		 getU_TopKey()[0]==calculateKey(&maze[goal->y][goal->x])[0] &&
-		 getU_TopKey()[1]<calculateKey(&maze[goal->y][goal->x])[1])||
+	(getU_TopKey()[0]==calculateKey(&maze[goal->y][goal->x])[0] && getU_TopKey()[1]<calculateKey(&maze[goal->y][goal->x])[1])||
 	maze[goal->y][goal->x].rhs != maze[goal->y][goal->x].g)//09
 	{
         cout<< "; U.size:"<<U.size()<<endl;

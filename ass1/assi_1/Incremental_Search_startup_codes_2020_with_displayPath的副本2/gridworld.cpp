@@ -9,12 +9,12 @@ double sum(double a, double b){
 		}
     }
 //---
-void GridWorld::displayPathForLpa()
-// void GridWorld::displayPathForLpa(int start_col,int start_row, int end_col,int end_row)
+// void GridWorld::displayPathForLpa(vertex start_vertex, vertex end_vertex)
+void GridWorld::displayPathForLpa(int start_col,int start_row, int end_col,int end_row)
 {
-    vertex* currentVertex = &map[goalVertex.row][goalVertex.col];
-    // vertex* currentVertex = &map[end_row][end_col];
-    	// cout <<"currentVertex->g:"<<currentVertex->g<<";currentVertex->h:"<<currentVertex->h <<endl;
+    // vertex* currentVertex = &map[end_vertex.row][end_vertex.col];
+    vertex* currentVertex = &map[end_row][end_col];
+    	cout <<"currentVertex->g:"<<currentVertex->g<<";currentVertex->h:"<<currentVertex->h <<endl;
 
     //---
     vertex* neighbour;
@@ -68,8 +68,8 @@ void GridWorld::displayPathForLpa()
         currentVertex=min_neighbour;
        originVertex=currentVertex;
  		// cout <<"x,y:"<<currentVertex->row << currentVertex->col<< endl;
-        if(currentVertex == &map[startVertex.row][startVertex.col])
-        // if(currentVertex == &map[start_row][start_col])
+        // if(currentVertex == &map[start_vertex.row][start_vertex.col])
+        if(currentVertex == &map[start_row][start_col])
 
             break;
 
