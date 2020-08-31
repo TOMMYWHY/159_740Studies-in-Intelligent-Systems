@@ -9,20 +9,25 @@ double sum(double a, double b){
 		}
     }
 //---
-void GridWorld::displayPath(){
-
-    vertex* currentVertex = &map[startVertex.row][startVertex.col];
+// void GridWorld::displayPathForLpa(vertex start_vertex, vertex end_vertex)
+void GridWorld::displayPathForLpa(int start_col,int start_row, int end_col,int end_row)
+{
+    // vertex* currentVertex = &map[end_vertex.row][end_vertex.col];
+    vertex* currentVertex = &map[end_row][end_col];
+    	cout <<"currentVertex->g:"<<currentVertex->g<<";currentVertex->h:"<<currentVertex->h <<endl;
 
     //---
     vertex* neighbour;
-//    vertex* originVertex;
+   vertex* originVertex;
+   vertex* min_neighbour;
+
 
     double min_g_plus_c = INF;
     double linkCost,g;
     double min_linkCost,min_g;
     //---
 
-//    originVertex = currentVertex;
+   originVertex = currentVertex;
 
     while(1){
         min_g_plus_c = INF;
@@ -60,11 +65,11 @@ void GridWorld::displayPath(){
 
         line(min_neighbour->centre.x, min_neighbour->centre.y, currentVertex->centre.x, currentVertex->centre.y);
 
-        /* red line*/
         currentVertex=min_neighbour;
-//        originVertex=currentVertex;
-
-        if(currentVertex == &map[goalVertex.row][goalVertex.col])
+       originVertex=currentVertex;
+ 		// cout <<"x,y:"<<currentVertex->row << currentVertex->col<< endl;
+        // if(currentVertex == &map[start_vertex.row][start_vertex.col])
+        if(currentVertex == &map[start_row][start_col])
 
             break;
 

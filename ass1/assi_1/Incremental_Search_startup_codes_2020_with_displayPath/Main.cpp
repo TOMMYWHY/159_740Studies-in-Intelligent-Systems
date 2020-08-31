@@ -333,7 +333,8 @@ void runSimulation(char *fileName){
 			    grid_world.displayMap();
 			// getch();
 			if(Lpa_line){
-			    grid_world.displayPath();
+			    // grid_world.displayPathForLpa(&start,&goal);
+			    grid_world.displayPathForLpa(start.col,start.row,goal.col,goal.row);
 			}
 			 
 			 switch(action){
@@ -345,6 +346,7 @@ void runSimulation(char *fileName){
 							rowSelected=-1;
 							colSelected=-1;
 						}
+                     Lpa_line= false;
 						action = -1;
 						break;
 				
@@ -356,6 +358,8 @@ void runSimulation(char *fileName){
 					  	//F6 lpa replanning
                      lpa_star->replanning();
                      copyMazeToDisplayMap(grid_world,lpa_star);
+                     Lpa_line= true;
+
                      action = -1;
                      Sleep(200);
                      break;
@@ -366,6 +370,7 @@ void runSimulation(char *fileName){
 						lpa_star->computeShortestPath();
 						 copyMazeToDisplayMap(grid_world,lpa_star);
 						 Lpa_line = true;
+						 // grid_world.displayPathForLpa();
 						action = -1;
 						Sleep(200);
 						break;
