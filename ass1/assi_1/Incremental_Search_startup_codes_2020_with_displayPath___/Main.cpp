@@ -40,7 +40,7 @@
 #include "globalVariables.h"
 #include "transform.h"
 #include "graphics.h"
-#include "DstarLite.h"
+#include "AstarSearch.h"
 #include "LPAstar.h"
 #include "gridworld.h"
 
@@ -65,8 +65,6 @@ int qLengthAfterSearch;
 
 ///////////////////////////////////////////////////////////////////////////////
 LpaStar* lpa_star;
-DstarLite*  d_star;
-
 GridWorld grid_world;
 
 bool SHOW_MAP_DETAILS;
@@ -112,43 +110,6 @@ void copyMazeToDisplayMap(GridWorld &gWorld, LpaStar* lpa){
 	}
 	
 }
-void copyMazeToDisplayMap_dstarLite(GridWorld &gWorld, DstarLite* dstarLite){
-    for(int i=0; i < gWorld.getGridWorldRows(); i++){
-        for(int j=0; j < gWorld.getGridWorldCols(); j++){
-            gWorld.map[i][j].type = dstarLite->maze[i][j].type;
-            gWorld.map[i][j].h =    dstarLite->maze[i][j].h;
-            gWorld.map[i][j].g =    dstarLite->maze[i][j].g;
-            gWorld.map[i][j].rhs =  dstarLite->maze[i][j].rhs;
-            gWorld.map[i][j].row =  dstarLite->maze[i][j].y;
-            gWorld.map[i][j].col =  dstarLite->maze[i][j].x;
-
-            for(int k=0; k < 2; k++){
-                gWorld.map[i][j].key[k] = dstarLite->maze[i][j].key[k];
-            }
-
-
-        }
-    }
-    gWorld.map[dstarLite->start->y][dstarLite->start->x].h = dstarLite->start->h;
-    gWorld.map[dstarLite->start->y][dstarLite->start->x].g = dstarLite->start->g;
-    gWorld.map[dstarLite->start->y][dstarLite->start->x].rhs = dstarLite->start->rhs;
-    gWorld.map[dstarLite->start->y][dstarLite->start->x].row = dstarLite->start->y;
-    gWorld.map[dstarLite->start->y][dstarLite->start->x].col = dstarLite->start->x;
-    for(int k=0; k < 2; k++){
-        gWorld.map[dstarLite->start->y][dstarLite->start->x].key[k] = dstarLite->start->key[k];
-    }
-
-
-    gWorld.map[dstarLite->goal->y][dstarLite->goal->x].h = dstarLite->goal->h;
-    gWorld.map[dstarLite->goal->y][dstarLite->goal->x].g = dstarLite->goal->g;
-    gWorld.map[dstarLite->goal->y][dstarLite->goal->x].rhs = dstarLite->goal->rhs;
-    gWorld.map[dstarLite->goal->y][dstarLite->goal->x].row = dstarLite->goal->y;
-    gWorld.map[dstarLite->goal->y][dstarLite->goal->x].col = dstarLite->goal->x;
-    for(int k=0; k < 2; k++){
-        gWorld.map[dstarLite->goal->y][dstarLite->goal->x].key[k] = dstarLite->goal->key[k];
-    }
-
-}
 
 //--------------------------------------------------------------
 //copy map (of GridWorld)to maze (of LPA*)
@@ -191,46 +152,6 @@ void copyDisplayMapToMaze(GridWorld &gWorld, LpaStar* lpa){
 	lpa->goal->x = gWorld.map[goalV.row][goalV.col].col;
 	lpa->goal->y = gWorld.map[goalV.row][goalV.col].row;
 	
-}
-void copyDisplayMapToMaze_dstarLite(GridWorld &gWorld, DstarLite* dstarLite){
-    LpaStarCell* originLpaStarC;//--
-    for(int i=0; i < gWorld.getGridWorldRows(); i++){
-        for(int j=0; j < gWorld.getGridWorldCols(); j++){
-            dstarLite->maze[i][j].type = gWorld.map[i][j].type;
-            dstarLite->maze[i][j].x = gWorld.map[i][j].col;
-            dstarLite->maze[i][j].y = gWorld.map[i][j].row;
-
-            for (int m = 0; m < DIRECTIONS; m++)
-            {
-//				cout <<"vertex:"<<m <<endl;
-                dstarLite->maze[i][j].linkCost[m]=gWorld.map[i][j].linkCost[m];//--
-                if(gWorld.map[i][j].move[m]!=NULL){
-                    int row = gWorld.map[i][j].move[m]->row;//--
-                    int col = gWorld.map[i][j].move[m]->col;//--
-//					cout<< "vertex row col:" <<row << "," << col <<endl;
-                    dstarLite->maze[i][j].move[m] = &dstarLite->maze[row][col];////-- update: child = parent
-                    dstarLite->maze[i][j].predecessor[m] = &dstarLite->maze[row][col];
-                }
-            }
-            //dstarLite->maze[i][j].g = gWorld.map[i][j].g;
-            //dstarLite->maze[i][j].rhs = gWorld.map[i][j].rhs;
-
-        }
-    }
-
-    vertex startV = gWorld.getStartVertex();
-    vertex goalV = gWorld.getGoalVertex();
-
-    //dstarLite->start->g = gWorld.map[startV.row][startV.col].g ;
-    //dstarLite->start->rhs = gWorld.map[startV.row][startV.col].rhs ;
-    dstarLite->start->x = gWorld.map[startV.row][startV.col].col;
-    dstarLite->start->y = gWorld.map[startV.row][startV.col].row;
-
-    //dstarLite->goal->g = gWorld.map[goalV.row][goalV.col].g;
-    //dstarLite->goal->rhs = gWorld.map[goalV.row][goalV.col].rhs;
-    dstarLite->goal->x = gWorld.map[goalV.row][goalV.col].col;
-    dstarLite->goal->y = gWorld.map[goalV.row][goalV.col].row;
-
 }
 
 
@@ -379,7 +300,6 @@ void runSimulation(char *fileName){
 	//----------------------------------------------------------------
 	//LPA*
 	lpa_star = new LpaStar(grid_world.getGridWorldRows(), grid_world.getGridWorldCols());
-	d_star = new DstarLite(grid_world.getGridWorldRows(), grid_world.getGridWorldCols());
 	vertex start = grid_world.getStartVertex();
 	vertex goal = grid_world.getGoalVertex();
 	
@@ -387,13 +307,10 @@ void runSimulation(char *fileName){
 	cout << "(goal.col = " << goal.col << ", goal.row = " << goal.row << ")" << endl;
 	
 	lpa_star->initialise(start.col, start.row, goal.col, goal.row);
-    d_star->initialise(start.col, start.row, goal.col, goal.row);
-
-
-    //lpa_star->copyMazeToDisplayMap(grid_world);
+	
+	//lpa_star->copyMazeToDisplayMap(grid_world);
 	//copyMazeToDisplayMap(grid_world, lpa_star);
 	copyDisplayMapToMaze(grid_world, lpa_star);
-	copyDisplayMapToMaze_dstarLite(grid_world, d_star);
 	//----------------------------------------------------------------
 		
 	worldBoundary = grid_world.getWorldBoundary();
@@ -463,10 +380,8 @@ void runSimulation(char *fileName){
 					  //F8
 					   //~ algorithmSelection = DSTAR_ALGORITHM;
 					   //todo
-                        d_star->computeShortestPath();
-                     copyMazeToDisplayMap_dstarLite(grid_world,d_star);
-
-                     break;
+//                        d_star_lite->computeShortestPath();
+						break;
 				
 				case 15:
 					 //key-C

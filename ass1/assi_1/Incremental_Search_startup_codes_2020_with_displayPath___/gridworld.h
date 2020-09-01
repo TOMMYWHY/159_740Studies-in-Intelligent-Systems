@@ -9,7 +9,6 @@
 #include "globalvariables.h"
 #include "graphics.h"
 #include "LpaStar.h"
-#include "DstarLite.h"
 
 
 class GridWorld{
@@ -191,9 +190,7 @@ public:
 	// friend functions
 	friend void copyMazeToDisplayMap(GridWorld &gWorld, LpaStar* lpa);
 	friend void copyDisplayMapToMaze(GridWorld &gWorld, LpaStar* lpa);
-
-	friend void copyMazeToDisplayMap_dstarLite(GridWorld &gWorld, DstarLite* dstarLite);
-	friend void copyDisplayMapToMaze_dstarLite(GridWorld &gWorld,  DstarLite* dstarLite);
+	
 private:
 	int cellWidth;
    int cellHeight;

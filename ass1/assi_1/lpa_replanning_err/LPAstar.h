@@ -35,8 +35,8 @@ public:
     void updateVertex(LpaStarCell *u);
     void computeShortestPath();
     void replanning();
-    bool has_unknown_grids();
-    void searching();
+    bool hasUknowns();
+    void run();
 private:
 	
     vector<vector<LpaStarCell> > maze;   

@@ -277,9 +277,7 @@ void LpaStar::computeShortestPath(){
 
 
 	while(getU_TopKey()[0] < calculateKey(&maze[goal->y][goal->x])[0]||
-	(
-		 getU_TopKey()[0]==calculateKey(&maze[goal->y][goal->x])[0] &&
-		 getU_TopKey()[1]<calculateKey(&maze[goal->y][goal->x])[1])||
+	(getU_TopKey()[0]==calculateKey(&maze[goal->y][goal->x])[0] && getU_TopKey()[1]<calculateKey(&maze[goal->y][goal->x])[1])||
 	maze[goal->y][goal->x].rhs != maze[goal->y][goal->x].g)//09
 	{
         cout<< "; U.size:"<<U.size()<<endl;
@@ -346,7 +344,7 @@ void LpaStar::replanning() {
     }
 }
 
-bool LpaStar::has_unknown_grids(){
+bool LpaStar::hasUknowns(){
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             if(maze[i][j].g!=INF && (maze[i][j].type=='8'||maze[i][j].type=='9')){
@@ -357,9 +355,9 @@ bool LpaStar::has_unknown_grids(){
     return false;
 }
 
-void LpaStar::searching(){
+void LpaStar::run(){
     computeShortestPath();
-    while (has_unknown_grids()){
+    while (hasUknowns()){
         replanning();
         computeShortestPath();
     }

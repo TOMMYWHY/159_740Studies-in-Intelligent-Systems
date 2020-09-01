@@ -211,36 +211,6 @@ struct LpaStarCell
     int generated;
     int heapindex;
 };
-struct DStarLiteCell
-{
-    DStarLiteCell* move[DIRECTIONS];
-    DStarLiteCell* predecessor[DIRECTIONS];
-    double linkCost[DIRECTIONS];
-    DStarLiteCell* parent;
-    DStarLiteCell* trace;//?
-    short obstacle;
-    int x, y;
-
-    double g;
-    double rhs;
-    double h;
-    double key[2];
-
-    //~ int g;
-    //~ int rhs;
-    //~ int key[2];
-
-
-    //---------------------
-    //TYPE: 0 - traversable, 1 - blocked, 9 - unknown, 6 - start vertex, 7 - goal vertex
-    char type;
-    //----------------------
-
-
-
-    int generated;
-    int heapindex;
-};
 
 extern bool SHOW_MAP_DETAILS;
 
