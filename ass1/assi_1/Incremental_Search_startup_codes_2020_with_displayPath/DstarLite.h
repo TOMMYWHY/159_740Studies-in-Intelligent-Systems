@@ -23,6 +23,7 @@ public:
     int maxValue(int v1, int v2);
     void calcKey(int x, int y);
     void calcKey(DStarLiteCell *cell);
+//    void calcKey(DStarLiteCell *cell);
     //void calc_H(int x, int y);
     double calc_H(int x, int y);
     void updateHValues();
@@ -56,11 +57,13 @@ private:
     priority_queue<DStarLiteCell,vector <DStarLiteCell*>,CompareKey> U; //02
     DStarLiteCell* start;
     DStarLiteCell* goal;
+    DStarLiteCell* last;
 
     int rows;
     int cols;
     int vertexAccess;
     int MaxQlength;
+    double k_m;
 
 };
 

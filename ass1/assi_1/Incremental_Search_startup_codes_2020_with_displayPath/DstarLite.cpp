@@ -21,7 +21,7 @@ DstarLite::DstarLite(int rows_, int cols_){
 		 }
 }
 void DstarLite::initialise(int startX, int startY, int goalX, int goalY){
-    //03
+    //04
     for(int i=0; i < rows; i++){
         for(int j=0; j < cols; j++){
             maze[i][j].g = INF;
@@ -31,18 +31,20 @@ void DstarLite::initialise(int startX, int startY, int goalX, int goalY){
             }
         }
     }
+//    double k_m=0;
+    // Heuristic todo
     start = new DStarLiteCell;
     goal = new DStarLiteCell;
 
     //START VERTEX
     start->g = INF;
-    start->rhs = 0.0;//04
+    start->rhs = INF;//04
     start->x = startX;
     start->y = startY;
 
     //GOAL VERTEX
     goal->g = INF;
-    goal->rhs = INF;
+    goal->rhs = 0.0;//05
     goal->x = goalX;
     goal->y = goalY;
     //---------------------
@@ -53,27 +55,14 @@ void DstarLite::initialise(int startX, int startY, int goalX, int goalY){
     maze[goal->y][goal->x].rhs = goal->rhs;
     //---------------------
     updateHValues();
-    calcKey(&maze[start->y][start->x]);
-    U.push(&maze[start->y][start->x]);//05
+    calcKey(&maze[goal->y][goal->x]);
+    U.push(&maze[goal->y][goal->x]);//05
     cout << "priority Queue is empty : "<<U.empty()<<endl;
     cout << "priority Queue top : "<<getU_TopKey()[0]<<","<<getU_TopKey()[1]<<endl;
     cout << "priority Queue size : "<<U.size()<<endl;
+    last = &maze[start->y][start->x];
     start = &maze[start->y][start->x];
     goal = &maze[goal->y][goal->x];
-
-
-    vertexAccess=0;//TODO
-    maxQLength=0;//TODO
-
-    //for debugging only
-    //~ for(int i=0; i < rows; i++){
-    //~ for(int j=0; j < cols; j++){
-    //~ //cout << maze[i][j].g << ", ";
-    //~ cout << maze[i][j].rhs << ", ";
-
-    //~ }
-    //~ cout << endl;
-    //~ }
 
 }
 
@@ -94,14 +83,24 @@ int DstarLite::maxValue(int v1, int v2){
     }
 }
 
-double DstarLite::calc_H(int x, int y){
+/*double DstarLite::calc_H(int x, int y){
 
     int diffY = abs(goal->y - y);
     int diffX = abs(goal->x - x);
 
     //maze[y][x].h = (double)maxValue(diffY, diffX);
     return (double)maxValue(diffY, diffX);
+}*/
+
+double DstarLite::calc_H(int x, int y){
+
+    int diffY = abs(start->y - y);
+    int diffX = abs(start->x - x);
+
+    //maze[y][x].h = (double)maxValue(diffY, diffX);
+    return (double)maxValue(diffY, diffX);
 }
+
 
 void DstarLite::updateHValues(){
     for(int i=0; i < rows; i++){
@@ -115,21 +114,22 @@ void DstarLite::updateHValues(){
 }
 
 void DstarLite::calcKey(int x, int y){
-    double key1, key2;
-
-    key2 = minValue(maze[y][x].g, maze[y][x].rhs);
-    key1 = key2 + maze[y][x].h;
+    double key1, key2, min_value;
+    min_value=minValue(maze[y][x].g, maze[y][x].rhs);
+    key1 = min_value + maze[y][x].h + k_m; //
+    key2 = min_value; //
 }
-
 void DstarLite::calcKey(DStarLiteCell *cell){
-    double key1, key2;
+    double key1, key2,min_value;
+    min_value=minValue(cell->g, cell->rhs);
 
-    key2 = minValue(cell->g, cell->rhs);
-    key1 = key2 + cell->h;
+    key1 = min_value + cell->h + k_m; //
+    key2 = min_value;
     // cout << "key1:" << key1 << " ; key2: " << key2<<endl;
     cell->key[0] = key1;
     cell->key[1] = key2;
 }
+
 
 void DstarLite::updateAllKeyValues(){
     for(int i=0; i < rows; i++){
@@ -188,23 +188,22 @@ void DstarLite:: removeElementFromU(DStarLiteCell *u){
 void DstarLite::updateVertex(DStarLiteCell *u){
     cout << " updateVertex: " << u->y << "," << u->x << "; type:"<< u->type
          <<"; U.size:"<<U.size() <<endl;
-    // if(u->x != start->x || u->y !=start->y) //06
-    if(u->type != '6')
+    if(u->type != '7')//07
     {
         u->rhs = INF;
         //06
         for(int i = 0; i<DIRECTIONS; i++){
-            DStarLiteCell *pred = u->predecessor[i];
+            DStarLiteCell *succ = u->move[i];
             // cout << " ~~~~~~!"<<
             // " ; pred x,y: "<< pred->x << ","<<pred->y<<
             //  "pred->type:"<< pred->type<<
             // "; pred->g:"<< pred->g  <<endl;
 
-            if(pred !=NULL && pred->type!='1'){
+            if(succ !=NULL && succ->type!='1'){
 //				cout<< u->rhs << ","<< pred->g<<","<< u ->linkCost[i]<<endl;
-                if( u->rhs > ( pred->g + u ->linkCost[i])){
+                if( u->rhs > ( succ->g + u ->linkCost[i])){
 //				cout << "xxxxxxxxx"<< endl;
-                    u->rhs = pred->g + u -> linkCost[i];//06
+                    u->rhs = succ->g + u -> linkCost[i];//07
                 }
             }
         }
@@ -223,14 +222,70 @@ void DstarLite::updateVertex(DStarLiteCell *u){
         calcKey(u);
         U.push(u);
         cout << "updateVertex:u->g != u->rhs   after push to U  queue size : "<<U.size()
-             << "; cell key0,key1:"<< u->key[0]<<","<<u->key[1]<<endl;
+             << "; cell key0,key1:"<< u->key[0]<<","<<u->key[1]<<
+             "; u->g:"<<u->g <<
+             "; u->rhs:"<<u->rhs <<
+             "; u->h:"<<u->h <<
+             <<endl;
     }
-    vertexAccess ++;
+ /*   vertexAccess ++;
     if(U.size()>maxQLength){
         maxQLength = U.size();
-    }
+    }*/
 
 }
 void DstarLite::computeShortestPath(){
     cout <<"DstarLite::computeShortestPath~!!!" << endl;
+    cout<< "---testing---"<<endl;
+     DStarLiteCell *test_u = U.top();
+    cout<<"goal to be u => g:"<<test_u->g<<
+    "; rhs:"<<test_u->rhs<<
+    "; h:"<<test_u->h<< "; y,x:"<<test_u->y<<","<<test_u->x<<
+    "; tpye:"<<test_u->type<<endl;
+
+    cout <<"getU_TopKey()[1]:"<<getU_TopKey()[1]<< endl;
+    cout <<"calculateKey(&maze[start->y][start->x])[1]:"<<calculateKey(&maze[start->y][start->x])[1]<< endl;
+
+    while(getU_TopKey()[0] < calculateKey(&maze[start->y][start->x])[0]||
+          (
+              getU_TopKey()[0]==calculateKey(&maze[start->y][start->x])[0] &&
+              getU_TopKey()[1]<calculateKey(&maze[start->y][start->x])[1]
+          )||
+          maze[start->y][start->x].rhs != maze[start->y][start->x].g)//09
+    {
+        cout<< "; U.size:"<<U.size()<<endl;
+        double k_old[2]={getU_TopKey()[0],getU_TopKey()[1]};
+        DStarLiteCell *u = U.top();//12
+        U.pop();//12
+        //13
+        if(k_old[0]<calculateKey(u)[0]||
+        (k_old[0]==calculateKey(u)[0])&& k_old[1]<calculateKey(u)[1]){
+            cout << "if : kold < calckey(u)"<<endl;
+            U.push(u);
+        }else if(u->g > u->rhs){
+            cout << "else if:u->g > u->rhs"<<endl;
+            u->g = u->rhs;//16
+            for (int i = 0; i < DIRECTIONS; i++)//13
+            {
+                DStarLiteCell * pred = u->predecessor[i];
+                // cout << " loop:"  <<i << " succ-type"<< succ->type <<"; y,x: "<< succ->y << "," << succ->x <<endl;
+                if(pred!=NULL && pred->type !='1'){
+                    updateVertex(pred);
+                }
+            }
+        }else{
+            cout << "else...."<<endl;
+            u->g = INF;//15
+            updateVertex(u);
+            for (int i = 0; i < DIRECTIONS; i++)//16
+            {
+                DStarLiteCell * pred = u->predecessor[i];
+                cout << "else loop:"  <<i << " pred-type"<< pred->type <<"; "<< pred->y << "," << pred->x <<endl;
+
+                if(pred!=NULL && pred->type !='1'){
+                    updateVertex(pred);
+                }
+            }
+        }
+    }
 }

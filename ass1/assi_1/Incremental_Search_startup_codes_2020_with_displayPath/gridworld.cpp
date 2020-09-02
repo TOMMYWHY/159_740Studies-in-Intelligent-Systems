@@ -10,7 +10,6 @@ double sum(double a, double b){
     }
 //---
 void GridWorld::displayPathForLpa()
-// void GridWorld::displayPathForLpa(int start_col,int start_row, int end_col,int end_row)
 {
     vertex* currentVertex = &map[goalVertex.row][goalVertex.col];
     // vertex* currentVertex = &map[end_row][end_col];
