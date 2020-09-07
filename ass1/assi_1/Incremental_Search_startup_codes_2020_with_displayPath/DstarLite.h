@@ -40,7 +40,6 @@ public:
     void updateVertex(DStarLiteCell *u);
     void computeShortestPath();
     void replanning();
-    bool has_unknown_grids();
     void searching();
 private:
 

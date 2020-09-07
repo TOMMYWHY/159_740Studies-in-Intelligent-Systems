@@ -193,7 +193,7 @@ void copyDisplayMapToMaze(GridWorld &gWorld, LpaStar* lpa){
 	
 }
 void copyDisplayMapToMaze_dstarLite(GridWorld &gWorld, DstarLite* dstarLite){
-    LpaStarCell* originLpaStarC;//--
+    DstarLite* originLpaStarC;//--
     for(int i=0; i < gWorld.getGridWorldRows(); i++){
         for(int j=0; j < gWorld.getGridWorldCols(); j++){
             dstarLite->maze[i][j].type = gWorld.map[i][j].type;
@@ -275,7 +275,7 @@ int getKey(){
     }
 	 
 	 if(GetAsyncKeyState(VK_F6) < 0) {
-        //execute A* with strict expanded list
+        //execute LPA* replanning
 		  return 106;
     }
 	 if(GetAsyncKeyState(VK_F7) < 0) {
@@ -286,8 +286,13 @@ int getKey(){
         //execute D*Lite
 		  return 108;
     }
-	 
-	 //copy display map to algorithm's maze
+    if(GetAsyncKeyState(VK_F3) < 0) {
+        //execute D*Lite replanning
+        return 103;
+    }
+
+
+    //copy display map to algorithm's maze
 	 if(GetAsyncKeyState(VK_F9) < 0) {
 		  return 109;
     }
@@ -353,6 +358,7 @@ void runSimulation(char *fileName){
 	bool ANIMATE_MOUSE_FLAG=false;
 	bool validCellSelected=false;
 	bool Lpa_line = false;
+	bool DstarLite_line = false;
 	static BOOL page=false;
 	int mX, mY;
 	float worldX, worldY;
@@ -419,6 +425,12 @@ void runSimulation(char *fileName){
 			    grid_world.displayPathForLpa();
 			    // grid_world.displayPathForLpa(start.col,start.row,goal.col,goal.row);
 			}
+
+			if(DstarLite_line){
+			    grid_world.displayPathForDstarLite();
+			    // grid_world.displayPathForLpa(start.col,start.row,goal.col,goal.row);
+			}
+			 
 			 
 			 switch(action){
 				case 1: //Block selected cell
@@ -430,6 +442,7 @@ void runSimulation(char *fileName){
 							colSelected=-1;
 						}
                      Lpa_line= false;
+                     DstarLite_line =false;
 						action = -1;
 						break;
 				
@@ -439,6 +452,8 @@ void runSimulation(char *fileName){
 				
 				case 106: 
 					  	//F6 lpa replanning
+                    Lpa_line = false;
+					DstarLite_line = false;
 					 cout <<"lpa check replanning" <<endl;
                      lpa_star->searching();
                      copyMazeToDisplayMap(grid_world,lpa_star);
@@ -450,7 +465,9 @@ void runSimulation(char *fileName){
 				
 				case 107: 
 					  //F7
-					   //~ algorithmSelection = LPASTAR_ALGORITHM;
+                    Lpa_line = false;
+					DstarLite_line = false;
+                     //~ algorithmSelection = LPASTAR_ALGORITHM;
 						 lpa_star->computeShortestPath();
 						 copyMazeToDisplayMap(grid_world,lpa_star);
 						 Lpa_line = true;
@@ -463,12 +480,31 @@ void runSimulation(char *fileName){
 					  //F8
 					   //~ algorithmSelection = DSTAR_ALGORITHM;
 					   //todo
+						Lpa_line = false;
+						DstarLite_line = false;
                         d_star->computeShortestPath();
-                     copyMazeToDisplayMap_dstarLite(grid_world,d_star);
-
+                     	copyMazeToDisplayMap_dstarLite(grid_world,d_star);
+ 						DstarLite_line = true;
+						action = -1;   
+						Sleep(200);
                      break;
-				
-				case 15:
+
+                 case 103:
+                     //F3
+                   	Lpa_line = false;
+					DstarLite_line = false;
+                     cout <<"Dstar lite check replanning======================" <<endl;
+                     //todo
+                    d_star->searching();
+					// copyMazeToDisplayMap_dstarLite(grid_world,d_star);
+					// DstarLite_line = true;
+
+                     action = -1;
+                     Sleep(200);
+                     break;
+
+
+                 case 15:
 					 //key-C
 					   if( rowSelected != -1 && colSelected != -1){
 							grid_world.displayVertexConnections(colSelected-1, rowSelected-1);

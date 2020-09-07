@@ -226,7 +226,7 @@ void DstarLite::updateVertex(DStarLiteCell *u){
              "; u->g:"<<u->g <<
              "; u->rhs:"<<u->rhs <<
              "; u->h:"<<u->h <<
-             <<endl;
+             endl;
     }
  /*   vertexAccess ++;
     if(U.size()>maxQLength){
@@ -288,4 +288,106 @@ void DstarLite::computeShortestPath(){
             }
         }
     }
+    cout <<"start:"<<start->y<<","<<start->x<< endl;
+    cout <<"GOAL:"<<goal->y<<","<<goal->x<< endl;
+
 }
+
+void DstarLite::replanning(){
+
+    int m;
+    int argmin=INF;
+    for (int i = 0; i < DIRECTIONS; i++) {
+        DStarLiteCell * succ = start->move[i];
+        //todo
+        if(succ!=NULL && succ->type!='1' && succ->type!='9' &&
+        argmin>(succ->g+start->linkCost[i])){
+            m=i;
+            argmin = succ->g + start->linkCost[i];
+            cout <<"1111"<<"; m:"<<m  << "; argmin :" << argmin << endl;
+        }
+    }
+    start=start->move[m];//27
+    start->type = '6';
+    cout << "start changed-----------:"<<start->x<<"," <<start->y <<endl;
+    updateHValues();
+    bool edgeChanged=false;
+    for (int i = 0; i < DIRECTIONS; i++) {
+        DStarLiteCell * succ = start->move[i];
+        if(succ->type =='8'){
+            cout << "change 8=>0 " <<endl;
+            succ->type = '0';
+        }
+        if(succ->type =='9'){
+            cout << "change 9=>1 " <<endl;
+            // succ->type = '1';
+            edgeChanged =true;
+            break;
+        }
+    }
+    if(edgeChanged){
+         for (int i = 0; i < DIRECTIONS; i++) {
+                cout << "222"<<endl;
+                DStarLiteCell * succ = start->move[i];
+                if(succ->type =='9'){
+                    cout << "333 succ:"<<succ->x<<","<<succ->y <<endl;
+                    maze[succ->y][succ->x].type='1';
+                    k_m = k_m + calc_H(last->x,last->y);
+                    last = start;
+                    succ->type='1';
+                    succ->g = INF;
+                       cout << "4444  last:"<<last->x<<","<<last->y <<endl;
+                    for (int j = 0; j < DIRECTIONS; j++) {
+                         cout << "6666"<<endl;
+
+                        DStarLiteCell * pred = succ->predecessor[i];
+                         cout <<"pred:"<<pred->x <<","<< pred->y  <<endl;
+                        if(pred->type=='0' || pred->type=='6' || succ->type=='7'|| succ->type=='8'){
+                         cout << "777777"<<endl;
+
+                            pred->linkCost[7-j]=INF;
+                            updateVertex(pred);
+                             cout << "888"<<endl;
+
+                        }else{
+                            cout <<"999"<<endl;
+                        }
+                    }
+                }
+            }
+         computeShortestPath();
+
+        }
+        // computeShortestPath();
+    
+}
+
+
+/*void DstarLite::replanning(){
+    while(start->y != goal->y || start->x !=goal->x){
+        replanning_one_step();
+    }
+}*/
+
+void DstarLite::searching(){
+//    computeShortestPath();
+  /*  if(start->y != goal->y || start->x !=goal->x){
+         cout << "searching replanning"<<endl;
+        replanning();
+         cout << "end searching replanning"<<endl;
+
+    }
+     cout <<"start:"<<start->y<<","<<start->x<< endl;
+    cout <<"GOAL:"<<goal->y<<","<<goal->x<< endl;*/
+    // computeShortestPath();
+
+    while(start->y != goal->y || start->x !=goal->x){
+        // cout << "searching replanning"<<endl;
+        replanning();
+        // computeShortestPath();
+
+    }
+      cout <<"start:"<<start->y<<","<<start->x<< endl;
+    cout <<"GOAL:"<<goal->y<<","<<goal->x<< endl;
+
+} // cout << "searching replanning"<<endl;
