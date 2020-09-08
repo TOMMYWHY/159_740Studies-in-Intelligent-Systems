@@ -47,9 +47,8 @@ public:
 	void displayMapConnections();
 	// void displayPath(vertex* currentVertex, vertex* min_neighbour);
 	// void displayPathForLpa(int start_col,int start_row, int end_col,int end_row);
-	void displayPathForLpa();
-	void displayPathForDstarLite();
-
+	int displayPathForLpa();
+	int displayPathForDstarLite();
    //------------------------------------------------
 	void drawGrid();
 	

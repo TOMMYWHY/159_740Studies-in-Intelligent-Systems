@@ -57,6 +57,8 @@ private:
     int cols;
     int vertexAccess;
     int MaxQlength;
+    int state_expansions;
+
 
 };
 

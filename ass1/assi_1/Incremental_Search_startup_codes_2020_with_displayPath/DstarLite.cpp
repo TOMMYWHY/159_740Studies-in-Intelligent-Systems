@@ -63,6 +63,9 @@ void DstarLite::initialise(int startX, int startY, int goalX, int goalY){
     last = &maze[start->y][start->x];
     start = &maze[start->y][start->x];
     goal = &maze[goal->y][goal->x];
+    vertexAccess=0;//TODO
+    maxQLength=0;//TODO
+    state_expansions = 0;
 
 }
 
@@ -83,22 +86,24 @@ int DstarLite::maxValue(int v1, int v2){
     }
 }
 
-/*double DstarLite::calc_H(int x, int y){
 
-    int diffY = abs(goal->y - y);
-    int diffX = abs(goal->x - x);
-
-    //maze[y][x].h = (double)maxValue(diffY, diffX);
-    return (double)maxValue(diffY, diffX);
-}*/
 
 double DstarLite::calc_H(int x, int y){
+    double result;
+    if(HEURISTIC ==MANHATTAN){
+        int diffY = abs(goal->y - y);
+        int diffX = abs(goal->x - x);
+        result =  (double)maxValue(diffY, diffX);
 
-    int diffY = abs(start->y - y);
-    int diffX = abs(start->x - x);
+    }
+    if(HEURISTIC==EUCLIDEAN){
+        int diffY=goal->y-y;
+        int diffX=goal->x-x;
+        result = (double)sqrt(diffY*diffY+ diffX*diffX);
+    }
 
+    return result;
     //maze[y][x].h = (double)maxValue(diffY, diffX);
-    return (double)maxValue(diffY, diffX);
 }
 
 
@@ -207,44 +212,46 @@ void DstarLite::updateVertex(DStarLiteCell *u){
                 }
             }
         }
-        cout << "!!!updateVertex g,hrs:" << u->g << "," << u->rhs<<endl;
+//        cout << "!!!updateVertex g,hrs:" << u->g << "," << u->rhs<<endl;
     }
 //	cout << "  remove before"  << u->y << ","<< u->x <<"; U.size:"<< U.size() <<endl;
     removeElementFromU(u);//07
 //	bool is_in_U = removeElementFromU(u);
-    cout <<"u->y,x:"<<  u->y << ","<< u->x
+//    cout <<"u->y,x:"<<  u->y << ","<< u->x
          // << " is_in_U :" <<is_in_U
-         <<"; U.size:"<< U.size() <<endl;
+//         <<"; U.size:"<< U.size() <<endl;
 //	cout << "remove after"  << u->y << ","<< u->x<<"; U.size:"<< U.size() <<endl;
     //08
     if(u->g != u->rhs){
 //		cout << "updateVertex:u->g != u->rhs queue size : "<<U.size() <<endl;
         calcKey(u);
         U.push(u);
-        cout << "updateVertex:u->g != u->rhs   after push to U  queue size : "<<U.size()
+       /* cout << "updateVertex:u->g != u->rhs   after push to U  queue size : "<<U.size()
              << "; cell key0,key1:"<< u->key[0]<<","<<u->key[1]<<
              "; u->g:"<<u->g <<
              "; u->rhs:"<<u->rhs <<
              "; u->h:"<<u->h <<
-             endl;
+             endl;*/
     }
- /*   vertexAccess ++;
+    vertexAccess ++;
     if(U.size()>maxQLength){
         maxQLength = U.size();
-    }*/
+    }
 
 }
 void DstarLite::computeShortestPath(){
     cout <<"DstarLite::computeShortestPath~!!!" << endl;
-    cout<< "---testing---"<<endl;
-     DStarLiteCell *test_u = U.top();
-    cout<<"goal to be u => g:"<<test_u->g<<
-    "; rhs:"<<test_u->rhs<<
-    "; h:"<<test_u->h<< "; y,x:"<<test_u->y<<","<<test_u->x<<
-    "; tpye:"<<test_u->type<<endl;
+    vertexAccess=0;
+    state_expansions = 0;
+//    cout<< "---testing---"<<endl;
+//     DStarLiteCell *test_u = U.top();
+//    cout<<"goal to be u => g:"<<test_u->g<<
+//    "; rhs:"<<test_u->rhs<<
+//    "; h:"<<test_u->h<< "; y,x:"<<test_u->y<<","<<test_u->x<<
+//    "; tpye:"<<test_u->type<<endl;
 
-    cout <<"getU_TopKey()[1]:"<<getU_TopKey()[1]<< endl;
-    cout <<"calculateKey(&maze[start->y][start->x])[1]:"<<calculateKey(&maze[start->y][start->x])[1]<< endl;
+//    cout <<"getU_TopKey()[1]:"<<getU_TopKey()[1]<< endl;
+//    cout <<"calculateKey(&maze[start->y][start->x])[1]:"<<calculateKey(&maze[start->y][start->x])[1]<< endl;
 
     while(getU_TopKey()[0] < calculateKey(&maze[start->y][start->x])[0]||
           (
@@ -253,17 +260,17 @@ void DstarLite::computeShortestPath(){
           )||
           maze[start->y][start->x].rhs != maze[start->y][start->x].g)//09
     {
-        cout<< "; U.size:"<<U.size()<<endl;
+//        cout<< "; U.size:"<<U.size()<<endl;
         double k_old[2]={getU_TopKey()[0],getU_TopKey()[1]};
         DStarLiteCell *u = U.top();//12
         U.pop();//12
         //13
         if(k_old[0]<calculateKey(u)[0]||
         (k_old[0]==calculateKey(u)[0])&& k_old[1]<calculateKey(u)[1]){
-            cout << "if : kold < calckey(u)"<<endl;
+//            cout << "if : kold < calckey(u)"<<endl;
             U.push(u);
         }else if(u->g > u->rhs){
-            cout << "else if:u->g > u->rhs"<<endl;
+//            cout << "else if:u->g > u->rhs"<<endl;
             u->g = u->rhs;//16
             for (int i = 0; i < DIRECTIONS; i++)//13
             {
@@ -274,13 +281,13 @@ void DstarLite::computeShortestPath(){
                 }
             }
         }else{
-            cout << "else...."<<endl;
+//            cout << "else...."<<endl;
             u->g = INF;//15
             updateVertex(u);
             for (int i = 0; i < DIRECTIONS; i++)//16
             {
                 DStarLiteCell * pred = u->predecessor[i];
-                cout << "else loop:"  <<i << " pred-type"<< pred->type <<"; "<< pred->y << "," << pred->x <<endl;
+//                cout << "else loop:"  <<i << " pred-type"<< pred->type <<"; "<< pred->y << "," << pred->x <<endl;
 
                 if(pred!=NULL && pred->type !='1'){
                     updateVertex(pred);
@@ -288,13 +295,17 @@ void DstarLite::computeShortestPath(){
             }
         }
     }
-    cout <<"start:"<<start->y<<","<<start->x<< endl;
-    cout <<"GOAL:"<<goal->y<<","<<goal->x<< endl;
+//    cout <<"start:"<<start->y<<","<<start->x<< endl;
+//    cout <<"GOAL:"<<goal->y<<","<<goal->x<< endl;
+    cout << "vertex Accesses : " << vertexAccess<<endl;
+    cout << "Max Q length : " << maxQLength<<endl;
+    cout << "No. of state expansions : " << state_expansions <<endl;
 
 }
 
 void DstarLite::replanning(){
-
+    vertexAccess=0;
+    state_expansions = 0;
     int m;
     int argmin=INF;
     for (int i = 0; i < DIRECTIONS; i++) {
@@ -304,22 +315,22 @@ void DstarLite::replanning(){
         argmin>(succ->g+start->linkCost[i])){
             m=i;
             argmin = succ->g + start->linkCost[i];
-            cout <<"1111"<<"; m:"<<m  << "; argmin :" << argmin << endl;
+//            cout <<"1111"<<"; m:"<<m  << "; argmin :" << argmin << endl;
         }
     }
     start=start->move[m];//27
-    start->type = '6';
-    cout << "start changed-----------:"<<start->x<<"," <<start->y <<endl;
+    // start->type = '6';
+//    cout << "start changed-----------:"<<start->x<<"," <<start->y <<endl;
     updateHValues();
     bool edgeChanged=false;
     for (int i = 0; i < DIRECTIONS; i++) {
         DStarLiteCell * succ = start->move[i];
         if(succ->type =='8'){
-            cout << "change 8=>0 " <<endl;
+//            cout << "change 8=>0 " <<endl;
             succ->type = '0';
         }
         if(succ->type =='9'){
-            cout << "change 9=>1 " <<endl;
+//            cout << "change 9=>1 " <<endl;
             // succ->type = '1';
             edgeChanged =true;
             break;
@@ -327,30 +338,21 @@ void DstarLite::replanning(){
     }
     if(edgeChanged){
          for (int i = 0; i < DIRECTIONS; i++) {
-                cout << "222"<<endl;
                 DStarLiteCell * succ = start->move[i];
                 if(succ->type =='9'){
-                    cout << "333 succ:"<<succ->x<<","<<succ->y <<endl;
-                    maze[succ->y][succ->x].type='1';
                     k_m = k_m + calc_H(last->x,last->y);
                     last = start;
                     succ->type='1';
                     succ->g = INF;
-                       cout << "4444  last:"<<last->x<<","<<last->y <<endl;
                     for (int j = 0; j < DIRECTIONS; j++) {
-                         cout << "6666"<<endl;
 
-                        DStarLiteCell * pred = succ->predecessor[i];
-                         cout <<"pred:"<<pred->x <<","<< pred->y  <<endl;
+                        DStarLiteCell * pred = succ->predecessor[j];
+//                         cout <<"pred:"<<pred->x <<","<< pred->y  <<endl;
                         if(pred->type=='0' || pred->type=='6' || succ->type=='7'|| succ->type=='8'){
-                         cout << "777777"<<endl;
 
                             pred->linkCost[7-j]=INF;
                             updateVertex(pred);
-                             cout << "888"<<endl;
 
-                        }else{
-                            cout <<"999"<<endl;
                         }
                     }
                 }
@@ -358,36 +360,23 @@ void DstarLite::replanning(){
          computeShortestPath();
 
         }
-        // computeShortestPath();
+    cout << "vertex Accesses : " << vertexAccess<<endl;
+    cout << "Max Q length : " << maxQLength<<endl;
+    cout << "No. of state expansions : " << state_expansions <<endl;
     
 }
 
 
-/*void DstarLite::replanning(){
-    while(start->y != goal->y || start->x !=goal->x){
-        replanning_one_step();
-    }
-}*/
 
 void DstarLite::searching(){
-//    computeShortestPath();
-  /*  if(start->y != goal->y || start->x !=goal->x){
-         cout << "searching replanning"<<endl;
-        replanning();
-         cout << "end searching replanning"<<endl;
-
-    }
-     cout <<"start:"<<start->y<<","<<start->x<< endl;
-    cout <<"GOAL:"<<goal->y<<","<<goal->x<< endl;*/
-    // computeShortestPath();
+   computeShortestPath();
 
     while(start->y != goal->y || start->x !=goal->x){
-        // cout << "searching replanning"<<endl;
+        cout << "searching replanning"<<endl;
         replanning();
-        // computeShortestPath();
 
     }
-      cout <<"start:"<<start->y<<","<<start->x<< endl;
-    cout <<"GOAL:"<<goal->y<<","<<goal->x<< endl;
+//      cout <<"start:"<<start->y<<","<<start->x<< endl;
+//    cout <<"GOAL:"<<goal->y<<","<<goal->x<< endl;
 
 } // cout << "searching replanning"<<endl;

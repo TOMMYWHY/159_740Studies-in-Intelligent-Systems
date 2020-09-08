@@ -379,7 +379,6 @@ void runSimulation(char *fileName){
 	colSelected=-1;
 	
 	int mouseRadius=1;
-	int path_length=0;
 		
 	srand(time(NULL));  // Seed the random number generator
 			
@@ -430,14 +429,12 @@ void runSimulation(char *fileName){
 			    grid_world.displayMap();
 			// getch();
 			if(Lpa_line){
-			   path_length= grid_world.displayPathForLpa();
+			    grid_world.displayPathForLpa();
 			    // grid_world.displayPathForLpa(start.col,start.row,goal.col,goal.row);
 			}
 
 			if(DstarLite_line){
-			   path_length = grid_world.displayPathForDstarLite();
-      	            // cout <<"path_length: "<<path_length<< endl;
-
+			    grid_world.displayPathForDstarLite();
 			    // grid_world.displayPathForLpa(start.col,start.row,goal.col,goal.row);
 			}
 			 
@@ -468,12 +465,10 @@ void runSimulation(char *fileName){
                       begin_t = clock();
                      lpa_star->searching();
                       finish_t = clock();
+                     cout<<"LPA_Start replanning cost time: " << (double )(finish_t - begin_t )/CLOCKS_PER_SEC <<" s"<<endl;
 
                      copyMazeToDisplayMap(grid_world,lpa_star);
                      Lpa_line= true;
- 					path_length= grid_world.displayPathForLpa();
-         	            cout <<"path_length: "<<path_length<< endl;
-                     cout<<"LPA_Start replanning cost time: " << (double )(finish_t - begin_t )/CLOCKS_PER_SEC <<" s"<<endl;
 
                      action = -1;
                      Sleep(200);
@@ -487,14 +482,10 @@ void runSimulation(char *fileName){
                      begin_t = clock();
                      lpa_star->computeShortestPath();
                       finish_t = clock();
+                     cout<<"LPA_Start cost time: " << (double )(finish_t - begin_t )/CLOCKS_PER_SEC <<" s"<<endl;
 
                      copyMazeToDisplayMap(grid_world,lpa_star);
 						 Lpa_line = true;
-		 			   path_length= grid_world.displayPathForLpa();
-         	            cout <<"path_length: "<<path_length<< endl;
-
-                     cout<<"LPA_Start cost time: " << (double )(finish_t - begin_t )/CLOCKS_PER_SEC <<" s"<<endl;
-
 						 // grid_world.displayPathForLpa();
 						action = -1;
 						Sleep(200);
@@ -510,14 +501,9 @@ void runSimulation(char *fileName){
                      d_star->computeShortestPath();
                       finish_t = clock();
                      	copyMazeToDisplayMap_dstarLite(grid_world,d_star);
-
-
-                     DstarLite_line = true;
-                      path_length = grid_world.displayPathForDstarLite();
-      	            cout <<"path_length: "<<path_length<< endl;
                      cout<<"D_Start_lite cost time: " << (double )(finish_t - begin_t )/CLOCKS_PER_SEC <<" s"<<endl;
 
-
+                     DstarLite_line = true;
 						action = -1;   
 						Sleep(200);
                      break;
@@ -531,12 +517,10 @@ void runSimulation(char *fileName){
                        begin_t = clock();
                     d_star->searching();
                      finish_t = clock();
+                      cout<<"D_Start_lite replannig cost time: " << (double )(finish_t - begin_t )/CLOCKS_PER_SEC <<" s"<<endl;
 
 					copyMazeToDisplayMap_dstarLite(grid_world,d_star);
 					DstarLite_line = true;
-					   path_length = grid_world.displayPathForDstarLite();
-      	            cout <<"path_length: "<<path_length<< endl;
-                      cout<<"D_Start_lite replannig cost time: " << (double )(finish_t - begin_t )/CLOCKS_PER_SEC <<" s"<<endl;
 
                      action = -1;
                      Sleep(200);

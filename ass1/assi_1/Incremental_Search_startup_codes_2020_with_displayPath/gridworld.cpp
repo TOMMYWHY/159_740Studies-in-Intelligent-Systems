@@ -9,7 +9,7 @@ double sum(double a, double b){
 		}
     }
 //---
-void GridWorld::displayPathForLpa()
+int GridWorld::displayPathForLpa()
 {
     vertex* currentVertex = &map[goalVertex.row][goalVertex.col];
     // vertex* currentVertex = &map[end_row][end_col];
@@ -25,6 +25,7 @@ void GridWorld::displayPathForLpa()
     double linkCost,g;
     double min_linkCost,min_g;
     //---
+    int path_length = 0;
 
    originVertex = currentVertex;
 
@@ -66,6 +67,8 @@ void GridWorld::displayPathForLpa()
 
         currentVertex=min_neighbour;
        originVertex=currentVertex;
+               path_length ++;
+
  		// cout <<"x,y:"<<currentVertex->row << currentVertex->col<< endl;
         if(currentVertex == &map[startVertex.row][startVertex.col])
         // if(currentVertex == &map[start_row][start_col])
@@ -74,11 +77,12 @@ void GridWorld::displayPathForLpa()
 
     }
 
+    return path_length;
 
 
 }
 
-void GridWorld::displayPathForDstarLite()
+int GridWorld::displayPathForDstarLite()
 {
     vertex* currentVertex = &map[startVertex.row][startVertex.col];
     // vertex* currentVertex = &map[end_row][end_col];
@@ -94,7 +98,7 @@ void GridWorld::displayPathForDstarLite()
     double linkCost,g;
     double min_linkCost,min_g;
     //---
-
+    int path_length = 0;
     originVertex = currentVertex;
 
     while(1){
@@ -135,15 +139,18 @@ void GridWorld::displayPathForDstarLite()
 
         currentVertex=min_neighbour;
         originVertex=currentVertex;
+        path_length ++;
         // cout <<"x,y:"<<currentVertex->row << currentVertex->col<< endl;
         if(currentVertex == &map[goalVertex.row][goalVertex.col])
             // if(currentVertex == &map[start_row][start_col])
-
+            // cout <<"path_length: "<<path_length<< endl;
             break;
 
     }
 
 
+            // cout <<"path_length: "<<path_length<< endl;
+    return path_length;
 
 }
 //---
