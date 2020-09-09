@@ -21,7 +21,8 @@ DstarLite::DstarLite(int rows_, int cols_){
 		 }
 }
 void DstarLite::initialise(int startX, int startY, int goalX, int goalY){
-    //04
+    k_m = 0; // todo: pseudocode 03
+    // todo: pseudocode 04
     for(int i=0; i < rows; i++){
         for(int j=0; j < cols; j++){
             maze[i][j].g = INF;
@@ -31,20 +32,18 @@ void DstarLite::initialise(int startX, int startY, int goalX, int goalY){
             }
         }
     }
-//    double k_m=0;
-    // Heuristic todo
     start = new DStarLiteCell;
     goal = new DStarLiteCell;
 
     //START VERTEX
     start->g = INF;
-    start->rhs = INF;//04
+    start->rhs = INF;
     start->x = startX;
     start->y = startY;
 
     //GOAL VERTEX
     goal->g = INF;
-    goal->rhs = 0.0;//05
+    goal->rhs = 0.0;// todo: pseudocode 05
     goal->x = goalX;
     goal->y = goalY;
     //---------------------
@@ -56,15 +55,15 @@ void DstarLite::initialise(int startX, int startY, int goalX, int goalY){
     //---------------------
     updateHValues();
     calcKey(&maze[goal->y][goal->x]);
-    U.push(&maze[goal->y][goal->x]);//05
-    cout << "priority Queue is empty : "<<U.empty()<<endl;
-    cout << "priority Queue top : "<<getU_TopKey()[0]<<","<<getU_TopKey()[1]<<endl;
-    cout << "priority Queue size : "<<U.size()<<endl;
+    U.push(&maze[goal->y][goal->x]);// todo: pseudocode 06
+//    cout << "priority Queue is empty : "<<U.empty()<<endl;
+//    cout << "priority Queue top : "<<getU_TopKey()[0]<<","<<getU_TopKey()[1]<<endl;
+//    cout << "priority Queue size : "<<U.size()<<endl;
     last = &maze[start->y][start->x];
     start = &maze[start->y][start->x];
     goal = &maze[goal->y][goal->x];
-    vertexAccess=0;//TODO
-    maxQLength=0;//TODO
+    vertexAccess=0;
+    maxQLength=0;
     state_expansions = 0;
 
 }
@@ -148,6 +147,7 @@ void DstarLite::updateAllKeyValues(){
 }
 
 /*=======++++++++++++++=========*/
+//todo: pseudocode 01
 vector <double> DstarLite::calculateKey(DStarLiteCell *cell){
     vector <double> ret;
     calcKey(cell);
@@ -191,41 +191,40 @@ void DstarLite:: removeElementFromU(DStarLiteCell *u){
 
 }
 void DstarLite::updateVertex(DStarLiteCell *u){
-    cout << " updateVertex: " << u->y << "," << u->x << "; type:"<< u->type
-         <<"; U.size:"<<U.size() <<endl;
-    if(u->type != '7')//07
+//    cout << " updateVertex: " << u->y << "," << u->x << "; type:"<< u->type
+//         <<"; U.size:"<<U.size() <<endl;
+    if(u->type != '7')//todo: pseudocode 07
     {
         u->rhs = INF;
-        //06
+        //todo: pseudocode 07
         for(int i = 0; i<DIRECTIONS; i++){
             DStarLiteCell *succ = u->move[i];
-            // cout << " ~~~~~~!"<<
+/*            // cout << " ~~~~~~!"<<
             // " ; pred x,y: "<< pred->x << ","<<pred->y<<
             //  "pred->type:"<< pred->type<<
-            // "; pred->g:"<< pred->g  <<endl;
-
+            // "; pred->g:"<< pred->g  <<endl;*/
             if(succ !=NULL && succ->type!='1'){
 //				cout<< u->rhs << ","<< pred->g<<","<< u ->linkCost[i]<<endl;
                 if( u->rhs > ( succ->g + u ->linkCost[i])){
 //				cout << "xxxxxxxxx"<< endl;
-                    u->rhs = succ->g + u -> linkCost[i];//07
+                    u->rhs = succ->g + u -> linkCost[i];//todo: pseudocode 07
                 }
             }
         }
 //        cout << "!!!updateVertex g,hrs:" << u->g << "," << u->rhs<<endl;
     }
 //	cout << "  remove before"  << u->y << ","<< u->x <<"; U.size:"<< U.size() <<endl;
-    removeElementFromU(u);//07
+    removeElementFromU(u);//todo: pseudocode 08
 //	bool is_in_U = removeElementFromU(u);
 //    cout <<"u->y,x:"<<  u->y << ","<< u->x
          // << " is_in_U :" <<is_in_U
 //         <<"; U.size:"<< U.size() <<endl;
 //	cout << "remove after"  << u->y << ","<< u->x<<"; U.size:"<< U.size() <<endl;
-    //08
+    //todo: pseudocode 09
     if(u->g != u->rhs){
 //		cout << "updateVertex:u->g != u->rhs queue size : "<<U.size() <<endl;
         calcKey(u);
-        U.push(u);
+        U.push(u);//todo: pseudocode 09
        /* cout << "updateVertex:u->g != u->rhs   after push to U  queue size : "<<U.size()
              << "; cell key0,key1:"<< u->key[0]<<","<<u->key[1]<<
              "; u->g:"<<u->g <<
@@ -243,7 +242,7 @@ void DstarLite::computeShortestPath(){
     cout <<"DstarLite::computeShortestPath~!!!" << endl;
     vertexAccess=0;
     state_expansions = 0;
-//    cout<< "---testing---"<<endl;
+/*//    cout<< "---testing---"<<endl;
 //     DStarLiteCell *test_u = U.top();
 //    cout<<"goal to be u => g:"<<test_u->g<<
 //    "; rhs:"<<test_u->rhs<<
@@ -251,52 +250,48 @@ void DstarLite::computeShortestPath(){
 //    "; tpye:"<<test_u->type<<endl;
 
 //    cout <<"getU_TopKey()[1]:"<<getU_TopKey()[1]<< endl;
-//    cout <<"calculateKey(&maze[start->y][start->x])[1]:"<<calculateKey(&maze[start->y][start->x])[1]<< endl;
-
+//    cout <<"calculateKey(&maze[start->y][start->x])[1]:"<<calculateKey(&maze[start->y][start->x])[1]<< endl;*/
+// todo: pseudocode 10
     while(getU_TopKey()[0] < calculateKey(&maze[start->y][start->x])[0]||
           (
               getU_TopKey()[0]==calculateKey(&maze[start->y][start->x])[0] &&
               getU_TopKey()[1]<calculateKey(&maze[start->y][start->x])[1]
           )||
-          maze[start->y][start->x].rhs != maze[start->y][start->x].g)//09
+          maze[start->y][start->x].rhs != maze[start->y][start->x].g)
     {
 //        cout<< "; U.size:"<<U.size()<<endl;
-        double k_old[2]={getU_TopKey()[0],getU_TopKey()[1]};
-        DStarLiteCell *u = U.top();//12
-        U.pop();//12
-        //13
+        double k_old[2]={getU_TopKey()[0],getU_TopKey()[1]};// todo: pseudocode 11
+        DStarLiteCell *u = U.top();//todo: pseudocode 12
+        U.pop();
+        //todo: pseudocode 13
         if(k_old[0]<calculateKey(u)[0]||
         (k_old[0]==calculateKey(u)[0])&& k_old[1]<calculateKey(u)[1]){
 //            cout << "if : kold < calckey(u)"<<endl;
-            U.push(u);
+            U.push(u);//todo: pseudocode 14
         }else if(u->g > u->rhs){
 //            cout << "else if:u->g > u->rhs"<<endl;
-            u->g = u->rhs;//16
-            for (int i = 0; i < DIRECTIONS; i++)//13
+            u->g = u->rhs;//todo: pseudocode 16
+            for (int i = 0; i < DIRECTIONS; i++)//
             {
                 DStarLiteCell * pred = u->predecessor[i];
-                // cout << " loop:"  <<i << " succ-type"<< succ->type <<"; y,x: "<< succ->y << "," << succ->x <<endl;
                 if(pred!=NULL && pred->type !='1'){
-                    updateVertex(pred);
+                    updateVertex(pred); // todo: pseudocode 17
                 }
             }
         }else{
-//            cout << "else...."<<endl;
-            u->g = INF;//15
+            u->g = INF;//todo: pseudocode 19
             updateVertex(u);
             for (int i = 0; i < DIRECTIONS; i++)//16
             {
                 DStarLiteCell * pred = u->predecessor[i];
-//                cout << "else loop:"  <<i << " pred-type"<< pred->type <<"; "<< pred->y << "," << pred->x <<endl;
-
                 if(pred!=NULL && pred->type !='1'){
-                    updateVertex(pred);
+                    updateVertex(pred);//todo: pseudocode 20
                 }
             }
         }
     }
-//    cout <<"start:"<<start->y<<","<<start->x<< endl;
-//    cout <<"GOAL:"<<goal->y<<","<<goal->x<< endl;
+   cout <<"start:"<<start->y<<","<<start->x<< endl;
+   cout <<"GOAL:"<<goal->y<<","<<goal->x<< endl;
     cout << "vertex Accesses : " << vertexAccess<<endl;
     cout << "Max Q length : " << maxQLength<<endl;
     cout << "No. of state expansions : " << state_expansions <<endl;
@@ -308,21 +303,19 @@ void DstarLite::replanning(){
     state_expansions = 0;
     int m;
     int argmin=INF;
+    //todo: pseudocode 26
     for (int i = 0; i < DIRECTIONS; i++) {
         DStarLiteCell * succ = start->move[i];
-        //todo
-        if(succ!=NULL && succ->type!='1' && succ->type!='9' &&
-        argmin>(succ->g+start->linkCost[i])){
+        if(succ!=NULL && succ->type!='1' && succ->type!='9' && argmin>(succ->g+start->linkCost[i])){
             m=i;
-            argmin = succ->g + start->linkCost[i];
-//            cout <<"1111"<<"; m:"<<m  << "; argmin :" << argmin << endl;
+            argmin = succ->g + start->linkCost[i];//todo: pseudocode 26
         }
     }
-    start=start->move[m];//27
-    // start->type = '6';
-//    cout << "start changed-----------:"<<start->x<<"," <<start->y <<endl;
+    start=start->move[m];//todo: pseudocode 27
+   cout << "start changed-----------:"<<start->x<<"," <<start->y <<endl;
     updateHValues();
     bool edgeChanged=false;
+    //todo: pseudocode 28
     for (int i = 0; i < DIRECTIONS; i++) {
         DStarLiteCell * succ = start->move[i];
         if(succ->type =='8'){
@@ -330,8 +323,7 @@ void DstarLite::replanning(){
             succ->type = '0';
         }
         if(succ->type =='9'){
-//            cout << "change 9=>1 " <<endl;
-            // succ->type = '1';
+           cout << "change 9=>1 " <<endl;
             edgeChanged =true;
             break;
         }
@@ -340,24 +332,23 @@ void DstarLite::replanning(){
          for (int i = 0; i < DIRECTIONS; i++) {
                 DStarLiteCell * succ = start->move[i];
                 if(succ->type =='9'){
-                    k_m = k_m + calc_H(last->x,last->y);
-                    last = start;
+                    k_m = k_m + calc_H(last->x,last->y);//todo: pseudocode 30
+                    last = start;//todo: pseudocode 31
                     succ->type='1';
                     succ->g = INF;
                     for (int j = 0; j < DIRECTIONS; j++) {
 
                         DStarLiteCell * pred = succ->predecessor[j];
 //                         cout <<"pred:"<<pred->x <<","<< pred->y  <<endl;
-                        if(pred->type=='0' || pred->type=='6' || succ->type=='7'|| succ->type=='8'){
-
+                        if(pred->type=='0' || pred->type=='6' || succ->type=='7'){
                             pred->linkCost[7-j]=INF;
-                            updateVertex(pred);
+                            updateVertex(pred);//todo: pseudocode 34
 
                         }
                     }
                 }
             }
-         computeShortestPath();
+         computeShortestPath();//todo: pseudocode 35
 
         }
     cout << "vertex Accesses : " << vertexAccess<<endl;
@@ -370,13 +361,8 @@ void DstarLite::replanning(){
 
 void DstarLite::searching(){
    computeShortestPath();
-
     while(start->y != goal->y || start->x !=goal->x){
         cout << "searching replanning"<<endl;
         replanning();
-
-    }
-//      cout <<"start:"<<start->y<<","<<start->x<< endl;
-//    cout <<"GOAL:"<<goal->y<<","<<goal->x<< endl;
-
-} // cout << "searching replanning"<<endl;
+    } 
+}

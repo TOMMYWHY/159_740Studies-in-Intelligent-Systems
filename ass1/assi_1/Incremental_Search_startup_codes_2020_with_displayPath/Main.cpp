@@ -435,7 +435,8 @@ void runSimulation(char *fileName){
 			}
 
 			if(DstarLite_line){
-			   path_length = grid_world.displayPathForDstarLite();
+			   // path_length = grid_world.displayPathForDstarLite();
+			   grid_world.displayPathForDstarLite();
       	            // cout <<"path_length: "<<path_length<< endl;
 
 			    // grid_world.displayPathForLpa(start.col,start.row,goal.col,goal.row);
@@ -474,6 +475,7 @@ void runSimulation(char *fileName){
  					path_length= grid_world.displayPathForLpa();
          	            cout <<"path_length: "<<path_length<< endl;
                      cout<<"LPA_Start replanning cost time: " << (double )(finish_t - begin_t )/CLOCKS_PER_SEC <<" s"<<endl;
+                     cout<<"LPA_Start replanning cost time: " << (double )(finish_t - begin_t )/CLOCKS_PER_SEC *1000<<" ms"<<endl;
 
                      action = -1;
                      Sleep(200);
@@ -494,6 +496,7 @@ void runSimulation(char *fileName){
          	            cout <<"path_length: "<<path_length<< endl;
 
                      cout<<"LPA_Start cost time: " << (double )(finish_t - begin_t )/CLOCKS_PER_SEC <<" s"<<endl;
+                     cout<<"LPA_Start cost time: " << (double )(finish_t - begin_t )/CLOCKS_PER_SEC *1000<<" ms"<<endl;
 
 						 // grid_world.displayPathForLpa();
 						action = -1;
@@ -516,6 +519,7 @@ void runSimulation(char *fileName){
                       path_length = grid_world.displayPathForDstarLite();
       	            cout <<"path_length: "<<path_length<< endl;
                      cout<<"D_Start_lite cost time: " << (double )(finish_t - begin_t )/CLOCKS_PER_SEC <<" s"<<endl;
+                     cout<<"D_Start_lite cost time: " << (double )(finish_t - begin_t )/CLOCKS_PER_SEC *1000<<" ms"<<endl;
 
 
 						action = -1;   
@@ -530,13 +534,15 @@ void runSimulation(char *fileName){
                      //todo
                        begin_t = clock();
                     d_star->searching();
+                    cout <<"replanning search done" <<endl;
                      finish_t = clock();
-
+ cout<<"D_Start_lite replannig cost time: " << (double )(finish_t - begin_t )/CLOCKS_PER_SEC <<" s"<<endl;
+ cout<<"D_Start_lite replannig cost time: " << (double )(finish_t - begin_t )/CLOCKS_PER_SEC *1000 <<" ms"<<endl;
 					copyMazeToDisplayMap_dstarLite(grid_world,d_star);
 					DstarLite_line = true;
 					   path_length = grid_world.displayPathForDstarLite();
       	            cout <<"path_length: "<<path_length<< endl;
-                      cout<<"D_Start_lite replannig cost time: " << (double )(finish_t - begin_t )/CLOCKS_PER_SEC <<" s"<<endl;
+                     
 
                      action = -1;
                      Sleep(200);

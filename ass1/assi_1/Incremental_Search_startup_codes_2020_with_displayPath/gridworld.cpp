@@ -82,8 +82,12 @@ int GridWorld::displayPathForLpa()
 
 }
 
+
+
+
 int GridWorld::displayPathForDstarLite()
 {
+	// cout << "draw line"<<endl;
     vertex* currentVertex = &map[startVertex.row][startVertex.col];
     // vertex* currentVertex = &map[end_row][end_col];
     // cout <<"currentVertex->g:"<<currentVertex->g<<";currentVertex->h:"<<currentVertex->h <<endl;
@@ -139,7 +143,7 @@ int GridWorld::displayPathForDstarLite()
 
         currentVertex=min_neighbour;
         originVertex=currentVertex;
-        path_length ++;
+        // path_length ++;
         // cout <<"x,y:"<<currentVertex->row << currentVertex->col<< endl;
         if(currentVertex == &map[goalVertex.row][goalVertex.col])
             // if(currentVertex == &map[start_row][start_col])
@@ -147,8 +151,6 @@ int GridWorld::displayPathForDstarLite()
             break;
 
     }
-
-
             // cout <<"path_length: "<<path_length<< endl;
     return path_length;
 
@@ -372,7 +374,12 @@ void GridWorld::initialiseMapConnections()
 							if(neighbour->type != '1'){ //if the neighbour is not BLOCKED, then it is reacheable
 							   //map[j][i].move[m] = neighbour;
 								originVertex->move[m] = neighbour;
-								originVertex->linkCost[m] = 1.0;
+								if(m == 0 || m==2 || m== 5 || m== 7 ){
+                                    originVertex->linkCost[m] = 1.414;
+								}else{
+								    originVertex->linkCost[m] = 1.0;
+								}
+								 // originVertex->linkCost[m] = 1.0;
 							} else if(neighbour->type == '1'){
 								
 								originVertex->move[m] = neighbour; //THIS IS ONLY A TEST

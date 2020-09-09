@@ -217,7 +217,7 @@ struct DStarLiteCell
     DStarLiteCell* predecessor[DIRECTIONS];
     double linkCost[DIRECTIONS];
     DStarLiteCell* parent;
-    DStarLiteCell* trace;//?
+    DStarLiteCell* trace;//
     short obstacle;
     int x, y;
 

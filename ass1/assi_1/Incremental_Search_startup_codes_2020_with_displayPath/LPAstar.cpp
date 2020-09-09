@@ -19,8 +19,8 @@
 }
 
 void LpaStar::initialise(int startX, int startY, int goalX, int goalY){
-    //03
-	for(int i=0; i < rows; i++){
+    //todo: pseudocode 03
+    for(int i=0; i < rows; i++){
 	   for(int j=0; j < cols; j++){
 		   maze[i][j].g = INF;
 			maze[i][j].rhs = INF;
@@ -34,7 +34,7 @@ void LpaStar::initialise(int startX, int startY, int goalX, int goalY){
 	
 	//START VERTEX
 	start->g = INF;
-	start->rhs = 0.0;//04
+	start->rhs = 0.0;// todo: pseudocode 04
 	start->x = startX;
 	start->y = startY;
 	
@@ -52,7 +52,7 @@ void LpaStar::initialise(int startX, int startY, int goalX, int goalY){
 	//---------------------
 	updateHValues();
 	calcKey(&maze[start->y][start->x]);
-	U.push(&maze[start->y][start->x]);//05
+	U.push(&maze[start->y][start->x]);//todo: pseudocode 05
 //	cout << "priority Queue is empty : "<<U.empty()<<endl;
 //	cout << "priority Queue top : "<<getU_TopKey()[0]<<","<<getU_TopKey()[1]<<endl;
 //	cout << "priority Queue size : "<<U.size()<<endl;
@@ -60,20 +60,10 @@ void LpaStar::initialise(int startX, int startY, int goalX, int goalY){
 	goal = &maze[goal->y][goal->x];
 
    
-	vertexAccess=0;//TODO
-    maxQLength=0;//TODO
+	vertexAccess=0;
+    maxQLength=0;
     state_expansions = 0;
 
-	//for debugging only
-	//~ for(int i=0; i < rows; i++){
-	   //~ for(int j=0; j < cols; j++){
-		   //~ //cout << maze[i][j].g << ", ";
-			//~ cout << maze[i][j].rhs << ", ";
-			
-		//~ }
-		//~ cout << endl;
-	//~ }
-	
 }
 
 double LpaStar::minValue(double g_, double rhs_){
@@ -94,18 +84,20 @@ int LpaStar::maxValue(int v1, int v2){
 }
 
 double LpaStar::calc_H(int x, int y){
+	double result;
 	if(HEURISTIC ==MANHATTAN){
         int diffY = abs(goal->y - y);
         int diffX = abs(goal->x - x);
-        return (double)maxValue(diffY, diffX);
+        result = (double)maxValue(diffY, diffX);
 
     }
 	 if(HEURISTIC==EUCLIDEAN){
         int diffY=goal->y-y;
         int diffX=goal->x-x;
-        return (double)sqrt(diffY*diffY+ diffX*diffX);
+        result = (double)sqrt(diffY*diffY+ diffX*diffX);
     }
 	//maze[y][x].h = (double)maxValue(diffY, diffX);
+	return result;
 }
 
 void LpaStar::updateHValues(){
@@ -149,7 +141,7 @@ void LpaStar::updateAllKeyValues(){
 }
 
 /*=======++++++++++++++=========*/
-//01
+//todo: pseudocode 01
 vector <double> LpaStar::calculateKey(LpaStarCell *cell){
 	vector <double> ret;
     calcKey(cell);
@@ -200,40 +192,38 @@ void LpaStar:: removeElementFromU(LpaStarCell *u){
 void LpaStar::updateVertex(LpaStarCell *u){
 	cout << " updateVertex: " << u->y << "," << u->x << "; type:"<< u->type
 	<<"; U.size:"<<U.size() <<endl;
-	// if(u->x != start->x || u->y !=start->y) //06
-	if(u->type != '6')
-	{
+	if(u->type != '6') //todo: pseudocode 06
+    {
 		u->rhs = INF;
-		//06
+        //todo: pseudocode 06
 		for(int i = 0; i<DIRECTIONS; i++){
 			LpaStarCell *pred = u->predecessor[i];
-			// cout << " ~~~~~~!"<<
+/*			// cout << " ~~~~~~!"<<
 			// " ; pred x,y: "<< pred->x << ","<<pred->y<<
 			//  "pred->type:"<< pred->type<<
-			// "; pred->g:"<< pred->g  <<endl;
-
+			// "; pred->g:"<< pred->g  <<endl;*/
 			if(pred !=NULL && pred->type!='1'){
 //				cout<< u->rhs << ","<< pred->g<<","<< u ->linkCost[i]<<endl;
 				if( u->rhs > ( pred->g + u ->linkCost[i])){
 //				cout << "xxxxxxxxx"<< endl;
-				u->rhs = pred->g + u -> linkCost[i];//06
+				u->rhs = pred->g + u -> linkCost[i]; //todo: pseudocode 06
 				}
 			}
 		}
 //		cout << "!!!updateVertex g,hrs:" << u->g << "," << u->rhs<<endl;
 	}
 //	cout << "  remove before"  << u->y << ","<< u->x <<"; U.size:"<< U.size() <<endl;
-	removeElementFromU(u);//07
+	removeElementFromU(u); //todo: pseudocode 07
 //	bool is_in_U = removeElementFromU(u);
 //	cout <<"u->y,x:"<<  u->y << ","<< u->x
 	 // << " is_in_U :" <<is_in_U 
 //	 <<"; U.size:"<< U.size() <<endl;
 //	cout << "remove after"  << u->y << ","<< u->x<<"; U.size:"<< U.size() <<endl;
-	//08
+	// todo: pseudocode 08
 	if(u->g != u->rhs){
 //		cout << "updateVertex:u->g != u->rhs queue size : "<<U.size() <<endl;
 		calcKey(u);
-		U.push(u);
+		U.push(u);// todo: pseudocode 08
 //		cout << "updateVertex:u->g != u->rhs   after push to U  queue size : "<<U.size()
 //		<< "; cell key0,key1:"<< u->key[0]<<","<<u->key[1]<<endl;
 	}
@@ -246,17 +236,13 @@ void LpaStar::updateVertex(LpaStarCell *u){
 
 void LpaStar::computeShortestPath(){
 	cout << "computeShortestPath now"  <<endl;
-
 //	cout<< "----- start.rhs:"<<start->rhs<<endl;
-	// calcKey(maze[start->y][start->x]);
-
 	vertexAccess=0;
      state_expansions = 0;
-//    cout <<"getU_TopKey()[0]:"<<getU_TopKey()[0] <<"; getU_TopKey()[1]:" << getU_TopKey()[1]<<endl;
+/*//    cout <<"getU_TopKey()[0]:"<<getU_TopKey()[0] <<"; getU_TopKey()[1]:" << getU_TopKey()[1]<<endl;
 //    cout<< "start g:" << maze[start->y][start->x].g<<endl;//inf
-//    cout<< "start rhs:" << maze[start->y][start->x].rhs<<endl;//0
-
-
+//    cout<< "start rhs:" << maze[start->y][start->x].rhs<<endl;//0*/
+// todo: pseudocode 09
 	while(getU_TopKey()[0] < calculateKey(&maze[goal->y][goal->x])[0]||
 	(
 		 getU_TopKey()[0]==calculateKey(&maze[goal->y][goal->x])[0] &&
@@ -264,17 +250,15 @@ void LpaStar::computeShortestPath(){
 	maze[goal->y][goal->x].rhs != maze[goal->y][goal->x].g)//09
 	{
 //        cout<< "; U.size:"<<U.size()<<endl;
-
         LpaStarCell *u = U.top();
-       
-        U.pop();//10
-        if(u->g > u->rhs)//11
+        U.pop();// todo: pseudocode 10
+        if(u->g > u->rhs)// todo: pseudocode 11
         {
-//            cout << "selected--- u-> y,x:"  << u->y << ","<< u->x <<"; u->h:"<<u->h <<
+/*//            cout << "selected--- u-> y,x:"  << u->y << ","<< u->x <<"; u->h:"<<u->h <<
 //            "; u->key0,key1:"<<u->key[0] <<","<<u->key[1]<<
-//            "; U.size:"<<U.size()<<endl;
-            u->g = u->rhs;//12
-            for (int i = 0; i < DIRECTIONS; i++)//13
+//            "; U.size:"<<U.size()<<endl;*/
+            u->g = u->rhs;// todo: pseudocode 12
+            for (int i = 0; i < DIRECTIONS; i++)// todo: pseudocode 13
             {
                 LpaStarCell * succ = u->move[i];
                 // cout << " loop:"  <<i << " succ-type"<< succ->type <<"; y,x: "<< succ->y << "," << succ->x <<endl;
@@ -283,18 +267,16 @@ void LpaStar::computeShortestPath(){
                 }
             }
 //            cout << "DIRECTIONS 8 done; U size : "<< U.size()<<endl;
-
         }
-        else{//14
+        else{// todo: pseudocode 14
 //        	cout << "else...."<<endl;
             u->g = INF;//15
             updateVertex(u);
 
-            for (int i = 0; i < DIRECTIONS; i++)//16
+            for (int i = 0; i < DIRECTIONS; i++)// todo: pseudocode 16
             {
                 LpaStarCell * succ = u->move[i];
 //                cout << "else loop:"  <<i << " succ-type"<< succ->type <<"; "<< succ->y << "," << succ->x <<endl;
-
                 if(succ!=NULL && succ->type !='1'){
                     updateVertex(succ);
                 }
@@ -312,7 +294,8 @@ void LpaStar::replanning() {
     state_expansions = 0;
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            if(maze[i][j].type == '8' && maze[i][j].g!=INF)//todo
+            //todo: pseudocode 21
+            if(maze[i][j].type == '8' && maze[i][j].g!=INF)
             {
 //                cout << "change 8=>0 " <<endl;
                 maze[i][j].type='0';
@@ -325,7 +308,7 @@ void LpaStar::replanning() {
                     LpaStarCell* succ = maze[i][j].move[k];
                     if(succ->type=='0' || succ->type=='8' || succ->type=='6' || succ->type=='7'){
                         succ->linkCost[7-k]= INF;
-                        updateVertex(succ);
+                        updateVertex(succ);   //todo: pseudocode 23
                     }
                 }
             }
