@@ -264,8 +264,9 @@ void DstarLite::computeShortestPath(){
         DStarLiteCell *u = U.top();//todo: pseudocode 12
         U.pop();
         //todo: pseudocode 13
-        if(k_old[0]<calculateKey(u)[0]||
-        (k_old[0]==calculateKey(u)[0])&& k_old[1]<calculateKey(u)[1]){
+        cout << "k_old[0],k_old[1]："<<k_old[0]<<","<<k_old[1] <<endl;
+        cout << "calculateKey(u)[0],calculateKey(u)[1]："<<calculateKey(u)[0]<<","<<calculateKey(u)[0]<<endl;
+        if(k_old[0]<calculateKey(u)[0]||  (k_old[0]==calculateKey(u)[0])&& k_old[1]<calculateKey(u)[1]){
 //            cout << "if : kold < calckey(u)"<<endl;
             U.push(u);//todo: pseudocode 14
         }else if(u->g > u->rhs){

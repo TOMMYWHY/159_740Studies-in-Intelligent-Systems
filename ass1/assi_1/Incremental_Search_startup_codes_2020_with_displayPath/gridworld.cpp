@@ -375,7 +375,7 @@ void GridWorld::initialiseMapConnections()
 							   //map[j][i].move[m] = neighbour;
 								originVertex->move[m] = neighbour;
 								if(m == 0 || m==2 || m== 5 || m== 7 ){
-                                    originVertex->linkCost[m] = 1.414;
+                                    originVertex->linkCost[m] = 1.4142;
 								}else{
 								    originVertex->linkCost[m] = 1.0;
 								}
