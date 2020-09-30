@@ -131,9 +131,9 @@ class Snake:
             # pick a font you have and set its size
             myfont = pygame.font.SysFont("Comic Sans MS", 15)
             # apply it to text on a label
-            label = myfont.render("Score " + str(self.fitness()) 
-                                    + " age " + str(self.age)
-                                    + " starve " + str(self.starve)
-                                    + " body length " + str(len(self.body)), 1, (255,255,0))
+            label = myfont.render("Score :" + str(self.fitness())
+                                    + "; age :" + str(self.age)
+                                    + "; starve :" + str(self.starve)
+                                    + "; body length :" + str(len(self.body)), 1, (255,255,0))
             # put the label object on the screen at point x=100, y=100
             window.blit(label, (700, 15))
