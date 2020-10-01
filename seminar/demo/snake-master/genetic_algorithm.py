@@ -23,6 +23,9 @@ from game import*
 from neural_network import *
 from joblib import Parallel, delayed
 
+import os
+
+
 
 class GeneticAlgorithm:
     """ Genetic Algorithm Class """
@@ -299,3 +302,15 @@ class GeneticAlgorithm:
         print("Pop size = ", len(networks))
         print("Average top 6 = ", top_mean)
         print("Average last 6 = ", bottom_mean)
+
+        if not os.path.isdir("reporting"):
+            os.mkdir("reporting")
+
+        with open("./reporting/" + "output_pops"+ str(self.population_size)+"_gn"+str(self.generation_number)  + ".csv", "a+") as f:
+                     # pop ize,            gen_num,             fitness,             avg_top6,                  avg_last6
+            f.write(str(len(networks)) +","+str( gen)+","+str(networks[0].score) +","+  str(top_mean) +","+ str(bottom_mean) + "\n")
+            # f.write("\nBest Fitness gen"+ str( gen) + " : "+ str( networks[0].score) + "\n")
+            # f.write("Pop size = "+ str( len(networks))+ "\n")
+            # f.write("Average top 6 ="+ str(top_mean)+ "\n")
+            # f.write("Average last 6 ="+ str(bottom_mean)+ "\n")
+            # f.write("\n")

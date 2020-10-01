@@ -38,7 +38,7 @@ game = Game()
 #net.load(filename_weights='saved/larry_weights.npy', filename_biases='saved/larry_biases.npy')
 #game.start(display=True, neural_net=net)
 
-# net.load(filename_weights="gen_data/gen_10_weights.npy", filename_biases="gen_data/gen_10_biases.npy")
+# net.load(filename_weights="gen_data/gen_86_weights.npy", filename_biases="gen_data/gen_86_biases.npy")
 # game.start(display=True, neural_net=net)
 
 #net.load(filename_weights='saved/gen_24_weights.npy', filename_biases='saved/gen_24_biases.npy')
@@ -50,6 +50,7 @@ Play a game of snake !
 I do not recommend it as it is in first person and not that fun
 But if you want, you can
 """
+
 #game = Game()
 #game.start(playable=True, display=True, speed=10)
 
@@ -63,7 +64,7 @@ The training speed depend a lot on your CPU and its cores number
 
 Contact me if you know how to make it run on GPU
 """
-gen = GeneticAlgorithm(population_size=100, crossover_method='neuron', mutation_method='weight')
+gen = GeneticAlgorithm(population_size=2000, generation_number=100, crossover_method='neuron', mutation_method='weight')
 gen.start()
 
 # Hey pssst, you, yes you.. Sometimes I boost training by making the snake already huge at the begining

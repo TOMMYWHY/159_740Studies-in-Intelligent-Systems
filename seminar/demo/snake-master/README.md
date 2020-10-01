@@ -1,3 +1,15 @@
+# todo
+
+1. pops 500
+2. pops 1000
+3. pops 1500
+4. pops 2000
+
+
+
+
+
+
 # Snake
 >Neural Networks playing snake game trained by genetic algorithm
 

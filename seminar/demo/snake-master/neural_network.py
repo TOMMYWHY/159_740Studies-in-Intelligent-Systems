@@ -48,7 +48,7 @@ class NeuralNetwork:
         :return: column of integers, output neurons activation
         """
         for b, w in zip(self.biases, self.weights):
-            a = sigmoid(np.dot(w, a)+b) #linear
+            a = sigmoid(np.dot(w, a)+b)
         return a
 
     def save(self, name=None):
