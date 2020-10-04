@@ -29,15 +29,15 @@ class Snake:
         """
         :param neural_net: NeuralNet given to the snake in charge of decisions (AI)
         """
-        self.body = [[10, 10], [9, 10], [9, 11], [9, 12]]       # the snake is in fact a list of coordinates
-        self.head = self.body[0][:]                             # first body block
-        self.old_tail = self.head[:]                            # useful to grow
+        self.body = [[10, 10], [9, 10], [9, 11], [9, 12]]  # the snake is in fact a list of coordinates
+        self.head = self.body[0][:]  # first body block
+        self.old_tail = self.head[:]  # useful to grow
         self.direction = RIGHT
         self.age = 0
-        self.starve = 500                                       # useful to avoid looping AI snakes
+        self.starve = 500  # useful to avoid looping AI snakes
         self.alive = True
         self.neural_net = neural_net
-        self.vision = []                                        # holds the map.scan() and is used by the neural net
+        self.vision = []  # holds the map.scan() and is used by the neural net
 
     def update(self):
         """
@@ -55,20 +55,20 @@ class Snake:
         Makes snake grow one block longer
         Called by map.update() when snake's head is in collision with food
         """
-        self.starve = 500                   # useful to avoid looping AI snakes (they die younger -> bad fitness)
-        self.body.append(self.old_tail)     # that's why I keep old_tail
+        self.starve = 500  # useful to avoid looping AI snakes (they die younger -> bad fitness)
+        self.body.append(self.old_tail)  # that's why I keep old_tail
 
     def move(self):
         """
         Makes the snake move, head moves in current direction and each blocks replace its predecessor
         """
-        self.old_tail = self.body[-1][:]        # save old position of last block
-        self.head[0] += self.direction[0]       # moves head
+        self.old_tail = self.body[-1][:]  # save old position of last block
+        self.head[0] += self.direction[0]  # moves head
         self.head[1] += self.direction[1]
-        if self.head in self.body[1:]:          # if snakes hits himself
+        if self.head in self.body[1:]:  # if snakes hits himself
             self.alive = False
-        self.body.insert(0, self.body.pop())    # each block is replace by predecessor
-        self.body[0] = self.head[:]             # first block is head
+        self.body.insert(0, self.body.pop())  # each block is replace by predecessor
+        self.body[0] = self.head[:]  # first block is head
 
     def turn_right(self):
         """
@@ -112,8 +112,8 @@ class Snake:
 
         :return: integer representing how good the snake is performing
         """
-        return int ( (len(self.body)**2) * self.age / 1000 )
-        # return int ( ( (len(self.body)*100) + self.age)  )
+        # return int((len(self.body) ** 2) * self.age / 1000)
+        return int(((len(self.body) * 100) + self.age))
 
     def render(self, window):
         """
@@ -122,19 +122,19 @@ class Snake:
 
         :param window: surface window
         """
-        body = pygame.image.load(IMAGE_SNAKE).convert_alpha()                   # loading image
-        snake_head = pygame.image.load(IMAGE_SNAKE_HEAD).convert()  
+        body = pygame.image.load(IMAGE_SNAKE).convert_alpha()  # loading image
+        snake_head = pygame.image.load(IMAGE_SNAKE_HEAD).convert()
         for block in self.body:
-            window.blit(body, (block[0]*SPRITE_SIZE, block[1]*SPRITE_SIZE))     # painting a beautiful snek
-        window.blit(snake_head, (self.body[0][0]*SPRITE_SIZE, self.body[0][1]*SPRITE_SIZE))
-        if self.neural_net:                                                     # calls for neural net rendering
+            window.blit(body, (block[0] * SPRITE_SIZE, block[1] * SPRITE_SIZE))  # painting a beautiful snek
+        window.blit(snake_head, (self.body[0][0] * SPRITE_SIZE, self.body[0][1] * SPRITE_SIZE))
+        if self.neural_net:  # calls for neural net rendering
             self.neural_net.render(window, self.vision)
             # pick a font you have and set its size
             myfont = pygame.font.SysFont("Comic Sans MS", 15)
             # apply it to text on a label
-            label = myfont.render("Score " + str(self.fitness()) 
-                                    + " age " + str(self.age)
-                                    + " starve " + str(self.starve)
-                                    + " body length " + str(len(self.body)), 1, (255,255,0))
+            label = myfont.render("Score " + str(self.fitness())
+                                  + " age " + str(self.age)
+                                  + " starve " + str(self.starve)
+                                  + " body length " + str(len(self.body)), 1, (255, 255, 0))
             # put the label object on the screen at point x=100, y=100
             window.blit(label, (700, 15))

@@ -5,6 +5,44 @@
 3. pops 1500
 4. pops 2000
 
+1. Dependencies
+Using Python 3.6 or uper environment.
+The project needs libraries: joblib,numpy,numba,pygame
+2. User guide 
+2.1 demonstration 
+execute 'run.py' with parameter "--mode demo" will loading the 1000 population and 100generation model. 
+
+
+``` shell script
+ python run.py --mode demo
+
+```
+
+``` shell
+ python run.py --mode play
+
+```
+
+
+If you prefer loading different model have to modify the path in main.py file.
+-img
+
+If training snakes please select parameter "--mode train" and need to setup population and generations as below.
+
+``` shell
+ python run.py --mode train --pops 1000 --gens 100
+
+```
+Using different fitness format have to edit in the file of snake.py.
+-img
+
+we still prvide mode of "play" for user slef play as well. 
+``` shell
+ python run.py --mode play
+
+```
+
+   
 
 
 
