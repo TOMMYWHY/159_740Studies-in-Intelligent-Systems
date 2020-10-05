@@ -13,7 +13,7 @@ def get_args():
 def main():
     args = get_args()
     if args.mode == "demo":
-        print('running best model for demonstratio...')
+        print('running best model for demonstration...')
         M.best_demo()
     if args.mode == "train":
         print('training model...')

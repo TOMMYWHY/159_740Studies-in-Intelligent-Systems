@@ -25,10 +25,6 @@ def best_demo():
     net.load(filename_weights="gen_data/gen_86_weights.npy", filename_biases="gen_data/gen_86_biases.npy")
     game.start(display=True, neural_net=net)
 
-
-# net.load(filename_weights='saved/gen_24_weights.npy', filename_biases='saved/gen_24_biases.npy')
-# game.start(display=True, neural_net=net)
-
 def play():
     game = Game()
     game.start(playable=True, display=True, speed=10)

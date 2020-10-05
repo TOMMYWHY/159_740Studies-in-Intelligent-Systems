@@ -2,16 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b2a83bc-ca74-47f0-9b0f-ff64a2f6d2f8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/genetic_algorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/genetic_algorithm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Draft_Report.doc" beforeDir="false" afterPath="$PROJECT_DIR$/../Draft_Report.doc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../best_model/.ipynb_checkpoints/未命名-checkpoint.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../best_model/pops1000_gen100/gen_90_weights.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../best_model/pops1000_gen100/output.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../best_model/pops1500_gen100/gen_100_biases.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../best_model/pops1500_gen100/gen_100_weights.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../best_model/pops500_gen100/gen_86_biases.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../best_model/pops500_gen100/gen_86_weights.npy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../best_model/未命名.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/snake-master.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/snake-master.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/test-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/test-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fitness.png" beforeDir="false" afterPath="$PROJECT_DIR$/Fitness.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/neural_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/neural_network.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/snake.py" beforeDir="false" afterPath="$PROJECT_DIR$/snake.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/test.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
@@ -27,6 +46,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -38,6 +58,10 @@
       <option name="presentableId" value="Default" />
       <updated>1601506059299</updated>
       <workItem from="1601506060417" duration="663000" />
+      <workItem from="1601592016934" duration="4991000" />
+      <workItem from="1601687359605" duration="14000" />
+      <workItem from="1601769146405" duration="388000" />
+      <workItem from="1601849018862" duration="2030000" />
     </task>
     <servers />
   </component>
