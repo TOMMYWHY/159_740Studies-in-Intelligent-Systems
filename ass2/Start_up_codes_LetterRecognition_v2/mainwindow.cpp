@@ -45,7 +45,8 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_Read_File_clicked()
 {
     qDebug() << "\nReading file...";
-    QFile file("complete_data_set.txt");
+    QFile file("/Users/Tommy/Desktop/studyInMassey/159_740Studies in Intelligent Systems/ass2/Start_up_codes_LetterRecognition_v2/complete_data_set.txt");
+//    QFile file("./complete_data_set.txt");
     file.open(QIODevice::ReadOnly | QIODevice::Text);
 
     if(!file.exists()){

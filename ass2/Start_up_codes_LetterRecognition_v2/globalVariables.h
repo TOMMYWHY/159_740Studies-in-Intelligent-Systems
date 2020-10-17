@@ -13,7 +13,7 @@ enum Symbol{LETTER_A=0, LETTER_B=1, UNKNOWN=2};
 
 struct LetterStructure{
     Symbol symbol;
-    int outputs[OUTPUT_NEURONS];
+    int outputs[OUTPUT_NEURONS];//0-25
     float f[INPUT_NEURONS];
 };
 

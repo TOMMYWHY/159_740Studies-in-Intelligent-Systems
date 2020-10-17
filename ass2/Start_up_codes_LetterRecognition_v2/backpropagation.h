@@ -52,8 +52,8 @@ private:
     /* Activations */
     double inputs[INPUT_NEURONS];
     double hidden[HIDDEN_NEURONS];
-    double target[OUTPUT_NEURONS];
-    double actual[OUTPUT_NEURONS];
+    double target[OUTPUT_NEURONS];//output
+    double actual[OUTPUT_NEURONS];//label
 
     /* Unit Errors */
     double erro[OUTPUT_NEURONS];
