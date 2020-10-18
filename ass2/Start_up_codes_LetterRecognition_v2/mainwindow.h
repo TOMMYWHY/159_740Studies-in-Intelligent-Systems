@@ -47,10 +47,13 @@ private slots:
 
     void on_horizScrollBar_LearningRate_actionTriggered(int action);
 
+
 private:
     Ui::MainWindow *ui;
     //-------------------------
     Backpropagation *bp;
+    void set_letters();
+    void show_letters_msg(QString *msg,QString *lineOfData, char characterSymbol, int counterForLetterB);
 };
 
 #endif // MAINWINDOW_H

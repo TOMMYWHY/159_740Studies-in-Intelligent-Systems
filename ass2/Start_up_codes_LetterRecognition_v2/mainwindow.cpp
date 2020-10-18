@@ -64,7 +64,31 @@ void MainWindow::on_pushButton_Read_File_clicked()
 
     int counterForLetterA=0;
     int counterForLetterB=0;
-    int counterForUnknownLetters=0;
+    int counterForLetterC=0;
+    int counterForLetterD=0;
+    int counterForLetterE=0;
+    int counterForLetterF=0;
+    int counterForLetterG=0;
+    int counterForLetterH=0;
+    int counterForLetterI=0;
+    int counterForLetterJ=0;
+    int counterForLetterK=0;
+    int counterForLetterL=0;
+    int counterForLetterM=0;
+    int counterForLetterN=0;
+    int counterForLetterO=0;
+    int counterForLetterP=0;
+    int counterForLetterQ=0;
+    int counterForLetterR=0;
+    int counterForLetterS=0;
+    int counterForLetterT=0;
+    int counterForLetterU=0;
+    int counterForLetterV=0;
+    int counterForLetterW=0;
+    int counterForLetterX=0;
+    int counterForLetterY=0;
+    int counterForLetterZ=0;
+    int counterForUnknownLetters = 0;
     QString lineOfData;
     QString msg;
     int i=0;
@@ -78,22 +102,137 @@ void MainWindow::on_pushButton_Read_File_clicked()
 
         if(characterSymbol == 'A'){
             letters[i].symbol = LETTER_A;
-            letters[i].outputs[0] = 1;
-            letters[i].outputs[1] = 0;
-            letters[i].outputs[2] = 0;
+            letters[i].outputs[LETTER_A] = 1;
             counterForLetterA++;
 
         } else if(characterSymbol == 'B'){
             letters[i].symbol = LETTER_B;
-            letters[i].outputs[0] = 0;
-            letters[i].outputs[1] = 1;
-            letters[i].outputs[2] = 0;
+            letters[i].outputs[LETTER_B] = 1;
             counterForLetterB++;
-
-        } else {
+        }
+        else if(characterSymbol == 'C'){
+            letters[i].symbol = LETTER_C;
+            letters[i].outputs[LETTER_C] = 1;
+            counterForLetterC++;
+        }
+         else if(characterSymbol == 'D'){
+            letters[i].symbol = LETTER_D;
+            letters[i].outputs[LETTER_D] = 1;
+            counterForLetterD++;
+        }
+         else if(characterSymbol == 'E'){
+            letters[i].symbol = LETTER_E;
+            letters[i].outputs[LETTER_E] = 1;
+            counterForLetterE++;
+        }
+         else if(characterSymbol == 'F'){
+            letters[i].symbol = LETTER_F;
+            letters[i].outputs[LETTER_F] = 1;
+            counterForLetterF++;
+        }
+         else if(characterSymbol == 'G'){
+            letters[i].symbol = LETTER_G;
+            letters[i].outputs[LETTER_G] = 1;
+            counterForLetterG++;
+        }
+         else if(characterSymbol == 'H'){
+          letters[i].symbol = LETTER_H;
+           letters[i].outputs[LETTER_H] = 1;
+                     counterForLetterH++;
+        }
+        else if(characterSymbol == 'I'){
+         letters[i].symbol = LETTER_I;
+          letters[i].outputs[LETTER_I] = 1;
+                    counterForLetterI++;
+        }
+         else if(characterSymbol == 'J'){
+          letters[i].symbol = LETTER_J;
+           letters[i].outputs[LETTER_J] = 1;
+                     counterForLetterJ++;
+        }
+         else if(characterSymbol == 'K'){
+          letters[i].symbol = LETTER_K;
+           letters[i].outputs[LETTER_K] = 1;
+                     counterForLetterK++;
+        }
+         else if(characterSymbol == 'L'){
+          letters[i].symbol = LETTER_L;
+           letters[i].outputs[LETTER_L] = 1;
+                     counterForLetterL++;
+        }
+         
+         else if(characterSymbol == 'M'){
+          letters[i].symbol = LETTER_M;
+           letters[i].outputs[LETTER_M] = 1;
+                     counterForLetterM++;
+        }
+         else if(characterSymbol == 'N'){
+          letters[i].symbol = LETTER_N;
+           letters[i].outputs[LETTER_N] = 1;
+                     counterForLetterN++;
+        }
+         else if(characterSymbol == 'O'){
+          letters[i].symbol = LETTER_O;
+           letters[i].outputs[LETTER_O] = 1;
+                     counterForLetterO++;
+        }
+         else if(characterSymbol == 'P'){
+          letters[i].symbol = LETTER_P;
+           letters[i].outputs[LETTER_P] = 1;
+                     counterForLetterP++;
+        }
+         else if(characterSymbol == 'Q'){
+          letters[i].symbol = LETTER_Q;
+           letters[i].outputs[LETTER_Q] = 1;
+                     counterForLetterQ++;
+        }
+         else if(characterSymbol == 'R'){
+          letters[i].symbol = LETTER_R;
+           letters[i].outputs[LETTER_R] = 1;
+                     counterForLetterR++;
+        }
+         else if(characterSymbol == 'S'){
+          letters[i].symbol = LETTER_S;
+           letters[i].outputs[LETTER_S] = 1;
+                     counterForLetterS++;
+        }
+         else if(characterSymbol == 'T'){
+          letters[i].symbol = LETTER_T;
+           letters[i].outputs[LETTER_T] = 1;
+                     counterForLetterT++;
+        }
+         else if(characterSymbol == 'U'){
+          letters[i].symbol = LETTER_U;
+           letters[i].outputs[LETTER_U] = 1;
+                     counterForLetterU++;
+        }
+         else if(characterSymbol == 'V'){
+          letters[i].symbol = LETTER_V;
+           letters[i].outputs[LETTER_V] = 1;
+                     counterForLetterV++;
+        }
+         else if(characterSymbol == 'W'){
+          letters[i].symbol = LETTER_W;
+           letters[i].outputs[LETTER_W] = 1;
+                     counterForLetterW++;
+        }
+         else if(characterSymbol == 'X'){
+          letters[i].symbol = LETTER_X;
+           letters[i].outputs[LETTER_X] = 1;
+                     counterForLetterX++;
+        }
+         else if(characterSymbol == 'Y'){
+          letters[i].symbol = LETTER_Y;
+           letters[i].outputs[LETTER_Y] = 1;
+                     counterForLetterY++;
+        }
+         else if(characterSymbol == 'Z'){
+          letters[i].symbol = LETTER_Z;
+           letters[i].outputs[LETTER_Z] = 1;
+                     counterForLetterZ++;
+        }
+         else {
             letters[i].symbol = UNKNOWN;
-            letters[i].outputs[0] = 0;
-            letters[i].outputs[1] = 0;
             letters[i].outputs[2] = 1;
             counterForUnknownLetters++;
 
@@ -104,13 +243,36 @@ void MainWindow::on_pushButton_Read_File_clicked()
             lineOfData.clear();
             QTextStream(&lineOfData) << "number of patterns for Letter A = " << counterForLetterA << endl;
 
-            msg.append(lineOfData);
-            lineOfData.clear();
-            QTextStream(&lineOfData) << "number of patterns for Letter B = " << counterForLetterB << endl;
+            
+             show_letters_msg(&msg,&lineOfData,'B',counterForLetterB);
+             show_letters_msg(&msg,&lineOfData,'C',counterForLetterC);
+             show_letters_msg(&msg,&lineOfData,'D',counterForLetterD);
+             show_letters_msg(&msg,&lineOfData,'E',counterForLetterE);
+             show_letters_msg(&msg,&lineOfData,'F',counterForLetterF);
+             show_letters_msg(&msg,&lineOfData,'G',counterForLetterG);
+             show_letters_msg(&msg,&lineOfData,'H',counterForLetterH);
+             show_letters_msg(&msg,&lineOfData,'I',counterForLetterI);
+             show_letters_msg(&msg,&lineOfData,'J',counterForLetterJ);
+             show_letters_msg(&msg,&lineOfData,'K',counterForLetterK);
+             show_letters_msg(&msg,&lineOfData,'L',counterForLetterL);
+             show_letters_msg(&msg,&lineOfData,'M',counterForLetterM);
+             show_letters_msg(&msg,&lineOfData,'N',counterForLetterN);
+             show_letters_msg(&msg,&lineOfData,'O',counterForLetterO);
+             show_letters_msg(&msg,&lineOfData,'P',counterForLetterP);
+             show_letters_msg(&msg,&lineOfData,'Q',counterForLetterQ);
+             show_letters_msg(&msg,&lineOfData,'R',counterForLetterR);
+             show_letters_msg(&msg,&lineOfData,'S',counterForLetterS);
+             show_letters_msg(&msg,&lineOfData,'T',counterForLetterT);
+             show_letters_msg(&msg,&lineOfData,'U',counterForLetterU);
+             show_letters_msg(&msg,&lineOfData,'V',counterForLetterV);
+             show_letters_msg(&msg,&lineOfData,'W',counterForLetterW);
+             show_letters_msg(&msg,&lineOfData,'X',counterForLetterX);
+             show_letters_msg(&msg,&lineOfData,'Y',counterForLetterY);
+             show_letters_msg(&msg,&lineOfData,'Z',counterForLetterZ);
 
-            msg.append(lineOfData);
-            lineOfData.clear();
-            QTextStream(&lineOfData) << "number of patterns for UNKNOWN letters = " << counterForUnknownLetters << endl;
+            // msg.append(lineOfData);
+            // lineOfData.clear();
+            // QTextStream(&lineOfData) << "number of patterns for UNKNOWN letters = " << counterForUnknownLetters << endl;
 
             msg.append(lineOfData);
 
@@ -426,4 +588,14 @@ void MainWindow::on_horizScrollBar_LearningRate_actionTriggered(int action)
    if(action == 0){
 
    }
+}
+/*----------------------------------*/
+void set_letters(){
+    
+}
+
+void MainWindow:: show_letters_msg(QString *msg,QString *lineOfData, char characterSymbol, int counterForLetterB){
+    msg->append(lineOfData);
+    lineOfData->clear();
+    QTextStream(lineOfData) << "number of patterns for Letter "<<characterSymbol <<" = "  << counterForLetterB << endl;
 }
