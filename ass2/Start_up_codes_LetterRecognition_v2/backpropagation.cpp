@@ -337,7 +337,6 @@ void Backpropagation::feedForward( )
 {
   int inp, hid, out;
   double sum;
-
   /* Calculate input to hidden layer */
   for (hid = 0 ; hid < HIDDEN_NEURONS ; hid++) {
 

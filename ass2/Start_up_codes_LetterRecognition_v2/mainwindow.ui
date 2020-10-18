@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1498</width>
+    <width>1563</width>
     <height>892</height>
    </rect>
   </property>
@@ -224,7 +224,7 @@
     <property name="geometry">
      <rect>
       <x>400</x>
-      <y>380</y>
+      <y>330</y>
       <width>891</width>
       <height>31</height>
      </rect>
@@ -236,8 +236,8 @@
    <widget class="QWidget" name="verticalLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>690</x>
-      <y>210</y>
+      <x>640</x>
+      <y>180</y>
       <width>681</width>
       <height>147</height>
      </rect>
@@ -258,15 +258,33 @@
    <widget class="QWidget" name="horizontalLayoutWidget_4">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>430</y>
+      <x>410</x>
+      <y>360</y>
       <width>951</width>
-      <height>59</height>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>80</height>
+     </size>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
       <widget class="QLabel" name="label_4">
+       <property name="minimumSize">
+        <size>
+         <width>30</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>80</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <pointsize>14</pointsize>
@@ -275,7 +293,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Letter 'A'</string>
+        <string> A</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -292,8 +310,14 @@
        </property>
        <property name="minimumSize">
         <size>
-         <width>100</width>
+         <width>50</width>
          <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
         </size>
        </property>
        <property name="smallDecimalPoint">
@@ -305,22 +329,21 @@
       </widget>
      </item>
      <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
         <widget class="QLabel" name="label_5">
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>80</height>
+          </size>
+         </property>
          <property name="font">
           <font>
            <pointsize>14</pointsize>
@@ -329,7 +352,7 @@
           </font>
          </property>
          <property name="text">
-          <string>Letter 'B'</string>
+          <string>B</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -340,8 +363,14 @@
         <widget class="QLCDNumber" name="lcdNumber_B">
          <property name="minimumSize">
           <size>
-           <width>100</width>
+           <width>50</width>
            <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
           </size>
          </property>
          <property name="smallDecimalPoint">
@@ -353,20 +382,127 @@
         </widget>
        </item>
        <item>
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
+        <widget class="QLabel" name="label_12">
+         <property name="minimumSize">
           <size>
-           <width>40</width>
-           <height>20</height>
+           <width>30</width>
+           <height>0</height>
           </size>
          </property>
-        </spacer>
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>C</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_6">
+        <widget class="QLCDNumber" name="lcdNumber_C">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="smallDecimalPoint">
+          <bool>true</bool>
+         </property>
+         <property name="segmentStyle">
+          <enum>QLCDNumber::Flat</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_13">
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>D</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLCDNumber" name="lcdNumber_D">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="smallDecimalPoint">
+          <bool>true</bool>
+         </property>
+         <property name="segmentStyle">
+          <enum>QLCDNumber::Flat</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_14">
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>80</height>
+          </size>
+         </property>
          <property name="font">
           <font>
            <pointsize>14</pointsize>
@@ -378,7 +514,7 @@
           <enum>Qt::LeftToRight</enum>
          </property>
          <property name="text">
-          <string>unknown</string>
+          <string>E</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -386,11 +522,17 @@
         </widget>
        </item>
        <item>
-        <widget class="QLCDNumber" name="lcdNumber_unknown">
+        <widget class="QLCDNumber" name="lcdNumber_E">
          <property name="minimumSize">
           <size>
-           <width>100</width>
+           <width>50</width>
            <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
           </size>
          </property>
          <property name="smallDecimalPoint">
@@ -402,7 +544,112 @@
         </widget>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_6"/>
+        <widget class="QLabel" name="label_15">
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="text">
+          <string>F</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLCDNumber" name="lcdNumber_F">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="smallDecimalPoint">
+          <bool>true</bool>
+         </property>
+         <property name="segmentStyle">
+          <enum>QLCDNumber::Flat</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_16">
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="text">
+          <string>G</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLCDNumber" name="lcdNumber_G">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="smallDecimalPoint">
+          <bool>true</bool>
+         </property>
+         <property name="segmentStyle">
+          <enum>QLCDNumber::Flat</enum>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -538,6 +785,12 @@
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QLabel" name="label_3">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>60</height>
+          </size>
+         </property>
          <property name="text">
           <string>Test Pattern</string>
          </property>
@@ -551,22 +804,16 @@
         </widget>
        </item>
        <item>
-        <widget class="QPlainTextEdit" name="plainTextEdit_Input_Pattern"/>
+        <widget class="QPlainTextEdit" name="plainTextEdit_Input_Pattern">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>60</height>
+          </size>
+         </property>
+        </widget>
        </item>
       </layout>
-     </item>
-     <item>
-      <spacer name="verticalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
      </item>
      <item>
       <widget class="Line" name="line_2">
@@ -609,151 +856,1087 @@
    <widget class="QWidget" name="horizontalLayoutWidget_5">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>500</y>
+      <x>410</x>
+      <y>420</y>
       <width>951</width>
-      <height>59</height>
+      <height>41</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_10">
      <item>
-      <widget class="QLabel" name="label_12">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Letter 'C'</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLCDNumber" name="lcdNumber_C">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>100</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="smallDecimalPoint">
-        <bool>true</bool>
-       </property>
-       <property name="segmentStyle">
-        <enum>QLCDNumber::Flat</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
       <layout class="QHBoxLayout" name="horizontalLayout_12">
        <item>
-        <widget class="QLabel" name="label_13">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Letter 'D'</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout_13">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <item>
+            <widget class="QLabel" name="label_6">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>H</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLCDNumber" name="lcdNumber_H">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="smallDecimalPoint">
+              <bool>true</bool>
+             </property>
+             <property name="segmentStyle">
+              <enum>QLCDNumber::Flat</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_17">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>I</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLCDNumber" name="lcdNumber_I">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="smallDecimalPoint">
+              <bool>true</bool>
+             </property>
+             <property name="segmentStyle">
+              <enum>QLCDNumber::Flat</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_18">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>J</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLCDNumber" name="lcdNumber_J">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="smallDecimalPoint">
+              <bool>true</bool>
+             </property>
+             <property name="segmentStyle">
+              <enum>QLCDNumber::Flat</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_19">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>K</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLCDNumber" name="lcdNumber_K">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="smallDecimalPoint">
+              <bool>true</bool>
+             </property>
+             <property name="segmentStyle">
+              <enum>QLCDNumber::Flat</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_20">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>L</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLCDNumber" name="lcdNumber_L">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="smallDecimalPoint">
+              <bool>true</bool>
+             </property>
+             <property name="segmentStyle">
+              <enum>QLCDNumber::Flat</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_21">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>M</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLCDNumber" name="lcdNumber_M">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="smallDecimalPoint">
+              <bool>true</bool>
+             </property>
+             <property name="segmentStyle">
+              <enum>QLCDNumber::Flat</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_22">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>N</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLCDNumber" name="lcdNumber_N">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="smallDecimalPoint">
+              <bool>true</bool>
+             </property>
+             <property name="segmentStyle">
+              <enum>QLCDNumber::Flat</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
        </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_6">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>480</y>
+      <width>951</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_18">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_19">
        <item>
-        <widget class="QLCDNumber" name="lcdNumber_D">
-         <property name="minimumSize">
-          <size>
-           <width>100</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="smallDecimalPoint">
-          <bool>true</bool>
-         </property>
-         <property name="segmentStyle">
-          <enum>QLCDNumber::Flat</enum>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout_20">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_21">
+           <item>
+            <widget class="QLabel" name="label_30">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>O</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLCDNumber" name="lcdNumber_O">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="smallDecimalPoint">
+              <bool>true</bool>
+             </property>
+             <property name="segmentStyle">
+              <enum>QLCDNumber::Flat</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_31">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>P</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLCDNumber" name="lcdNumber_P">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="smallDecimalPoint">
+              <bool>true</bool>
+             </property>
+             <property name="segmentStyle">
+              <enum>QLCDNumber::Flat</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_32">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Q</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLCDNumber" name="lcdNumber_Q">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="smallDecimalPoint">
+              <bool>true</bool>
+             </property>
+             <property name="segmentStyle">
+              <enum>QLCDNumber::Flat</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_33">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>R</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLCDNumber" name="lcdNumber_R">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="smallDecimalPoint">
+              <bool>true</bool>
+             </property>
+             <property name="segmentStyle">
+              <enum>QLCDNumber::Flat</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_34">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>S</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLCDNumber" name="lcdNumber_S">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="smallDecimalPoint">
+              <bool>true</bool>
+             </property>
+             <property name="segmentStyle">
+              <enum>QLCDNumber::Flat</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_35">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>T</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLCDNumber" name="lcdNumber_T">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="smallDecimalPoint">
+              <bool>true</bool>
+             </property>
+             <property name="segmentStyle">
+              <enum>QLCDNumber::Flat</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_36">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>U</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLCDNumber" name="lcdNumber_U">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="smallDecimalPoint">
+              <bool>true</bool>
+             </property>
+             <property name="segmentStyle">
+              <enum>QLCDNumber::Flat</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
        </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_7">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>530</y>
+      <width>951</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_26">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_27">
        <item>
-        <spacer name="horizontalSpacer_4">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_14">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Letter 'E'</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLCDNumber" name="lcdNumber_E">
-         <property name="minimumSize">
-          <size>
-           <width>100</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="smallDecimalPoint">
-          <bool>true</bool>
-         </property>
-         <property name="segmentStyle">
-          <enum>QLCDNumber::Flat</enum>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_13"/>
+        <layout class="QHBoxLayout" name="horizontalLayout_28">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_29">
+           <item>
+            <widget class="QLabel" name="label_44">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>V</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLCDNumber" name="lcdNumber_V">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="smallDecimalPoint">
+              <bool>true</bool>
+             </property>
+             <property name="segmentStyle">
+              <enum>QLCDNumber::Flat</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_45">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>W</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLCDNumber" name="lcdNumber_W">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="smallDecimalPoint">
+              <bool>true</bool>
+             </property>
+             <property name="segmentStyle">
+              <enum>QLCDNumber::Flat</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_46">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>X</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLCDNumber" name="lcdNumber_X">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="smallDecimalPoint">
+              <bool>true</bool>
+             </property>
+             <property name="segmentStyle">
+              <enum>QLCDNumber::Flat</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_47">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Y</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLCDNumber" name="lcdNumber_Y">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="smallDecimalPoint">
+              <bool>true</bool>
+             </property>
+             <property name="segmentStyle">
+              <enum>QLCDNumber::Flat</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_48">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Z</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLCDNumber" name="lcdNumber_Z">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="smallDecimalPoint">
+              <bool>true</bool>
+             </property>
+             <property name="segmentStyle">
+              <enum>QLCDNumber::Flat</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
        </item>
       </layout>
      </item>
@@ -765,8 +1948,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1498</width>
-     <height>26</height>
+     <width>1563</width>
+     <height>22</height>
     </rect>
    </property>
   </widget>
