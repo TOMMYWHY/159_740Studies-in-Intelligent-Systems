@@ -237,13 +237,11 @@ double Backpropagation::trainNetwork()
     while (1) {
         //retrieve input patterns
         for(int j=0; j < INPUT_NEURONS; j++){
-           inputs[j] = letters[sample].f[j];//features
-          //  cout <<"inputs[j]"<<inputs[j] <<endl;
+           inputs[j] = letters[sample].f[j];
         }
 
         for(int i=0; i < OUTPUT_NEURONS; i++){
-            target[i] = letters[sample].outputs[i];//0-25 one hot code
-            //  cout <<"target[i]"<<target[i] <<endl;
+            target[i] = letters[sample].outputs[i];
         }
 
         feedForward();
@@ -339,23 +337,22 @@ void Backpropagation::feedForward( )
 {
   int inp, hid, out;
   double sum;
+
   /* Calculate input to hidden layer */
   for (hid = 0 ; hid < HIDDEN_NEURONS ; hid++) {
 
     sum = 0.0;
     for (inp = 0 ; inp < INPUT_NEURONS ; inp++) {
       sum += inputs[inp] * wih[inp][hid];
-      // cout <<"wih[inp][hid]:"<<wih[inp][hid]<<endl;
     }
 
     /* Add in Bias */
     sum += wih[INPUT_NEURONS][hid];
-      // cout <<"wih[INPUT_NEURONS][hid]:"<<wih[INPUT_NEURONS][hid]<<endl;
 
     hidden[hid] = sigmoid( sum );
 
   }
-//todo hidden2
+
   /* Calculate the hidden to output layer */
   for (out = 0 ; out < OUTPUT_NEURONS ; out++) {
 

@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "globalVariables.h"
-
+#include<typeinfo>
 
 //--------------------------------------
 
@@ -97,8 +97,17 @@ void MainWindow::on_pushButton_Read_File_clicked()
 
         //e.g. T,2,8,3,5,1,8,13,0,6,6,10,8,0,8,0,8
         in >> characterSymbol >> t >> letters[i].f[0] >> t >>  letters[i].f[1] >> t >>  letters[i].f[2] >> t >>  letters[i].f[3] >> t >>  letters[i].f[4] >> t >>  letters[i].f[5] >> t >>  letters[i].f[6] >> t >>  letters[i].f[7] >> t >>  letters[i].f[8] >> t >>  letters[i].f[9] >> t >>  letters[i].f[10] >> t >>  letters[i].f[11] >> t >> letters[i].f[12] >> t >> letters[i].f[13] >> t >> letters[i].f[14] >> t >> letters[i].f[15];
-
+       
+        
         line = in.readLine();
+        // cout << "characterSymbol: "<< characterSymbol <<endl;
+        // for (int j = 0; j < 16; j++)
+        // {
+        //     cout << letters[i].f[j] <<" ";
+        // }
+        // cout << endl;
+        
+
 
         if(characterSymbol == 'A'){
             letters[i].symbol = LETTER_A;
@@ -231,13 +240,13 @@ void MainWindow::on_pushButton_Read_File_clicked()
            letters[i].outputs[LETTER_Z] = 1;
                      counterForLetterZ++;
         }
-         else {
-            letters[i].symbol = UNKNOWN;
-            letters[i].outputs[2] = 1;
-            counterForUnknownLetters++;
+        //  else {
+        //     letters[i].symbol = UNKNOWN;
+        //     letters[i].outputs[2] = 1;
+        //     counterForUnknownLetters++;
 
-        }
-
+        // }
+        // cout <<"letters[i].symbol in train:"<<letters[i].symbol << endl;
         if( i == (NUMBER_OF_PATTERNS-1)) {
             msg.clear();
             lineOfData.clear();
@@ -299,8 +308,6 @@ void MainWindow::on_horizScrollBar_LearningRate_valueChanged(int value)
     LEARNING_RATE = value/1000.0;
 }
 
-
-
 void MainWindow::on_pushButton_Classify_Test_Pattern_clicked()
 {
 
@@ -310,10 +317,6 @@ void MainWindow::on_pushButton_Classify_Test_Pattern_clicked()
 
     double* outputs;
     outputs = new double[OUTPUT_NEURONS];
-
-
-
-
 
     classificationResults = new double[OUTPUT_NEURONS];
 
@@ -326,17 +329,110 @@ void MainWindow::on_pushButton_Classify_Test_Pattern_clicked()
 
     if(characterSymbol == 'A'){
         testPattern.symbol = LETTER_A;
-        testPattern.outputs[0] = 1;
-        testPattern.outputs[1] = 0;
-        testPattern.outputs[2] = 0;
-
+        testPattern.outputs[LETTER_A] = 1;
     } else if(characterSymbol == 'B'){
         testPattern.symbol = LETTER_B;
-        testPattern.outputs[0] = 0;
-        testPattern.outputs[1] = 1;
-        testPattern.outputs[2] = 0;
+         testPattern.outputs[LETTER_B] = 1;
+    }
+    else if(characterSymbol == 'C'){
+    testPattern.symbol = LETTER_C;
+     testPattern.outputs[LETTER_C] = 1;
+    }
+    else if(characterSymbol == 'D'){
+    testPattern.symbol = LETTER_D;
+     testPattern.outputs[LETTER_D] = 1;
+    }
+    else if(characterSymbol == 'E'){
+    testPattern.symbol = LETTER_E;
+     testPattern.outputs[LETTER_E] = 1;
+    }
+    else if(characterSymbol == 'F'){
+    testPattern.symbol = LETTER_F;
+     testPattern.outputs[LETTER_F] = 1;
+    }
+    else if(characterSymbol == 'G'){
+    testPattern.symbol = LETTER_G;
+     testPattern.outputs[LETTER_G] = 1;
+    }
+    else if(characterSymbol == 'H'){
+    testPattern.symbol = LETTER_H;
+     testPattern.outputs[LETTER_H] = 1;
+    }
+    else if(characterSymbol == 'I'){
+    testPattern.symbol = LETTER_I;
+     testPattern.outputs[LETTER_I] = 1;
+    }
+    else if(characterSymbol == 'J'){
+    testPattern.symbol = LETTER_J;
+     testPattern.outputs[LETTER_J] = 1;
+    }
+    else if(characterSymbol == 'K'){
+    testPattern.symbol = LETTER_K;
+     testPattern.outputs[LETTER_K] = 1;
+    }
+    else if(characterSymbol == 'L'){
+    testPattern.symbol = LETTER_L;
+     testPattern.outputs[LETTER_L] = 1;
+    }
+    else if(characterSymbol == 'M'){
+    testPattern.symbol = LETTER_M;
+     testPattern.outputs[LETTER_M] = 1;
+    }
+    else if(characterSymbol == 'N'){
+    testPattern.symbol = LETTER_N;
+     testPattern.outputs[LETTER_N] = 1;
+    }
+    else if(characterSymbol == 'O'){
+    testPattern.symbol = LETTER_O;
+     testPattern.outputs[LETTER_O] = 1;
+    }
+    else if(characterSymbol == 'P'){
+    testPattern.symbol = LETTER_P;
+     testPattern.outputs[LETTER_P] = 1;
+    }
+    else if(characterSymbol == 'Q'){
+    testPattern.symbol = LETTER_Q;
+     testPattern.outputs[LETTER_Q] = 1;
+    }
+    else if(characterSymbol == 'R'){
+    testPattern.symbol = LETTER_R;
+     testPattern.outputs[LETTER_R] = 1;
+    }
+    else if(characterSymbol == 'S'){
+    testPattern.symbol = LETTER_S;
+     testPattern.outputs[LETTER_S] = 1;
+    }
+    else if(characterSymbol == 'T'){
+    testPattern.symbol = LETTER_T;
+     testPattern.outputs[LETTER_T] = 1;
+    }
+    else if(characterSymbol == 'U'){
+    testPattern.symbol = LETTER_U;
+     testPattern.outputs[LETTER_U] = 1;
+    }
+    else if(characterSymbol == 'V'){
+    testPattern.symbol = LETTER_V;
+     testPattern.outputs[LETTER_V] = 1;
+    }
+    else if(characterSymbol == 'W'){
+    testPattern.symbol = LETTER_W;
+     testPattern.outputs[LETTER_W] = 1;
+    }
+    else if(characterSymbol == 'X'){
+    testPattern.symbol = LETTER_X;
+     testPattern.outputs[LETTER_X] = 1;
+    }
+    else if(characterSymbol == 'Y'){
+    testPattern.symbol = LETTER_Y;
+     testPattern.outputs[LETTER_Y] = 1;
+    }
+    else if(characterSymbol == 'Z'){
+    testPattern.symbol = LETTER_Z;
+     testPattern.outputs[LETTER_Z] = 1;
+    }
 
-    } else {
+
+     else {
         testPattern.symbol = UNKNOWN;
         testPattern.outputs[0] = 0;
         testPattern.outputs[1] = 0;
@@ -349,6 +445,31 @@ void MainWindow::on_pushButton_Classify_Test_Pattern_clicked()
 
     ui->lcdNumber_A->display(classificationResults[0]);
     ui->lcdNumber_B->display(classificationResults[1]);
+    ui->lcdNumber_C->display(classificationResults[2]);
+    ui->lcdNumber_D->display(classificationResults[3]);
+    ui->lcdNumber_E->display(classificationResults[4]);
+    ui->lcdNumber_F->display(classificationResults[5]);
+    ui->lcdNumber_G->display(classificationResults[6]);
+    ui->lcdNumber_H->display(classificationResults[7]);
+    ui->lcdNumber_I->display(classificationResults[8]);
+    ui->lcdNumber_J->display(classificationResults[9]);
+    ui->lcdNumber_K->display(classificationResults[10]);
+    ui->lcdNumber_L->display(classificationResults[11]);
+    ui->lcdNumber_M->display(classificationResults[12]);
+    ui->lcdNumber_N->display(classificationResults[13]);
+    ui->lcdNumber_O->display(classificationResults[14]);
+    ui->lcdNumber_P->display(classificationResults[15]);
+    ui->lcdNumber_Q->display(classificationResults[16]);
+    ui->lcdNumber_R->display(classificationResults[17]);
+    ui->lcdNumber_S->display(classificationResults[18]);
+    ui->lcdNumber_T->display(classificationResults[19]);
+    ui->lcdNumber_U->display(classificationResults[20]);
+    ui->lcdNumber_V->display(classificationResults[21]);
+    ui->lcdNumber_W->display(classificationResults[22]);
+    ui->lcdNumber_X->display(classificationResults[23]);
+    ui->lcdNumber_Y->display(classificationResults[24]);
+    ui->lcdNumber_Z->display(classificationResults[25]);
+    
 //    ui->lcdNumber_unknown->display(classificationResults[2]);
 
 
@@ -366,16 +487,91 @@ void MainWindow::on_pushButton_Classify_Test_Pattern_clicked()
             textClassification = "letter B";
             break;
         case 2:
+            textClassification = "letter C";
+            break;
+        case 3:
+            textClassification = "letter D";
+            break;
+        case 4:
+            textClassification = "letter E";
+            break;
+        case 5:
+            textClassification = "letter F";
+            break;
+        case 6:
+            textClassification = "letter G";
+            break;
+        case 7:
+            textClassification = "letter H";
+            break;
+        case 8:
+            textClassification = "letter I";
+            break;
+        case 9:
+            textClassification = "letter J";
+            break;
+        case 10:
+            textClassification = "letter K";
+            break;
+        case 11:
+            textClassification = "letter L";
+            break;
+        case 12:
+            textClassification = "letter M";
+            break;
+        case 13:
+            textClassification = "letter N";
+            break;
+        case 14:
+            textClassification = "letter O";
+            break;
+        case 15:
+            textClassification = "letter P";
+            break;
+        case 16:
+            textClassification = "letter Q";
+            break;
+        case 17:
+            textClassification = "letter R";
+            break;
+        case 18:
+            textClassification = "letter S";
+            break;
+        case 19:
+            textClassification = "letter T";
+            break;
+        case 20:
+            textClassification = "letter U";
+            break;
+        case 21:
+            textClassification = "letter V";
+            break;
+        case 22:
+            textClassification = "letter W";
+            break;
+        case 23:
+            textClassification = "letter X";
+            break;
+        case 24:
+            textClassification = "letter Y";
+            break;
+        case 25:
+            textClassification = "letter Z";
+            break;
+       
+        case 26:
             textClassification = "unknown";
             break;
      };
-
+    cout << bp->action(classificationResults) <<" -- "<< bp->action(outputs) <<endl;
     if (bp->action(classificationResults) == bp->action(outputs)) {
         qDebug() << "correct classification.";
         ui->label_Classification->setText(textClassification + ", - Correct classification!");
     } else {
         qDebug() << "incorrect classification.";
-        ui->label_Classification->setText(textClassification + ", -XXX- Incorrect classification.");
+        cout <<"typeof:" <<typeid( bp->action(classificationResults)).name()<<endl;
+        // ui->label_Classification->setText(textClassification + ", -"+ (string)(bp->action(classificationResults))  +" - Incorrect classification.");
+        ui->label_Classification->setText(textClassification + ", -" +QString::number(bp->action(classificationResults))  +" - Incorrect classification.");
     }
 
 }
@@ -401,7 +597,8 @@ void MainWindow::on_pushButton_Train_Network_Max_Epochs_clicked()
 
       SSE = bp->trainNetwork(); //trains for 1 epoch
       ui->lcdNumber_SSE->display(SSE);
-
+      cout <<"SSE:"<<SSE<< "; MSE: " <<SSE/NUMBER_OF_TRAINING_PATTERNS << endl;
+      ui->lcdNumber_percentageOfGoodClassification->display(SSE/NUMBER_OF_TRAINING_PATTERNS);
       qApp->processEvents();
 
       update();
@@ -431,7 +628,7 @@ void MainWindow::on_pushButton_Initialise_Network_clicked()
 void MainWindow::on_pushButton_Test_All_Patterns_clicked()
 {
     char characterSymbol;
-
+    Symbol symbol_test;
     double* classificationResults;
     double* outputs;
     int correctClassifications=0;
@@ -441,39 +638,142 @@ void MainWindow::on_pushButton_Test_All_Patterns_clicked()
 
     for(int i=NUMBER_OF_TRAINING_PATTERNS; i < NUMBER_OF_PATTERNS; i++){
 
-            characterSymbol = letters[i].symbol;
+            symbol_test = letters[i].symbol;
+            // cout << "letters[i].symbol in test:"<<letters[i].symbol<<endl;
+            cout << "symbol_test in test:"<<symbol_test<<endl;
+            for (int k = 0; k < OUTPUT_NEURONS; k++)
+            {
+                 testPattern.outputs[k]=0; 
+            }
+            
             for(int j=0; j < INPUT_NEURONS; j++){
                 testPattern.f[j] = letters[i].f[j];
+                // cout <<letters[i].f[j];
             }
+            cout <<endl;
 
             //This part could be implemented more concisely
-            if(characterSymbol == LETTER_A){
+            if(symbol_test == LETTER_A){
                 testPattern.symbol = LETTER_A;
                 testPattern.outputs[0] = 1;
-                testPattern.outputs[1] = 0;
-                testPattern.outputs[2] = 0;
-
-            } else if(characterSymbol == LETTER_A){
+            } 
+            else if(symbol_test == LETTER_B){
                 testPattern.symbol = LETTER_B;
-                testPattern.outputs[0] = 0;
                 testPattern.outputs[1] = 1;
-                testPattern.outputs[2] = 0;
-
-            } else {
-                testPattern.symbol = UNKNOWN;
-                testPattern.outputs[0] = 0;
-                testPattern.outputs[1] = 0;
-                testPattern.outputs[2] = 1;
             }
-
+            else if(symbol_test == LETTER_C){
+            testPattern.symbol = LETTER_C;
+            testPattern.outputs[2] = 1;
+            }
+            else if(symbol_test == LETTER_D){
+            testPattern.symbol = LETTER_D;
+            testPattern.outputs[3] = 1;
+            }
+            else if(symbol_test == LETTER_E){
+            testPattern.symbol = LETTER_E;
+            testPattern.outputs[4] = 1;
+            }
+            else if(symbol_test == LETTER_F){
+            testPattern.symbol = LETTER_F;
+            testPattern.outputs[5] = 1;
+            }
+            else if(symbol_test == LETTER_G){
+            testPattern.symbol = LETTER_G;
+            testPattern.outputs[6] = 1;
+            }
+            else if(symbol_test == LETTER_H){
+            testPattern.symbol = LETTER_H;
+            testPattern.outputs[7] = 1;
+            }
+            else if(symbol_test == LETTER_I){
+            testPattern.symbol = LETTER_I;
+            testPattern.outputs[8] = 1;
+            }
+            else if(symbol_test == LETTER_J){
+            testPattern.symbol = LETTER_J;
+            testPattern.outputs[9] = 1;
+            }
+            else if(symbol_test == LETTER_K){
+            testPattern.symbol = LETTER_K;
+            testPattern.outputs[10] = 1;
+            }
+            else if(symbol_test == LETTER_L){
+            testPattern.symbol = LETTER_L;
+            testPattern.outputs[11] = 1;
+            }
+            else if(symbol_test == LETTER_M){
+            testPattern.symbol = LETTER_M;
+            testPattern.outputs[12] = 1;
+            }
+            else if(symbol_test == LETTER_N){
+            testPattern.symbol = LETTER_N;
+            testPattern.outputs[13] = 1;
+            }
+            else if(symbol_test == LETTER_O){
+            testPattern.symbol = LETTER_O;
+            testPattern.outputs[14] = 1;
+            }
+            else if(symbol_test == LETTER_P){
+            testPattern.symbol = LETTER_P;
+            testPattern.outputs[15] = 1;
+            }
+            else if(symbol_test == LETTER_Q){
+            testPattern.symbol = LETTER_Q;
+            testPattern.outputs[16] = 1;
+            }
+            else if(symbol_test == LETTER_R){
+            testPattern.symbol = LETTER_R;
+            testPattern.outputs[17] = 1;
+            }
+            else if(symbol_test == LETTER_S){
+            testPattern.symbol = LETTER_S;
+            testPattern.outputs[18] = 1;
+            }
+            else if(symbol_test == LETTER_T){
+            testPattern.symbol = LETTER_T;
+            testPattern.outputs[19] = 1;
+            }
+            else if(symbol_test == LETTER_U){
+            testPattern.symbol = LETTER_U;
+            testPattern.outputs[20] = 1;
+            }
+            else if(symbol_test == LETTER_V){
+            testPattern.symbol = LETTER_V;
+            testPattern.outputs[21] = 1;
+            }
+            else if(symbol_test == LETTER_W){
+            testPattern.symbol = LETTER_W;
+            testPattern.outputs[22] = 1;
+            }
+            else if(symbol_test == LETTER_X){
+            testPattern.symbol = LETTER_X;
+            testPattern.outputs[23] = 1;
+            }
+            else if(symbol_test == LETTER_Y){
+            testPattern.symbol = LETTER_Y;
+            testPattern.outputs[24] = 1;
+            }
+            else if(symbol_test == LETTER_Z){
+            testPattern.symbol = LETTER_Z;
+            testPattern.outputs[25] = 1;
+            }
+            //  else {
+            //     testPattern.symbol = UNKNOWN;
+            //     testPattern.outputs[0] = 0;
+            //     testPattern.outputs[1] = 0;
+            //     testPattern.outputs[2] = 1;
+            // }
+       
             //---------------------------------
             classificationResults = bp->testNetwork(testPattern);
 
             for(int k=0; k < OUTPUT_NEURONS; k++){
                outputs[k] = testPattern.outputs[k];
+            //    cout <<outputs[k];
             }
-
+            cout <<endl;
             if (bp->action(classificationResults) == bp->action(outputs)) {
+                // cout<<bp->action(classificationResults) <<"--"<<bp->action(outputs) <<endl;
                  correctClassifications++;
             }
 
@@ -524,6 +824,7 @@ void MainWindow::on_pushButton_Load_Weights_clicked()
 void MainWindow::on_pushButton_testNetOnTrainingSet_clicked()
 {
     char characterSymbol;
+    Symbol symbol_test;
 
     double* classificationResults;
     double* outputs;
@@ -534,30 +835,120 @@ void MainWindow::on_pushButton_testNetOnTrainingSet_clicked()
 
     for(int i=0; i < NUMBER_OF_TRAINING_PATTERNS; i++){
 
-            characterSymbol = letters[i].symbol;
+            symbol_test = letters[i].symbol;
+            for (int k = 0; k < OUTPUT_NEURONS; k++)
+            {
+                testPattern.outputs[k]=0; 
+            }
             for(int j=0; j < INPUT_NEURONS; j++){
                 testPattern.f[j] = letters[i].f[j];
             }
 
             //This part could be implemented more concisely
 
-            if(characterSymbol == LETTER_A){
+             if(symbol_test == LETTER_A){
                 testPattern.symbol = LETTER_A;
                 testPattern.outputs[0] = 1;
-                testPattern.outputs[1] = 0;
-                testPattern.outputs[2] = 0;
-
-            } else if(characterSymbol == LETTER_B){
+            } 
+            else if(symbol_test == LETTER_B){
                 testPattern.symbol = LETTER_B;
-                testPattern.outputs[0] = 0;
                 testPattern.outputs[1] = 1;
-                testPattern.outputs[2] = 0;
-
-            } else {
-                testPattern.symbol = UNKNOWN;
-                testPattern.outputs[0] = 0;
-                testPattern.outputs[1] = 0;
-                testPattern.outputs[2] = 1;
+            }
+            else if(symbol_test == LETTER_C){
+            testPattern.symbol = LETTER_C;
+            testPattern.outputs[2] = 1;
+            }
+            else if(symbol_test == LETTER_D){
+            testPattern.symbol = LETTER_D;
+            testPattern.outputs[3] = 1;
+            }
+            else if(symbol_test == LETTER_E){
+            testPattern.symbol = LETTER_E;
+            testPattern.outputs[4] = 1;
+            }
+            else if(symbol_test == LETTER_F){
+            testPattern.symbol = LETTER_F;
+            testPattern.outputs[5] = 1;
+            }
+            else if(symbol_test == LETTER_G){
+            testPattern.symbol = LETTER_G;
+            testPattern.outputs[6] = 1;
+            }
+            else if(symbol_test == LETTER_H){
+            testPattern.symbol = LETTER_H;
+            testPattern.outputs[7] = 1;
+            }
+            else if(symbol_test == LETTER_I){
+            testPattern.symbol = LETTER_I;
+            testPattern.outputs[8] = 1;
+            }
+            else if(symbol_test == LETTER_J){
+            testPattern.symbol = LETTER_J;
+            testPattern.outputs[9] = 1;
+            }
+            else if(symbol_test == LETTER_K){
+            testPattern.symbol = LETTER_K;
+            testPattern.outputs[10] = 1;
+            }
+            else if(symbol_test == LETTER_L){
+            testPattern.symbol = LETTER_L;
+            testPattern.outputs[11] = 1;
+            }
+            else if(symbol_test == LETTER_M){
+            testPattern.symbol = LETTER_M;
+            testPattern.outputs[12] = 1;
+            }
+            else if(symbol_test == LETTER_N){
+            testPattern.symbol = LETTER_N;
+            testPattern.outputs[13] = 1;
+            }
+            else if(symbol_test == LETTER_O){
+            testPattern.symbol = LETTER_O;
+            testPattern.outputs[14] = 1;
+            }
+            else if(symbol_test == LETTER_P){
+            testPattern.symbol = LETTER_P;
+            testPattern.outputs[15] = 1;
+            }
+            else if(symbol_test == LETTER_Q){
+            testPattern.symbol = LETTER_Q;
+            testPattern.outputs[16] = 1;
+            }
+            else if(symbol_test == LETTER_R){
+            testPattern.symbol = LETTER_R;
+            testPattern.outputs[17] = 1;
+            }
+            else if(symbol_test == LETTER_S){
+            testPattern.symbol = LETTER_S;
+            testPattern.outputs[18] = 1;
+            }
+            else if(symbol_test == LETTER_T){
+            testPattern.symbol = LETTER_T;
+            testPattern.outputs[19] = 1;
+            }
+            else if(symbol_test == LETTER_U){
+            testPattern.symbol = LETTER_U;
+            testPattern.outputs[20] = 1;
+            }
+            else if(symbol_test == LETTER_V){
+            testPattern.symbol = LETTER_V;
+            testPattern.outputs[21] = 1;
+            }
+            else if(symbol_test == LETTER_W){
+            testPattern.symbol = LETTER_W;
+            testPattern.outputs[22] = 1;
+            }
+            else if(symbol_test == LETTER_X){
+            testPattern.symbol = LETTER_X;
+            testPattern.outputs[23] = 1;
+            }
+            else if(symbol_test == LETTER_Y){
+            testPattern.symbol = LETTER_Y;
+            testPattern.outputs[24] = 1;
+            }
+            else if(symbol_test == LETTER_Z){
+            testPattern.symbol = LETTER_Z;
+            testPattern.outputs[25] = 1;
             }
 
             //---------------------------------

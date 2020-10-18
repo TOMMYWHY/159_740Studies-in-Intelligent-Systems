@@ -69,14 +69,19 @@ public:
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_4;
     QLCDNumber *lcdNumber_A;
-    QSpacerItem *horizontalSpacer;
     QHBoxLayout *horizontalLayout_5;
     QLabel *label_5;
     QLCDNumber *lcdNumber_B;
-    QSpacerItem *horizontalSpacer_2;
-    QLabel *label_6;
-    QLCDNumber *lcdNumber_unknown;
-    QHBoxLayout *horizontalLayout_6;
+    QLabel *label_12;
+    QLCDNumber *lcdNumber_C;
+    QLabel *label_13;
+    QLCDNumber *lcdNumber_D;
+    QLabel *label_14;
+    QLCDNumber *lcdNumber_E;
+    QLabel *label_15;
+    QLCDNumber *lcdNumber_F;
+    QLabel *label_16;
+    QLCDNumber *lcdNumber_G;
     QWidget *horizontalLayoutWidget_10;
     QHBoxLayout *horizontalLayout_11;
     QHBoxLayout *horizontalLayout_2;
@@ -92,23 +97,63 @@ public:
     QLabel *label_3;
     QPushButton *pushButton_Classify_Test_Pattern;
     QPlainTextEdit *plainTextEdit_Input_Pattern;
-    QSpacerItem *verticalSpacer_2;
     QFrame *line_2;
     QHBoxLayout *horizontalLayout_7;
     QLabel *label_7;
     QLabel *label_Classification;
     QWidget *horizontalLayoutWidget_5;
     QHBoxLayout *horizontalLayout_10;
-    QLabel *label_12;
-    QLCDNumber *lcdNumber_C;
-    QSpacerItem *horizontalSpacer_3;
     QHBoxLayout *horizontalLayout_12;
-    QLabel *label_13;
-    QLCDNumber *lcdNumber_D;
-    QSpacerItem *horizontalSpacer_4;
-    QLabel *label_14;
-    QLCDNumber *lcdNumber_E;
     QHBoxLayout *horizontalLayout_13;
+    QHBoxLayout *horizontalLayout_6;
+    QLabel *label_6;
+    QLCDNumber *lcdNumber_H;
+    QLabel *label_17;
+    QLCDNumber *lcdNumber_I;
+    QLabel *label_18;
+    QLCDNumber *lcdNumber_J;
+    QLabel *label_19;
+    QLCDNumber *lcdNumber_K;
+    QLabel *label_20;
+    QLCDNumber *lcdNumber_L;
+    QLabel *label_21;
+    QLCDNumber *lcdNumber_M;
+    QLabel *label_22;
+    QLCDNumber *lcdNumber_N;
+    QWidget *horizontalLayoutWidget_6;
+    QHBoxLayout *horizontalLayout_18;
+    QHBoxLayout *horizontalLayout_19;
+    QHBoxLayout *horizontalLayout_20;
+    QHBoxLayout *horizontalLayout_21;
+    QLabel *label_30;
+    QLCDNumber *lcdNumber_O;
+    QLabel *label_31;
+    QLCDNumber *lcdNumber_P;
+    QLabel *label_32;
+    QLCDNumber *lcdNumber_Q;
+    QLabel *label_33;
+    QLCDNumber *lcdNumber_R;
+    QLabel *label_34;
+    QLCDNumber *lcdNumber_S;
+    QLabel *label_35;
+    QLCDNumber *lcdNumber_T;
+    QLabel *label_36;
+    QLCDNumber *lcdNumber_U;
+    QWidget *horizontalLayoutWidget_7;
+    QHBoxLayout *horizontalLayout_26;
+    QHBoxLayout *horizontalLayout_27;
+    QHBoxLayout *horizontalLayout_28;
+    QHBoxLayout *horizontalLayout_29;
+    QLabel *label_44;
+    QLCDNumber *lcdNumber_V;
+    QLabel *label_45;
+    QLCDNumber *lcdNumber_W;
+    QLabel *label_46;
+    QLCDNumber *lcdNumber_X;
+    QLabel *label_47;
+    QLCDNumber *lcdNumber_Y;
+    QLabel *label_48;
+    QLCDNumber *lcdNumber_Z;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -117,7 +162,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1498, 892);
+        MainWindow->resize(1563, 892);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayoutWidget = new QWidget(centralWidget);
@@ -265,12 +310,12 @@ public:
         line->setFrameShadow(QFrame::Sunken);
         line_4 = new QFrame(centralWidget);
         line_4->setObjectName(QStringLiteral("line_4"));
-        line_4->setGeometry(QRect(400, 380, 891, 31));
+        line_4->setGeometry(QRect(400, 330, 891, 31));
         line_4->setFrameShape(QFrame::HLine);
         line_4->setFrameShadow(QFrame::Sunken);
         verticalLayoutWidget_2 = new QWidget(centralWidget);
         verticalLayoutWidget_2->setObjectName(QStringLiteral("verticalLayoutWidget_2"));
-        verticalLayoutWidget_2->setGeometry(QRect(690, 210, 681, 147));
+        verticalLayoutWidget_2->setGeometry(QRect(640, 180, 681, 147));
         verticalLayout_2 = new QVBoxLayout(verticalLayoutWidget_2);
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -288,7 +333,8 @@ public:
 
         horizontalLayoutWidget_4 = new QWidget(centralWidget);
         horizontalLayoutWidget_4->setObjectName(QStringLiteral("horizontalLayoutWidget_4"));
-        horizontalLayoutWidget_4->setGeometry(QRect(430, 430, 951, 59));
+        horizontalLayoutWidget_4->setGeometry(QRect(410, 360, 951, 41));
+        horizontalLayoutWidget_4->setMaximumSize(QSize(16777215, 80));
         horizontalLayout_4 = new QHBoxLayout(horizontalLayoutWidget_4);
         horizontalLayout_4->setSpacing(6);
         horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
@@ -296,6 +342,8 @@ public:
         horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
         label_4 = new QLabel(horizontalLayoutWidget_4);
         label_4->setObjectName(QStringLiteral("label_4"));
+        label_4->setMinimumSize(QSize(30, 0));
+        label_4->setMaximumSize(QSize(30, 80));
         QFont font;
         font.setPointSize(14);
         font.setBold(true);
@@ -312,21 +360,20 @@ public:
         sizePolicy3.setVerticalStretch(0);
         sizePolicy3.setHeightForWidth(lcdNumber_A->sizePolicy().hasHeightForWidth());
         lcdNumber_A->setSizePolicy(sizePolicy3);
-        lcdNumber_A->setMinimumSize(QSize(100, 0));
+        lcdNumber_A->setMinimumSize(QSize(50, 0));
+        lcdNumber_A->setMaximumSize(QSize(80, 80));
         lcdNumber_A->setSmallDecimalPoint(true);
         lcdNumber_A->setSegmentStyle(QLCDNumber::Flat);
 
         horizontalLayout_4->addWidget(lcdNumber_A);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_4->addItem(horizontalSpacer);
 
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setSpacing(6);
         horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         label_5 = new QLabel(horizontalLayoutWidget_4);
         label_5->setObjectName(QStringLiteral("label_5"));
+        label_5->setMinimumSize(QSize(30, 0));
+        label_5->setMaximumSize(QSize(30, 80));
         label_5->setFont(font);
         label_5->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
@@ -334,37 +381,107 @@ public:
 
         lcdNumber_B = new QLCDNumber(horizontalLayoutWidget_4);
         lcdNumber_B->setObjectName(QStringLiteral("lcdNumber_B"));
-        lcdNumber_B->setMinimumSize(QSize(100, 0));
+        lcdNumber_B->setMinimumSize(QSize(50, 0));
+        lcdNumber_B->setMaximumSize(QSize(80, 80));
         lcdNumber_B->setSmallDecimalPoint(true);
         lcdNumber_B->setSegmentStyle(QLCDNumber::Flat);
 
         horizontalLayout_5->addWidget(lcdNumber_B);
 
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        label_12 = new QLabel(horizontalLayoutWidget_4);
+        label_12->setObjectName(QStringLiteral("label_12"));
+        label_12->setMinimumSize(QSize(30, 0));
+        label_12->setMaximumSize(QSize(30, 80));
+        label_12->setFont(font);
+        label_12->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
-        horizontalLayout_5->addItem(horizontalSpacer_2);
+        horizontalLayout_5->addWidget(label_12);
 
-        label_6 = new QLabel(horizontalLayoutWidget_4);
-        label_6->setObjectName(QStringLiteral("label_6"));
-        label_6->setFont(font);
-        label_6->setLayoutDirection(Qt::LeftToRight);
-        label_6->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lcdNumber_C = new QLCDNumber(horizontalLayoutWidget_4);
+        lcdNumber_C->setObjectName(QStringLiteral("lcdNumber_C"));
+        sizePolicy3.setHeightForWidth(lcdNumber_C->sizePolicy().hasHeightForWidth());
+        lcdNumber_C->setSizePolicy(sizePolicy3);
+        lcdNumber_C->setMinimumSize(QSize(50, 0));
+        lcdNumber_C->setMaximumSize(QSize(80, 80));
+        lcdNumber_C->setSmallDecimalPoint(true);
+        lcdNumber_C->setSegmentStyle(QLCDNumber::Flat);
 
-        horizontalLayout_5->addWidget(label_6);
+        horizontalLayout_5->addWidget(lcdNumber_C);
 
-        lcdNumber_unknown = new QLCDNumber(horizontalLayoutWidget_4);
-        lcdNumber_unknown->setObjectName(QStringLiteral("lcdNumber_unknown"));
-        lcdNumber_unknown->setMinimumSize(QSize(100, 0));
-        lcdNumber_unknown->setSmallDecimalPoint(true);
-        lcdNumber_unknown->setSegmentStyle(QLCDNumber::Flat);
+        label_13 = new QLabel(horizontalLayoutWidget_4);
+        label_13->setObjectName(QStringLiteral("label_13"));
+        label_13->setMinimumSize(QSize(30, 0));
+        label_13->setMaximumSize(QSize(30, 80));
+        label_13->setFont(font);
+        label_13->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
-        horizontalLayout_5->addWidget(lcdNumber_unknown);
+        horizontalLayout_5->addWidget(label_13);
 
-        horizontalLayout_6 = new QHBoxLayout();
-        horizontalLayout_6->setSpacing(6);
-        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        lcdNumber_D = new QLCDNumber(horizontalLayoutWidget_4);
+        lcdNumber_D->setObjectName(QStringLiteral("lcdNumber_D"));
+        lcdNumber_D->setMinimumSize(QSize(50, 0));
+        lcdNumber_D->setMaximumSize(QSize(80, 80));
+        lcdNumber_D->setSmallDecimalPoint(true);
+        lcdNumber_D->setSegmentStyle(QLCDNumber::Flat);
 
-        horizontalLayout_5->addLayout(horizontalLayout_6);
+        horizontalLayout_5->addWidget(lcdNumber_D);
+
+        label_14 = new QLabel(horizontalLayoutWidget_4);
+        label_14->setObjectName(QStringLiteral("label_14"));
+        label_14->setMinimumSize(QSize(30, 0));
+        label_14->setMaximumSize(QSize(30, 80));
+        label_14->setFont(font);
+        label_14->setLayoutDirection(Qt::LeftToRight);
+        label_14->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_5->addWidget(label_14);
+
+        lcdNumber_E = new QLCDNumber(horizontalLayoutWidget_4);
+        lcdNumber_E->setObjectName(QStringLiteral("lcdNumber_E"));
+        lcdNumber_E->setMinimumSize(QSize(50, 0));
+        lcdNumber_E->setMaximumSize(QSize(80, 80));
+        lcdNumber_E->setSmallDecimalPoint(true);
+        lcdNumber_E->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_5->addWidget(lcdNumber_E);
+
+        label_15 = new QLabel(horizontalLayoutWidget_4);
+        label_15->setObjectName(QStringLiteral("label_15"));
+        label_15->setMinimumSize(QSize(30, 0));
+        label_15->setMaximumSize(QSize(30, 80));
+        label_15->setFont(font);
+        label_15->setLayoutDirection(Qt::LeftToRight);
+        label_15->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_5->addWidget(label_15);
+
+        lcdNumber_F = new QLCDNumber(horizontalLayoutWidget_4);
+        lcdNumber_F->setObjectName(QStringLiteral("lcdNumber_F"));
+        lcdNumber_F->setMinimumSize(QSize(50, 0));
+        lcdNumber_F->setMaximumSize(QSize(80, 80));
+        lcdNumber_F->setSmallDecimalPoint(true);
+        lcdNumber_F->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_5->addWidget(lcdNumber_F);
+
+        label_16 = new QLabel(horizontalLayoutWidget_4);
+        label_16->setObjectName(QStringLiteral("label_16"));
+        label_16->setMinimumSize(QSize(30, 0));
+        label_16->setMaximumSize(QSize(30, 80));
+        label_16->setFont(font);
+        label_16->setLayoutDirection(Qt::LeftToRight);
+        label_16->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_5->addWidget(label_16);
+
+        lcdNumber_G = new QLCDNumber(horizontalLayoutWidget_4);
+        lcdNumber_G->setObjectName(QStringLiteral("lcdNumber_G"));
+        lcdNumber_G->setMinimumSize(QSize(50, 0));
+        lcdNumber_G->setMaximumSize(QSize(80, 80));
+        lcdNumber_G->setSmallDecimalPoint(true);
+        lcdNumber_G->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_5->addWidget(lcdNumber_G);
 
 
         horizontalLayout_4->addLayout(horizontalLayout_5);
@@ -450,6 +567,7 @@ public:
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         label_3 = new QLabel(verticalLayoutWidget_3);
         label_3->setObjectName(QStringLiteral("label_3"));
+        label_3->setMaximumSize(QSize(16777215, 60));
 
         horizontalLayout_3->addWidget(label_3);
 
@@ -460,15 +578,12 @@ public:
 
         plainTextEdit_Input_Pattern = new QPlainTextEdit(verticalLayoutWidget_3);
         plainTextEdit_Input_Pattern->setObjectName(QStringLiteral("plainTextEdit_Input_Pattern"));
+        plainTextEdit_Input_Pattern->setMaximumSize(QSize(16777215, 60));
 
         horizontalLayout_3->addWidget(plainTextEdit_Input_Pattern);
 
 
         verticalLayout_3->addLayout(horizontalLayout_3);
-
-        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout_3->addItem(verticalSpacer_2);
 
         line_2 = new QFrame(verticalLayoutWidget_3);
         line_2->setObjectName(QStringLiteral("line_2"));
@@ -499,84 +614,444 @@ public:
 
         horizontalLayoutWidget_5 = new QWidget(centralWidget);
         horizontalLayoutWidget_5->setObjectName(QStringLiteral("horizontalLayoutWidget_5"));
-        horizontalLayoutWidget_5->setGeometry(QRect(430, 500, 951, 59));
+        horizontalLayoutWidget_5->setGeometry(QRect(410, 420, 951, 41));
         horizontalLayout_10 = new QHBoxLayout(horizontalLayoutWidget_5);
         horizontalLayout_10->setSpacing(6);
         horizontalLayout_10->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
         horizontalLayout_10->setContentsMargins(0, 0, 0, 0);
-        label_12 = new QLabel(horizontalLayoutWidget_5);
-        label_12->setObjectName(QStringLiteral("label_12"));
-        label_12->setFont(font);
-        label_12->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        horizontalLayout_10->addWidget(label_12);
-
-        lcdNumber_C = new QLCDNumber(horizontalLayoutWidget_5);
-        lcdNumber_C->setObjectName(QStringLiteral("lcdNumber_C"));
-        sizePolicy3.setHeightForWidth(lcdNumber_C->sizePolicy().hasHeightForWidth());
-        lcdNumber_C->setSizePolicy(sizePolicy3);
-        lcdNumber_C->setMinimumSize(QSize(100, 0));
-        lcdNumber_C->setSmallDecimalPoint(true);
-        lcdNumber_C->setSegmentStyle(QLCDNumber::Flat);
-
-        horizontalLayout_10->addWidget(lcdNumber_C);
-
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_10->addItem(horizontalSpacer_3);
-
         horizontalLayout_12 = new QHBoxLayout();
         horizontalLayout_12->setSpacing(6);
         horizontalLayout_12->setObjectName(QStringLiteral("horizontalLayout_12"));
-        label_13 = new QLabel(horizontalLayoutWidget_5);
-        label_13->setObjectName(QStringLiteral("label_13"));
-        label_13->setFont(font);
-        label_13->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        horizontalLayout_12->addWidget(label_13);
-
-        lcdNumber_D = new QLCDNumber(horizontalLayoutWidget_5);
-        lcdNumber_D->setObjectName(QStringLiteral("lcdNumber_D"));
-        lcdNumber_D->setMinimumSize(QSize(100, 0));
-        lcdNumber_D->setSmallDecimalPoint(true);
-        lcdNumber_D->setSegmentStyle(QLCDNumber::Flat);
-
-        horizontalLayout_12->addWidget(lcdNumber_D);
-
-        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_12->addItem(horizontalSpacer_4);
-
-        label_14 = new QLabel(horizontalLayoutWidget_5);
-        label_14->setObjectName(QStringLiteral("label_14"));
-        label_14->setFont(font);
-        label_14->setLayoutDirection(Qt::LeftToRight);
-        label_14->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        horizontalLayout_12->addWidget(label_14);
-
-        lcdNumber_E = new QLCDNumber(horizontalLayoutWidget_5);
-        lcdNumber_E->setObjectName(QStringLiteral("lcdNumber_E"));
-        lcdNumber_E->setMinimumSize(QSize(100, 0));
-        lcdNumber_E->setSmallDecimalPoint(true);
-        lcdNumber_E->setSegmentStyle(QLCDNumber::Flat);
-
-        horizontalLayout_12->addWidget(lcdNumber_E);
-
         horizontalLayout_13 = new QHBoxLayout();
         horizontalLayout_13->setSpacing(6);
         horizontalLayout_13->setObjectName(QStringLiteral("horizontalLayout_13"));
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setSpacing(6);
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        label_6 = new QLabel(horizontalLayoutWidget_5);
+        label_6->setObjectName(QStringLiteral("label_6"));
+        label_6->setMinimumSize(QSize(30, 0));
+        label_6->setMaximumSize(QSize(30, 80));
+        label_6->setFont(font);
+        label_6->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_6->addWidget(label_6);
+
+        lcdNumber_H = new QLCDNumber(horizontalLayoutWidget_5);
+        lcdNumber_H->setObjectName(QStringLiteral("lcdNumber_H"));
+        lcdNumber_H->setMinimumSize(QSize(50, 0));
+        lcdNumber_H->setMaximumSize(QSize(80, 80));
+        lcdNumber_H->setSmallDecimalPoint(true);
+        lcdNumber_H->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_6->addWidget(lcdNumber_H);
+
+        label_17 = new QLabel(horizontalLayoutWidget_5);
+        label_17->setObjectName(QStringLiteral("label_17"));
+        label_17->setMinimumSize(QSize(30, 0));
+        label_17->setMaximumSize(QSize(30, 80));
+        label_17->setFont(font);
+        label_17->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_6->addWidget(label_17);
+
+        lcdNumber_I = new QLCDNumber(horizontalLayoutWidget_5);
+        lcdNumber_I->setObjectName(QStringLiteral("lcdNumber_I"));
+        sizePolicy3.setHeightForWidth(lcdNumber_I->sizePolicy().hasHeightForWidth());
+        lcdNumber_I->setSizePolicy(sizePolicy3);
+        lcdNumber_I->setMinimumSize(QSize(50, 0));
+        lcdNumber_I->setMaximumSize(QSize(80, 80));
+        lcdNumber_I->setSmallDecimalPoint(true);
+        lcdNumber_I->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_6->addWidget(lcdNumber_I);
+
+        label_18 = new QLabel(horizontalLayoutWidget_5);
+        label_18->setObjectName(QStringLiteral("label_18"));
+        label_18->setMinimumSize(QSize(30, 0));
+        label_18->setMaximumSize(QSize(30, 80));
+        label_18->setFont(font);
+        label_18->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_6->addWidget(label_18);
+
+        lcdNumber_J = new QLCDNumber(horizontalLayoutWidget_5);
+        lcdNumber_J->setObjectName(QStringLiteral("lcdNumber_J"));
+        lcdNumber_J->setMinimumSize(QSize(50, 0));
+        lcdNumber_J->setMaximumSize(QSize(80, 80));
+        lcdNumber_J->setSmallDecimalPoint(true);
+        lcdNumber_J->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_6->addWidget(lcdNumber_J);
+
+        label_19 = new QLabel(horizontalLayoutWidget_5);
+        label_19->setObjectName(QStringLiteral("label_19"));
+        label_19->setMinimumSize(QSize(30, 0));
+        label_19->setMaximumSize(QSize(30, 80));
+        label_19->setFont(font);
+        label_19->setLayoutDirection(Qt::LeftToRight);
+        label_19->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_6->addWidget(label_19);
+
+        lcdNumber_K = new QLCDNumber(horizontalLayoutWidget_5);
+        lcdNumber_K->setObjectName(QStringLiteral("lcdNumber_K"));
+        lcdNumber_K->setMinimumSize(QSize(50, 0));
+        lcdNumber_K->setMaximumSize(QSize(80, 80));
+        lcdNumber_K->setSmallDecimalPoint(true);
+        lcdNumber_K->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_6->addWidget(lcdNumber_K);
+
+        label_20 = new QLabel(horizontalLayoutWidget_5);
+        label_20->setObjectName(QStringLiteral("label_20"));
+        label_20->setMinimumSize(QSize(30, 0));
+        label_20->setMaximumSize(QSize(30, 80));
+        label_20->setFont(font);
+        label_20->setLayoutDirection(Qt::LeftToRight);
+        label_20->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_6->addWidget(label_20);
+
+        lcdNumber_L = new QLCDNumber(horizontalLayoutWidget_5);
+        lcdNumber_L->setObjectName(QStringLiteral("lcdNumber_L"));
+        lcdNumber_L->setMinimumSize(QSize(50, 0));
+        lcdNumber_L->setMaximumSize(QSize(80, 80));
+        lcdNumber_L->setSmallDecimalPoint(true);
+        lcdNumber_L->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_6->addWidget(lcdNumber_L);
+
+        label_21 = new QLabel(horizontalLayoutWidget_5);
+        label_21->setObjectName(QStringLiteral("label_21"));
+        label_21->setMinimumSize(QSize(30, 0));
+        label_21->setMaximumSize(QSize(30, 80));
+        label_21->setFont(font);
+        label_21->setLayoutDirection(Qt::LeftToRight);
+        label_21->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_6->addWidget(label_21);
+
+        lcdNumber_M = new QLCDNumber(horizontalLayoutWidget_5);
+        lcdNumber_M->setObjectName(QStringLiteral("lcdNumber_M"));
+        lcdNumber_M->setMinimumSize(QSize(50, 0));
+        lcdNumber_M->setMaximumSize(QSize(80, 80));
+        lcdNumber_M->setSmallDecimalPoint(true);
+        lcdNumber_M->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_6->addWidget(lcdNumber_M);
+
+        label_22 = new QLabel(horizontalLayoutWidget_5);
+        label_22->setObjectName(QStringLiteral("label_22"));
+        label_22->setMinimumSize(QSize(30, 0));
+        label_22->setMaximumSize(QSize(30, 80));
+        label_22->setFont(font);
+        label_22->setLayoutDirection(Qt::LeftToRight);
+        label_22->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_6->addWidget(label_22);
+
+        lcdNumber_N = new QLCDNumber(horizontalLayoutWidget_5);
+        lcdNumber_N->setObjectName(QStringLiteral("lcdNumber_N"));
+        lcdNumber_N->setMinimumSize(QSize(50, 0));
+        lcdNumber_N->setMaximumSize(QSize(80, 80));
+        lcdNumber_N->setSmallDecimalPoint(true);
+        lcdNumber_N->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_6->addWidget(lcdNumber_N);
+
+
+        horizontalLayout_13->addLayout(horizontalLayout_6);
+
 
         horizontalLayout_12->addLayout(horizontalLayout_13);
 
 
         horizontalLayout_10->addLayout(horizontalLayout_12);
 
+        horizontalLayoutWidget_6 = new QWidget(centralWidget);
+        horizontalLayoutWidget_6->setObjectName(QStringLiteral("horizontalLayoutWidget_6"));
+        horizontalLayoutWidget_6->setGeometry(QRect(410, 480, 951, 41));
+        horizontalLayout_18 = new QHBoxLayout(horizontalLayoutWidget_6);
+        horizontalLayout_18->setSpacing(6);
+        horizontalLayout_18->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_18->setObjectName(QStringLiteral("horizontalLayout_18"));
+        horizontalLayout_18->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_19 = new QHBoxLayout();
+        horizontalLayout_19->setSpacing(6);
+        horizontalLayout_19->setObjectName(QStringLiteral("horizontalLayout_19"));
+        horizontalLayout_20 = new QHBoxLayout();
+        horizontalLayout_20->setSpacing(6);
+        horizontalLayout_20->setObjectName(QStringLiteral("horizontalLayout_20"));
+        horizontalLayout_21 = new QHBoxLayout();
+        horizontalLayout_21->setSpacing(6);
+        horizontalLayout_21->setObjectName(QStringLiteral("horizontalLayout_21"));
+        label_30 = new QLabel(horizontalLayoutWidget_6);
+        label_30->setObjectName(QStringLiteral("label_30"));
+        label_30->setMinimumSize(QSize(30, 0));
+        label_30->setMaximumSize(QSize(30, 80));
+        label_30->setFont(font);
+        label_30->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_21->addWidget(label_30);
+
+        lcdNumber_O = new QLCDNumber(horizontalLayoutWidget_6);
+        lcdNumber_O->setObjectName(QStringLiteral("lcdNumber_O"));
+        lcdNumber_O->setMinimumSize(QSize(50, 0));
+        lcdNumber_O->setMaximumSize(QSize(80, 80));
+        lcdNumber_O->setSmallDecimalPoint(true);
+        lcdNumber_O->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_21->addWidget(lcdNumber_O);
+
+        label_31 = new QLabel(horizontalLayoutWidget_6);
+        label_31->setObjectName(QStringLiteral("label_31"));
+        label_31->setMinimumSize(QSize(30, 0));
+        label_31->setMaximumSize(QSize(30, 80));
+        label_31->setFont(font);
+        label_31->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_21->addWidget(label_31);
+
+        lcdNumber_P = new QLCDNumber(horizontalLayoutWidget_6);
+        lcdNumber_P->setObjectName(QStringLiteral("lcdNumber_P"));
+        sizePolicy3.setHeightForWidth(lcdNumber_P->sizePolicy().hasHeightForWidth());
+        lcdNumber_P->setSizePolicy(sizePolicy3);
+        lcdNumber_P->setMinimumSize(QSize(50, 0));
+        lcdNumber_P->setMaximumSize(QSize(80, 80));
+        lcdNumber_P->setSmallDecimalPoint(true);
+        lcdNumber_P->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_21->addWidget(lcdNumber_P);
+
+        label_32 = new QLabel(horizontalLayoutWidget_6);
+        label_32->setObjectName(QStringLiteral("label_32"));
+        label_32->setMinimumSize(QSize(30, 0));
+        label_32->setMaximumSize(QSize(30, 80));
+        label_32->setFont(font);
+        label_32->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_21->addWidget(label_32);
+
+        lcdNumber_Q = new QLCDNumber(horizontalLayoutWidget_6);
+        lcdNumber_Q->setObjectName(QStringLiteral("lcdNumber_Q"));
+        lcdNumber_Q->setMinimumSize(QSize(50, 0));
+        lcdNumber_Q->setMaximumSize(QSize(80, 80));
+        lcdNumber_Q->setSmallDecimalPoint(true);
+        lcdNumber_Q->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_21->addWidget(lcdNumber_Q);
+
+        label_33 = new QLabel(horizontalLayoutWidget_6);
+        label_33->setObjectName(QStringLiteral("label_33"));
+        label_33->setMinimumSize(QSize(30, 0));
+        label_33->setMaximumSize(QSize(30, 80));
+        label_33->setFont(font);
+        label_33->setLayoutDirection(Qt::LeftToRight);
+        label_33->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_21->addWidget(label_33);
+
+        lcdNumber_R = new QLCDNumber(horizontalLayoutWidget_6);
+        lcdNumber_R->setObjectName(QStringLiteral("lcdNumber_R"));
+        lcdNumber_R->setMinimumSize(QSize(50, 0));
+        lcdNumber_R->setMaximumSize(QSize(80, 80));
+        lcdNumber_R->setSmallDecimalPoint(true);
+        lcdNumber_R->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_21->addWidget(lcdNumber_R);
+
+        label_34 = new QLabel(horizontalLayoutWidget_6);
+        label_34->setObjectName(QStringLiteral("label_34"));
+        label_34->setMinimumSize(QSize(30, 0));
+        label_34->setMaximumSize(QSize(30, 80));
+        label_34->setFont(font);
+        label_34->setLayoutDirection(Qt::LeftToRight);
+        label_34->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_21->addWidget(label_34);
+
+        lcdNumber_S = new QLCDNumber(horizontalLayoutWidget_6);
+        lcdNumber_S->setObjectName(QStringLiteral("lcdNumber_S"));
+        lcdNumber_S->setMinimumSize(QSize(50, 0));
+        lcdNumber_S->setMaximumSize(QSize(80, 80));
+        lcdNumber_S->setSmallDecimalPoint(true);
+        lcdNumber_S->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_21->addWidget(lcdNumber_S);
+
+        label_35 = new QLabel(horizontalLayoutWidget_6);
+        label_35->setObjectName(QStringLiteral("label_35"));
+        label_35->setMinimumSize(QSize(30, 0));
+        label_35->setMaximumSize(QSize(30, 80));
+        label_35->setFont(font);
+        label_35->setLayoutDirection(Qt::LeftToRight);
+        label_35->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_21->addWidget(label_35);
+
+        lcdNumber_T = new QLCDNumber(horizontalLayoutWidget_6);
+        lcdNumber_T->setObjectName(QStringLiteral("lcdNumber_T"));
+        lcdNumber_T->setMinimumSize(QSize(50, 0));
+        lcdNumber_T->setMaximumSize(QSize(80, 80));
+        lcdNumber_T->setSmallDecimalPoint(true);
+        lcdNumber_T->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_21->addWidget(lcdNumber_T);
+
+        label_36 = new QLabel(horizontalLayoutWidget_6);
+        label_36->setObjectName(QStringLiteral("label_36"));
+        label_36->setMinimumSize(QSize(30, 0));
+        label_36->setMaximumSize(QSize(30, 80));
+        label_36->setFont(font);
+        label_36->setLayoutDirection(Qt::LeftToRight);
+        label_36->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_21->addWidget(label_36);
+
+        lcdNumber_U = new QLCDNumber(horizontalLayoutWidget_6);
+        lcdNumber_U->setObjectName(QStringLiteral("lcdNumber_U"));
+        lcdNumber_U->setMinimumSize(QSize(50, 0));
+        lcdNumber_U->setMaximumSize(QSize(80, 80));
+        lcdNumber_U->setSmallDecimalPoint(true);
+        lcdNumber_U->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_21->addWidget(lcdNumber_U);
+
+
+        horizontalLayout_20->addLayout(horizontalLayout_21);
+
+
+        horizontalLayout_19->addLayout(horizontalLayout_20);
+
+
+        horizontalLayout_18->addLayout(horizontalLayout_19);
+
+        horizontalLayoutWidget_7 = new QWidget(centralWidget);
+        horizontalLayoutWidget_7->setObjectName(QStringLiteral("horizontalLayoutWidget_7"));
+        horizontalLayoutWidget_7->setGeometry(QRect(410, 530, 951, 41));
+        horizontalLayout_26 = new QHBoxLayout(horizontalLayoutWidget_7);
+        horizontalLayout_26->setSpacing(6);
+        horizontalLayout_26->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_26->setObjectName(QStringLiteral("horizontalLayout_26"));
+        horizontalLayout_26->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_27 = new QHBoxLayout();
+        horizontalLayout_27->setSpacing(6);
+        horizontalLayout_27->setObjectName(QStringLiteral("horizontalLayout_27"));
+        horizontalLayout_28 = new QHBoxLayout();
+        horizontalLayout_28->setSpacing(6);
+        horizontalLayout_28->setObjectName(QStringLiteral("horizontalLayout_28"));
+        horizontalLayout_29 = new QHBoxLayout();
+        horizontalLayout_29->setSpacing(6);
+        horizontalLayout_29->setObjectName(QStringLiteral("horizontalLayout_29"));
+        label_44 = new QLabel(horizontalLayoutWidget_7);
+        label_44->setObjectName(QStringLiteral("label_44"));
+        label_44->setMinimumSize(QSize(30, 0));
+        label_44->setMaximumSize(QSize(30, 80));
+        label_44->setFont(font);
+        label_44->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_29->addWidget(label_44);
+
+        lcdNumber_V = new QLCDNumber(horizontalLayoutWidget_7);
+        lcdNumber_V->setObjectName(QStringLiteral("lcdNumber_V"));
+        lcdNumber_V->setMinimumSize(QSize(50, 0));
+        lcdNumber_V->setMaximumSize(QSize(80, 80));
+        lcdNumber_V->setSmallDecimalPoint(true);
+        lcdNumber_V->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_29->addWidget(lcdNumber_V);
+
+        label_45 = new QLabel(horizontalLayoutWidget_7);
+        label_45->setObjectName(QStringLiteral("label_45"));
+        label_45->setMinimumSize(QSize(30, 0));
+        label_45->setMaximumSize(QSize(30, 80));
+        label_45->setFont(font);
+        label_45->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_29->addWidget(label_45);
+
+        lcdNumber_W = new QLCDNumber(horizontalLayoutWidget_7);
+        lcdNumber_W->setObjectName(QStringLiteral("lcdNumber_W"));
+        sizePolicy3.setHeightForWidth(lcdNumber_W->sizePolicy().hasHeightForWidth());
+        lcdNumber_W->setSizePolicy(sizePolicy3);
+        lcdNumber_W->setMinimumSize(QSize(50, 0));
+        lcdNumber_W->setMaximumSize(QSize(80, 80));
+        lcdNumber_W->setSmallDecimalPoint(true);
+        lcdNumber_W->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_29->addWidget(lcdNumber_W);
+
+        label_46 = new QLabel(horizontalLayoutWidget_7);
+        label_46->setObjectName(QStringLiteral("label_46"));
+        label_46->setMinimumSize(QSize(30, 0));
+        label_46->setMaximumSize(QSize(30, 80));
+        label_46->setFont(font);
+        label_46->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_29->addWidget(label_46);
+
+        lcdNumber_X = new QLCDNumber(horizontalLayoutWidget_7);
+        lcdNumber_X->setObjectName(QStringLiteral("lcdNumber_X"));
+        lcdNumber_X->setMinimumSize(QSize(50, 0));
+        lcdNumber_X->setMaximumSize(QSize(80, 80));
+        lcdNumber_X->setSmallDecimalPoint(true);
+        lcdNumber_X->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_29->addWidget(lcdNumber_X);
+
+        label_47 = new QLabel(horizontalLayoutWidget_7);
+        label_47->setObjectName(QStringLiteral("label_47"));
+        label_47->setMinimumSize(QSize(30, 0));
+        label_47->setMaximumSize(QSize(30, 80));
+        label_47->setFont(font);
+        label_47->setLayoutDirection(Qt::LeftToRight);
+        label_47->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_29->addWidget(label_47);
+
+        lcdNumber_Y = new QLCDNumber(horizontalLayoutWidget_7);
+        lcdNumber_Y->setObjectName(QStringLiteral("lcdNumber_Y"));
+        lcdNumber_Y->setMinimumSize(QSize(50, 0));
+        lcdNumber_Y->setMaximumSize(QSize(80, 80));
+        lcdNumber_Y->setSmallDecimalPoint(true);
+        lcdNumber_Y->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_29->addWidget(lcdNumber_Y);
+
+        label_48 = new QLabel(horizontalLayoutWidget_7);
+        label_48->setObjectName(QStringLiteral("label_48"));
+        label_48->setMinimumSize(QSize(30, 0));
+        label_48->setMaximumSize(QSize(30, 80));
+        label_48->setFont(font);
+        label_48->setLayoutDirection(Qt::LeftToRight);
+        label_48->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_29->addWidget(label_48);
+
+        lcdNumber_Z = new QLCDNumber(horizontalLayoutWidget_7);
+        lcdNumber_Z->setObjectName(QStringLiteral("lcdNumber_Z"));
+        lcdNumber_Z->setMinimumSize(QSize(50, 0));
+        lcdNumber_Z->setMaximumSize(QSize(80, 80));
+        lcdNumber_Z->setSmallDecimalPoint(true);
+        lcdNumber_Z->setSegmentStyle(QLCDNumber::Flat);
+
+        horizontalLayout_29->addWidget(lcdNumber_Z);
+
+
+        horizontalLayout_28->addLayout(horizontalLayout_29);
+
+
+        horizontalLayout_27->addLayout(horizontalLayout_28);
+
+
+        horizontalLayout_26->addLayout(horizontalLayout_27);
+
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1498, 26));
+        menuBar->setGeometry(QRect(0, 0, 1563, 22));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -606,18 +1081,38 @@ public:
         pushButton_Load_Weights->setText(QApplication::translate("MainWindow", "Load Weights", Q_NULLPTR));
         label->setText(QApplication::translate("MainWindow", "Learning rate:", Q_NULLPTR));
         label_10->setText(QApplication::translate("MainWindow", "Results:", Q_NULLPTR));
-        label_4->setText(QApplication::translate("MainWindow", "Letter 'A'", Q_NULLPTR));
-        label_5->setText(QApplication::translate("MainWindow", "Letter 'B'", Q_NULLPTR));
-        label_6->setText(QApplication::translate("MainWindow", "unknown", Q_NULLPTR));
+        label_4->setText(QApplication::translate("MainWindow", " A", Q_NULLPTR));
+        label_5->setText(QApplication::translate("MainWindow", "B", Q_NULLPTR));
+        label_12->setText(QApplication::translate("MainWindow", "C", Q_NULLPTR));
+        label_13->setText(QApplication::translate("MainWindow", "D", Q_NULLPTR));
+        label_14->setText(QApplication::translate("MainWindow", "E", Q_NULLPTR));
+        label_15->setText(QApplication::translate("MainWindow", "F", Q_NULLPTR));
+        label_16->setText(QApplication::translate("MainWindow", "G", Q_NULLPTR));
         label_2->setText(QApplication::translate("MainWindow", "Sum of Squared Error:", Q_NULLPTR));
         label_11->setText(QApplication::translate("MainWindow", "% of Good Classification:", Q_NULLPTR));
         label_3->setText(QApplication::translate("MainWindow", "Test Pattern", Q_NULLPTR));
         pushButton_Classify_Test_Pattern->setText(QApplication::translate("MainWindow", "Classify Test Pattern", Q_NULLPTR));
         label_7->setText(QApplication::translate("MainWindow", "Classification:", Q_NULLPTR));
         label_Classification->setText(QApplication::translate("MainWindow", "- - - - - - - - - ", Q_NULLPTR));
-        label_12->setText(QApplication::translate("MainWindow", "Letter 'C'", Q_NULLPTR));
-        label_13->setText(QApplication::translate("MainWindow", "Letter 'D'", Q_NULLPTR));
-        label_14->setText(QApplication::translate("MainWindow", "Letter 'E'", Q_NULLPTR));
+        label_6->setText(QApplication::translate("MainWindow", "H", Q_NULLPTR));
+        label_17->setText(QApplication::translate("MainWindow", "I", Q_NULLPTR));
+        label_18->setText(QApplication::translate("MainWindow", "J", Q_NULLPTR));
+        label_19->setText(QApplication::translate("MainWindow", "K", Q_NULLPTR));
+        label_20->setText(QApplication::translate("MainWindow", "L", Q_NULLPTR));
+        label_21->setText(QApplication::translate("MainWindow", "M", Q_NULLPTR));
+        label_22->setText(QApplication::translate("MainWindow", "N", Q_NULLPTR));
+        label_30->setText(QApplication::translate("MainWindow", "O", Q_NULLPTR));
+        label_31->setText(QApplication::translate("MainWindow", "P", Q_NULLPTR));
+        label_32->setText(QApplication::translate("MainWindow", "Q", Q_NULLPTR));
+        label_33->setText(QApplication::translate("MainWindow", "R", Q_NULLPTR));
+        label_34->setText(QApplication::translate("MainWindow", "S", Q_NULLPTR));
+        label_35->setText(QApplication::translate("MainWindow", "T", Q_NULLPTR));
+        label_36->setText(QApplication::translate("MainWindow", "U", Q_NULLPTR));
+        label_44->setText(QApplication::translate("MainWindow", "V", Q_NULLPTR));
+        label_45->setText(QApplication::translate("MainWindow", "W", Q_NULLPTR));
+        label_46->setText(QApplication::translate("MainWindow", "X", Q_NULLPTR));
+        label_47->setText(QApplication::translate("MainWindow", "Y", Q_NULLPTR));
+        label_48->setText(QApplication::translate("MainWindow", "Z", Q_NULLPTR));
     } // retranslateUi
 
 };

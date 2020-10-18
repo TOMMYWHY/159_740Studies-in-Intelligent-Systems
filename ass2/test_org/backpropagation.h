@@ -50,10 +50,10 @@ private:
     double who[HIDDEN_NEURONS+1][OUTPUT_NEURONS];
 
     /* Activations */
-    double inputs[INPUT_NEURONS];//16
+    double inputs[INPUT_NEURONS];
     double hidden[HIDDEN_NEURONS];
-    double target[OUTPUT_NEURONS];//output
-    double actual[OUTPUT_NEURONS];//label
+    double target[OUTPUT_NEURONS];
+    double actual[OUTPUT_NEURONS];
 
     /* Unit Errors */
     double erro[OUTPUT_NEURONS];
