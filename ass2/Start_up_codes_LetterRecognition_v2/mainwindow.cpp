@@ -432,12 +432,6 @@ void MainWindow::on_pushButton_Classify_Test_Pattern_clicked()
     }
 
 
-     else {
-        testPattern.symbol = UNKNOWN;
-        testPattern.outputs[0] = 0;
-        testPattern.outputs[1] = 0;
-        testPattern.outputs[2] = 1;
-    }
 
 
     //---------------------------------
@@ -474,9 +468,12 @@ void MainWindow::on_pushButton_Classify_Test_Pattern_clicked()
 
 
     //-----------------------------------------------------------
+    cout <<"outputs:";
     for(int k=0; k < OUTPUT_NEURONS; k++){
        outputs[k] = testPattern.outputs[k];
+       cout << outputs[k];
     }
+    cout <<endl;
     //-----------------------------------------------------------
      QString textClassification;
      switch(bp->action(outputs)){
@@ -563,7 +560,8 @@ void MainWindow::on_pushButton_Classify_Test_Pattern_clicked()
             textClassification = "unknown";
             break;
      };
-    cout << bp->action(classificationResults) <<" -- "<< bp->action(outputs) <<endl;
+    cout <<"y_predict:"<< bp->action(classificationResults) <<" --  y:"<< bp->action(outputs) <<endl;
+    // cout << "classificationResults:" <<classificationResults<<  endl;
     if (bp->action(classificationResults) == bp->action(outputs)) {
         qDebug() << "correct classification.";
         ui->label_Classification->setText(textClassification + ", - Correct classification!");
@@ -598,7 +596,7 @@ void MainWindow::on_pushButton_Train_Network_Max_Epochs_clicked()
       SSE = bp->trainNetwork(); //trains for 1 epoch
       ui->lcdNumber_SSE->display(SSE);
       cout <<"SSE:"<<SSE<< "; MSE: " <<SSE/NUMBER_OF_TRAINING_PATTERNS << endl;
-      ui->lcdNumber_percentageOfGoodClassification->display(SSE/NUMBER_OF_TRAINING_PATTERNS);
+      ui->lcdNumber_percentageOfGoodClassification->display((1-SSE/NUMBER_OF_TRAINING_PATTERNS)*100);
       qApp->processEvents();
 
       update();
