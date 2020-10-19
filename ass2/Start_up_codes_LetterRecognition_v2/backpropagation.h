@@ -51,7 +51,8 @@ private:
 
     /* Activations */
     double inputs[INPUT_NEURONS];//16
-    double hidden[HIDDEN_NEURONS];
+    double hidden[HIDDEN_NEURONS]; //64
+    double hidden_2[HIDDEN_NEURONS_2]; //128
     double target[OUTPUT_NEURONS];//output
     double actual[OUTPUT_NEURONS];//label
 

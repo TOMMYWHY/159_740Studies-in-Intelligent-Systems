@@ -237,13 +237,11 @@ double Backpropagation::trainNetwork()
     while (1) {
         //retrieve input patterns
         for(int j=0; j < INPUT_NEURONS; j++){
-           inputs[j] = letters[sample].f[j];//features
-          //  cout <<"inputs[j]"<<inputs[j] <<endl;
+           inputs[j] = letters[sample].f[j];
         }
 
         for(int i=0; i < OUTPUT_NEURONS; i++){
-            target[i] = letters[sample].outputs[i];//0-25 one hot code
-            //  cout <<"target[i]"<<target[i] <<endl;
+            target[i] = letters[sample].outputs[i];
         }
 
         feedForward();
@@ -271,6 +269,9 @@ double Backpropagation::trainNetwork()
       //qDebug() << "1 epoch training complete.";
       return accumulatedErr;
 }
+
+
+
 
 
 /*
@@ -334,45 +335,34 @@ double Backpropagation::sigmoidDerivative( double val )
 
 void Backpropagation::feedForward( )
 {
-  int inp, hid,hid_2, out;
+  int inp, hid, out;
   double sum;
+
   /* Calculate input to hidden layer */
   for (hid = 0 ; hid < HIDDEN_NEURONS ; hid++) {
 
     sum = 0.0;
     for (inp = 0 ; inp < INPUT_NEURONS ; inp++) {
       sum += inputs[inp] * wih[inp][hid];
-      // cout <<"wih[inp][hid]:"<<wih[inp][hid]<<endl;
     }
 
     /* Add in Bias */
     sum += wih[INPUT_NEURONS][hid];
-      // cout <<"wih[INPUT_NEURONS][hid]:"<<wih[INPUT_NEURONS][hid]<<endl;
 
     hidden[hid] = sigmoid( sum );
 
-  }
-//todo hidden2
-  for(hid_2=0;hid_2 < HIDDEN_NEURONS_2;hid_2++){
-    sum = 0.0;
-    for (hid = 0; hid < HIDDEN_NEURONS; hid++)
-    {
-      sum += hidden[hid] * wih[hid][hid_2];
-    }
-    sum += wih[HIDDEN_NEURONS][hid_2];
-    hidden_2[hid_2] = sigmoid( sum );
   }
 
   /* Calculate the hidden to output layer */
   for (out = 0 ; out < OUTPUT_NEURONS ; out++) {
 
     sum = 0.0;
-    for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
-      sum += hidden_2[hid_2] * who[hid_2][out];
+    for (hid = 0 ; hid < HIDDEN_NEURONS ; hid++) {
+      sum += hidden[hid] * who[hid][out];
     }
 
     /* Add in Bias */
-    sum += who[HIDDEN_NEURONS_2][out];
+    sum += who[HIDDEN_NEURONS][out];
 
     actual[out] = sigmoid( sum );
 
@@ -390,22 +380,11 @@ void Backpropagation::feedForward( )
 
 void Backpropagation::backPropagate( void )
 {
-  int inp, hid,hid_2, out;
+  int inp, hid, out;
 
   /* Calculate the output layer error (step 3 for output cell) */
   for (out = 0 ; out < OUTPUT_NEURONS ; out++) {
     erro[out] = (target[out] - actual[out]) * sigmoidDerivative( actual[out] );
-
-  }
-  /*  the hidden_2 layer  */
-  for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
-
-    errh[hid_2] = 0.0;
-    for (out = 0 ; out < OUTPUT_NEURONS ; out++) {
-      errh[hid_2] += erro[out] * who[hid_2][out];
-    }
-
-    errh[hid_2] *= sigmoidDerivative( hidden_2[hid_2] );
 
   }
 
@@ -413,35 +392,23 @@ void Backpropagation::backPropagate( void )
   for (hid = 0 ; hid < HIDDEN_NEURONS ; hid++) {
 
     errh[hid] = 0.0;
-    for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
-      errh[hid] += erro[out] * who[hid][hid_2];
+    for (out = 0 ; out < OUTPUT_NEURONS ; out++) {
+      errh[hid] += erro[out] * who[hid][out];
     }
 
     errh[hid] *= sigmoidDerivative( hidden[hid] );
 
   }
 
-/*========updating===========*/
-
   /* Update the weights for the output layer (step 4 for output cell) */
   for (out = 0 ; out < OUTPUT_NEURONS ; out++) {
 
-    for (hid_2 = 0 ; hid < HIDDEN_NEURONS_2 ; hid_2++) {
-      who[hid_2][out] += (LEARNING_RATE * erro[out] * hidden_2[hid_2]);
-    }
-    /* Update the Bias */
-    who[HIDDEN_NEURONS_2][out] += (LEARNING_RATE * erro[out]);
-
-  }
-  
-  for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
-
     for (hid = 0 ; hid < HIDDEN_NEURONS ; hid++) {
-      who[hid][hid_2] += (LEARNING_RATE * erro[out] * hidden[hid_2]);
+      who[hid][out] += (LEARNING_RATE * erro[out] * hidden[hid]);
     }
 
     /* Update the Bias */
-    wih[HIDDEN_NEURONS][hid_2] += (LEARNING_RATE * errh[hid_2]);
+    who[HIDDEN_NEURONS][out] += (LEARNING_RATE * erro[out]);
 
   }
 
