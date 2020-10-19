@@ -399,6 +399,7 @@ void Backpropagation::backPropagate( void )
     errh[hid] *= sigmoidDerivative( hidden[hid] );
 
   }
+/*========updating===========*/
 
   /* Update the weights for the output layer (step 4 for output cell) */
   for (out = 0 ; out < OUTPUT_NEURONS ; out++) {

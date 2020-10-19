@@ -11,4 +11,4 @@
 ## tip
 读取dataset 和 保存 model 需要使用绝对路径
 
-> /Users/Tommy/Desktop/studyInMassey/159_740Studies in Intelligent Systems/ass2/Start_up_codes_LetterRecognition_v2/weights100.txt
+>aaa /Users/Tommy/Desktop/studyInMassey/159_740Studies in Intelligent Systems/ass2/Start_up_codes_LetterRecognition_v2/weights100.txt

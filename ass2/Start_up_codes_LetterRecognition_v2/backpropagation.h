@@ -46,8 +46,11 @@ private:
     /* Input to Hidden Weights (with Biases) */
     double wih[INPUT_NEURONS+1][HIDDEN_NEURONS];
 
+    double whh_2[HIDDEN_NEURONS+1][HIDDEN_NEURONS_2];
+
     /* Hidden to Output Weights (with Biases) */
-    double who[HIDDEN_NEURONS+1][OUTPUT_NEURONS];
+    double who[HIDDEN_NEURONS_2+1][OUTPUT_NEURONS];
+    // double wh_2o[HIDDEN_NEURONS_2+1][OUTPUT_NEURONS];
 
     /* Activations */
     double inputs[INPUT_NEURONS];//16
@@ -59,6 +62,8 @@ private:
     /* Unit Errors */
     double erro[OUTPUT_NEURONS];
     double errh[HIDDEN_NEURONS];
+
+    double errh_2[HIDDEN_NEURONS_2];
 
     //-----------------------------------------
     double SSE;

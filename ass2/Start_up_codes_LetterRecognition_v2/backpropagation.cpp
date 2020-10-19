@@ -39,7 +39,7 @@ double Backpropagation::getError_SSE(){
 
 
 void Backpropagation::saveWeights(QString fileName){
-    int out, hid, inp;
+    int out, hid,hid_2, inp;
 
     QFile file3(fileName);
     file3.open(QIODevice::WriteOnly | QIODevice::Text);
@@ -54,15 +54,16 @@ void Backpropagation::saveWeights(QString fileName){
     //
     qDebug() << "updating weights...";
     qDebug() << "OUTPUT_NEURONS = " << OUTPUT_NEURONS;
+    qDebug() << "HIDDEN_NEURONS_2 = " << HIDDEN_NEURONS_2;
     qDebug() << "HIDDEN_NEURONS = " << HIDDEN_NEURONS;
     qDebug() << "INPUT_NEURONS = " << INPUT_NEURONS;
 
     // Update the weights for the output layer (step 4 for output cell)
     for (out = 0 ; out < OUTPUT_NEURONS ; out++) {
       temp3.clear();
-      for (hid = 0 ; hid < HIDDEN_NEURONS ; hid++) {
+      for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
           //---save------------------------------------
-            ::sprintf(tempBuffer3,"%f,",who[hid][out]);
+            ::sprintf(tempBuffer3,"%f,",who[hid_2][out]);
             qDebug() << tempBuffer3;
             temp3.append(tempBuffer3);
           //---------------------------------------
@@ -70,7 +71,7 @@ void Backpropagation::saveWeights(QString fileName){
 
       // Update the Bias
       //---save------------------------------------
-        ::sprintf(tempBuffer3,"%f",who[HIDDEN_NEURONS][out]);
+        ::sprintf(tempBuffer3,"%f",who[HIDDEN_NEURONS_2][out]);
         temp3.append(tempBuffer3);
         temp3.append("\n");
         qDebug() << tempBuffer3 << endl;
@@ -78,6 +79,30 @@ void Backpropagation::saveWeights(QString fileName){
       //---------------------------------------
 
     }
+
+    // Update the weights for the hidden2 layer (step 4 for hidden cell)
+    for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
+        temp3.clear();
+        for (hid = 0 ; hid < HIDDEN_NEURONS ; hid++) {
+
+          //---save------------------------------------
+            ::sprintf(tempBuffer3,"%f,",whh_2[hid][hid_2]);
+            temp3.append(tempBuffer3);
+            qDebug() << tempBuffer3;
+          //---------------------------------------
+        }
+
+        // Update the Bias
+        //---save------------------------------------
+          ::sprintf(tempBuffer3,"%f",whh_2[INPUT_NEURONS][hid_2]);
+          temp3.append(tempBuffer3);
+          temp3.append("\n");
+          qDebug() << tempBuffer3 << endl;
+          out3 << temp3;
+        //---------------------------------------
+
+      }
+
 
     // Update the weights for the hidden layer (step 4 for hidden cell)
     for (hid = 0 ; hid < HIDDEN_NEURONS ; hid++) {
@@ -108,7 +133,7 @@ void Backpropagation::saveWeights(QString fileName){
 
 
 void Backpropagation::loadWeights(QString fileName){
-    int out, hid, inp;
+    int out, hid,hid_2, inp;
 
     QFile file3(fileName);
     file3.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -131,6 +156,7 @@ void Backpropagation::loadWeights(QString fileName){
 
     qDebug() << "loading weights...";
     qDebug() << "OUTPUT_NEURONS = " << OUTPUT_NEURONS;
+    qDebug() << "HIDDEN_NEURONS_2 = " << HIDDEN_NEURONS_2;
     qDebug() << "HIDDEN_NEURONS = " << HIDDEN_NEURONS;
     qDebug() << "INPUT_NEURONS = " << INPUT_NEURONS;
 
@@ -143,21 +169,41 @@ void Backpropagation::loadWeights(QString fileName){
 
       streamLine.setRealNumberPrecision(12);
       qDebug() << "strLine = " << strLine << endl;
-      for (hid = 0 ; hid <= HIDDEN_NEURONS ; hid++) {
+      for (hid_2 = 0 ; hid_2 <= HIDDEN_NEURONS_2 ; hid_2++) {
           //---load------------------------------------
 
-            if(hid != HIDDEN_NEURONS){
-               streamLine >> who[hid][out] >> tChar;
-               qDebug() << who[hid][out];
+            if(hid_2 != HIDDEN_NEURONS_2){
+               streamLine >> who[hid_2][out] >> tChar;
+               qDebug() << who[hid_2][out];
             } else {
-               streamLine >> who[hid][out];
-               qDebug() << who[hid][out];
+               streamLine >> who[hid_2][out];
+               qDebug() << who[hid_2][out];
             }
           //---------------------------------------
       }
 
     }
+    // Update the weights for the hidden2 layer (step 4 for hidden cell)
+    for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
+      strLine = in.readLine();
+      QTextStream streamLine(&strLine);
 
+      streamLine.setRealNumberPrecision(12);
+      qDebug() << "strLine = " << strLine << endl;
+      for (hid = 0 ; hid <= HIDDEN_NEURONS ; hid++) {
+          //---load------------------------------------
+
+            if(hid != HIDDEN_NEURONS){
+               streamLine >> whh_2[hid][hid_2] >> tChar;
+               qDebug() << whh_2[hid][hid_2];
+            } else {
+               streamLine >> whh_2[hid][hid_2];
+               qDebug() << whh_2[hid][hid_2];
+            }
+          //---------------------------------------
+      }
+
+    }
     // Update the weights for the hidden layer (step 4 for hidden cell)
     for (hid = 0 ; hid < HIDDEN_NEURONS ; hid++) {
       for (inp = 0 ; inp < INPUT_NEURONS ; inp++) {
@@ -259,16 +305,15 @@ double Backpropagation::trainNetwork()
 
         accumulatedErr = accumulatedErr + err;
 
-
         backPropagate();
 
         if (++sample == NUMBER_OF_TRAINING_PATTERNS) {
-            //qDebug() << "training used " << sample << " example patterns."  << endl;
+            qDebug() << "training used " << sample << " example patterns."  << endl;
             break;
         }
 
       }
-      //qDebug() << "1 epoch training complete.";
+      qDebug() << "1 epoch training complete.";
       return accumulatedErr;
 }
 
@@ -282,7 +327,7 @@ double Backpropagation::trainNetwork()
 
 void Backpropagation::assignRandomWeights( void )
 {
-  int hid, inp, out;
+  int hid, hid_2, inp, out;
 
   for (inp = 0 ; inp < INPUT_NEURONS+1 ; inp++) {
     for (hid = 0 ; hid < HIDDEN_NEURONS ; hid++) {
@@ -291,6 +336,13 @@ void Backpropagation::assignRandomWeights( void )
   }
 
   for (hid = 0 ; hid < HIDDEN_NEURONS+1 ; hid++) {
+    for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
+      whh_2[hid][hid_2] = RAND_WEIGHT();
+    }
+  }
+
+
+  for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2+1 ; hid_2++) {
     for (out = 0 ; out < OUTPUT_NEURONS ; out++) {
       who[hid][out] = RAND_WEIGHT();
     }
@@ -357,9 +409,9 @@ void Backpropagation::feedForward( )
     sum = 0.0;
     for (hid = 0; hid < HIDDEN_NEURONS; hid++)
     {
-      sum += hidden[hid] * wih[hid][hid_2];
+      sum += hidden[hid] * whh_2[hid][hid_2];
     }
-    sum += wih[HIDDEN_NEURONS][hid_2];
+    sum += whh_2[HIDDEN_NEURONS][hid_2];
     hidden_2[hid_2] = sigmoid( sum );
   }
 
@@ -378,6 +430,7 @@ void Backpropagation::feedForward( )
 
   }
 
+
 }
 
 
@@ -390,6 +443,7 @@ void Backpropagation::feedForward( )
 
 void Backpropagation::backPropagate( void )
 {
+
   int inp, hid,hid_2, out;
 
   /* Calculate the output layer error (step 3 for output cell) */
@@ -400,12 +454,12 @@ void Backpropagation::backPropagate( void )
   /*  the hidden_2 layer  */
   for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
 
-    errh[hid_2] = 0.0;
+    errh_2[hid_2] = 0.0;
     for (out = 0 ; out < OUTPUT_NEURONS ; out++) {
-      errh[hid_2] += erro[out] * who[hid_2][out];
+      errh_2[hid_2] += erro[out] * who[hid_2][out];
     }
 
-    errh[hid_2] *= sigmoidDerivative( hidden_2[hid_2] );
+    errh_2[hid_2] *= sigmoidDerivative( hidden_2[hid_2] );
 
   }
 
@@ -414,7 +468,7 @@ void Backpropagation::backPropagate( void )
 
     errh[hid] = 0.0;
     for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
-      errh[hid] += erro[out] * who[hid][hid_2];
+      errh[hid] += errh_2[hid_2] * whh_2[hid][hid_2];
     }
 
     errh[hid] *= sigmoidDerivative( hidden[hid] );
@@ -426,7 +480,7 @@ void Backpropagation::backPropagate( void )
   /* Update the weights for the output layer (step 4 for output cell) */
   for (out = 0 ; out < OUTPUT_NEURONS ; out++) {
 
-    for (hid_2 = 0 ; hid < HIDDEN_NEURONS_2 ; hid_2++) {
+    for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
       who[hid_2][out] += (LEARNING_RATE * erro[out] * hidden_2[hid_2]);
     }
     /* Update the Bias */
@@ -437,11 +491,11 @@ void Backpropagation::backPropagate( void )
   for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
 
     for (hid = 0 ; hid < HIDDEN_NEURONS ; hid++) {
-      who[hid][hid_2] += (LEARNING_RATE * erro[out] * hidden[hid_2]);
+      whh_2[hid][hid_2] += (LEARNING_RATE * errh_2[hid_2] * hidden[hid]);
     }
 
     /* Update the Bias */
-    wih[HIDDEN_NEURONS][hid_2] += (LEARNING_RATE * errh[hid_2]);
+    whh_2[HIDDEN_NEURONS][hid_2] += (LEARNING_RATE * errh_2[hid_2]);
 
   }
 
@@ -451,7 +505,6 @@ void Backpropagation::backPropagate( void )
     for (inp = 0 ; inp < INPUT_NEURONS ; inp++) {
       wih[inp][hid] += (LEARNING_RATE * errh[hid] * inputs[inp]);
     }
-
     /* Update the Bias */
     wih[INPUT_NEURONS][hid] += (LEARNING_RATE * errh[hid]);
 
