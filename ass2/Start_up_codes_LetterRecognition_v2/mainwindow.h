@@ -47,6 +47,9 @@ private slots:
 
     void on_horizScrollBar_LearningRate_actionTriggered(int action);
 
+    void on_pushButton_Load_File_clicked();
+
+
 
 private:
     Ui::MainWindow *ui;

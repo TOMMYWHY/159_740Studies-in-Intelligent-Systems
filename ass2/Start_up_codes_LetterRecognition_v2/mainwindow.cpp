@@ -19,8 +19,9 @@ LetterStructure testPattern;
 bool patternsLoadedFromFile;
 int MAX_EPOCHS;
 double LEARNING_RATE;
-QString Absolute_path = "/Users/Tommy/Desktop/studyInMassey/159_740Studies in Intelligent Systems/ass2/";
+//QString Absolute_path;// = "/Users/Tommy/Desktop/studyInMassey/159_740Studies in Intelligent Systems/ass2/";
 
+//QString File_path;
 
 ///////////////////////////////////////////////////////
 
@@ -51,11 +52,19 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_Read_File_clicked()
+void MainWindow::on_pushButton_Read_File_clicked(){
+//     QString file_path;
+//    File_path = ui->textEdit_file_path->toPlainText();
+    qDebug() << "pass";
+}
+
+void MainWindow::on_pushButton_Load_File_clicked()
 {
     qDebug() << "\nReading file...";
-    QFile file("/Users/Tommy/Desktop/studyInMassey/159_740Studies in Intelligent Systems/ass2/Start_up_codes_LetterRecognition_v2/complete_data_set.txt");
-//    QFile file("./complete_data_set.txt");
+//     QFile file("complete_data_set.txt");
+    QString File_trian_path = ui->textEdit_file_path->toPlainText();
+    qDebug() << File_trian_path;
+    QFile file(File_trian_path);
     file.open(QIODevice::ReadOnly | QIODevice::Text);
 
     if(!file.exists()){
@@ -598,6 +607,7 @@ void MainWindow::on_pushButton_Train_Network_Max_Epochs_clicked()
     qDebug() << report_name.toStdString().data();
 
 
+
       QFile file (report_name);
       bool isOk =file.open(QIODevice::ReadWrite | QIODevice::Append);
       if (isOk){
@@ -614,7 +624,7 @@ void MainWindow::on_pushButton_Train_Network_Max_Epochs_clicked()
       ui->plainTextEdit_results->setPlainText(msg);
 
       if((i > 0) && ((i % 100) == 0)) {
-         bp->saveWeights(ui->plainTextEdit_saveWeightsAs->toPlainText());
+         bp->saveWeights("./weights/"+ui->plainTextEdit_saveWeightsAs->toPlainText());
 
          ui->plainTextEdit_results->setPlainText("Weights saved into file.");
          qApp->processEvents();
@@ -814,7 +824,8 @@ void MainWindow::on_pushButton_Save_Weights_clicked()
 void MainWindow::on_pushButton_Load_Weights_clicked()
 {
    bp->loadWeights(ui->plainTextEdit_fileNameLoadWeights->toPlainText());
-
+//   qDebug() << ui->plainTextEdit_fileNameLoadWeights->toPlainText();
+//   qDebug() <<"QApplication::applicationDirPath():" <<QApplication::applicationDirPath();
    QString msg;
 
    msg.append("weights loaded.\n");

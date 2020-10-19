@@ -68,7 +68,6 @@ void Backpropagation::saveWeights(QString fileName){
             temp3.append(tempBuffer3);
           //---------------------------------------
       }
-
       // Update the Bias
       //---save------------------------------------
         ::sprintf(tempBuffer3,"%f",who[HIDDEN_NEURONS_2][out]);
@@ -134,7 +133,7 @@ void Backpropagation::saveWeights(QString fileName){
 
 void Backpropagation::loadWeights(QString fileName){
     int out, hid,hid_2, inp;
-
+     qDebug() <<fileName;
     QFile file3(fileName);
     file3.open(QIODevice::ReadOnly | QIODevice::Text);
 
@@ -185,19 +184,21 @@ void Backpropagation::loadWeights(QString fileName){
     }
     // Update the weights for the hidden2 layer (step 4 for hidden cell)
     for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
-      strLine = in.readLine();
-      QTextStream streamLine(&strLine);
+      // strLine = in.readLine();
+      // QTextStream streamLine(&strLine);
 
-      streamLine.setRealNumberPrecision(12);
-      qDebug() << "strLine = " << strLine << endl;
+      // streamLine.setRealNumberPrecision(12);
+      // qDebug() << "strLine = " << strLine << endl;
       for (hid = 0 ; hid <= HIDDEN_NEURONS ; hid++) {
           //---load------------------------------------
 
             if(hid != HIDDEN_NEURONS){
-               streamLine >> whh_2[hid][hid_2] >> tChar;
+              //  streamLine >> whh_2[hid][hid_2] >> tChar;
+               in >> whh_2[hid][hid_2] >> tChar;
                qDebug() << whh_2[hid][hid_2];
             } else {
-               streamLine >> whh_2[hid][hid_2];
+              //  streamLine >> whh_2[hid][hid_2];
+               in >> whh_2[hid][hid_2];
                qDebug() << whh_2[hid][hid_2];
             }
           //---------------------------------------
