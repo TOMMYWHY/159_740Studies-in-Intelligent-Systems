@@ -23,3 +23,7 @@ v2: relu_16-128-256-26_100epoch acc:
 
 v2: tanh_16-128-256-26_50epoch acc:
 v2: tanh_16-128-256-26_100epoch acc:
+
+
+report path:
+/Users/Tommy/Desktop/studyInMassey/159_740Studies in Intelligent Systems/ass2/build-LetterRecognition-Desktop_Qt_5_15_1_clang_64bit-Debug/LetterRecognition.app/Contents/MacOS

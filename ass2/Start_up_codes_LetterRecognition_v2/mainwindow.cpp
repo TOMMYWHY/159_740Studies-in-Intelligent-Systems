@@ -3,6 +3,14 @@
 #include "globalVariables.h"
 #include<typeinfo>
 
+
+// #include <iostream>
+// #include <string>
+// #include <fstream>
+#include <QFile>
+#include <QFileInfo>
+#include<QFileDialog>
+
 //--------------------------------------
 
 LetterStructure letters[20001];
@@ -11,6 +19,7 @@ LetterStructure testPattern;
 bool patternsLoadedFromFile;
 int MAX_EPOCHS;
 double LEARNING_RATE;
+QString Absolute_path = "/Users/Tommy/Desktop/studyInMassey/159_740Studies in Intelligent Systems/ass2/";
 
 
 ///////////////////////////////////////////////////////
@@ -88,7 +97,6 @@ void MainWindow::on_pushButton_Read_File_clicked()
     int counterForLetterX=0;
     int counterForLetterY=0;
     int counterForLetterZ=0;
-    int counterForUnknownLetters = 0;
     QString lineOfData;
     QString msg;
     int i=0;
@@ -97,17 +105,9 @@ void MainWindow::on_pushButton_Read_File_clicked()
 
         //e.g. T,2,8,3,5,1,8,13,0,6,6,10,8,0,8,0,8
         in >> characterSymbol >> t >> letters[i].f[0] >> t >>  letters[i].f[1] >> t >>  letters[i].f[2] >> t >>  letters[i].f[3] >> t >>  letters[i].f[4] >> t >>  letters[i].f[5] >> t >>  letters[i].f[6] >> t >>  letters[i].f[7] >> t >>  letters[i].f[8] >> t >>  letters[i].f[9] >> t >>  letters[i].f[10] >> t >>  letters[i].f[11] >> t >> letters[i].f[12] >> t >> letters[i].f[13] >> t >> letters[i].f[14] >> t >> letters[i].f[15];
-       
-        
-        line = in.readLine();
-        // cout << "characterSymbol: "<< characterSymbol <<endl;
-        // for (int j = 0; j < 16; j++)
-        // {
-        //     cout << letters[i].f[j] <<" ";
-        // }
-        // cout << endl;
-        
 
+
+        line = in.readLine();
 
         if(characterSymbol == 'A'){
             letters[i].symbol = LETTER_A;
@@ -169,7 +169,7 @@ void MainWindow::on_pushButton_Read_File_clicked()
            letters[i].outputs[LETTER_L] = 1;
                      counterForLetterL++;
         }
-         
+
          else if(characterSymbol == 'M'){
           letters[i].symbol = LETTER_M;
            letters[i].outputs[LETTER_M] = 1;
@@ -240,19 +240,13 @@ void MainWindow::on_pushButton_Read_File_clicked()
            letters[i].outputs[LETTER_Z] = 1;
                      counterForLetterZ++;
         }
-        //  else {
-        //     letters[i].symbol = UNKNOWN;
-        //     letters[i].outputs[2] = 1;
-        //     counterForUnknownLetters++;
 
-        // }
-        // cout <<"letters[i].symbol in train:"<<letters[i].symbol << endl;
         if( i == (NUMBER_OF_PATTERNS-1)) {
             msg.clear();
             lineOfData.clear();
             QTextStream(&lineOfData) << "number of patterns for Letter A = " << counterForLetterA << endl;
 
-            
+
              show_letters_msg(&msg,&lineOfData,'B',counterForLetterB);
              show_letters_msg(&msg,&lineOfData,'C',counterForLetterC);
              show_letters_msg(&msg,&lineOfData,'D',counterForLetterD);
@@ -278,10 +272,6 @@ void MainWindow::on_pushButton_Read_File_clicked()
              show_letters_msg(&msg,&lineOfData,'X',counterForLetterX);
              show_letters_msg(&msg,&lineOfData,'Y',counterForLetterY);
              show_letters_msg(&msg,&lineOfData,'Z',counterForLetterZ);
-
-            // msg.append(lineOfData);
-            // lineOfData.clear();
-            // QTextStream(&lineOfData) << "number of patterns for UNKNOWN letters = " << counterForUnknownLetters << endl;
 
             msg.append(lineOfData);
 
@@ -463,7 +453,7 @@ void MainWindow::on_pushButton_Classify_Test_Pattern_clicked()
     ui->lcdNumber_X->display(classificationResults[23]);
     ui->lcdNumber_Y->display(classificationResults[24]);
     ui->lcdNumber_Z->display(classificationResults[25]);
-    
+
 //    ui->lcdNumber_unknown->display(classificationResults[2]);
 
 
@@ -555,7 +545,7 @@ void MainWindow::on_pushButton_Classify_Test_Pattern_clicked()
         case 25:
             textClassification = "letter Z";
             break;
-       
+
         case 26:
             textClassification = "unknown";
             break;
@@ -598,6 +588,23 @@ void MainWindow::on_pushButton_Train_Network_Max_Epochs_clicked()
       cout <<"SSE:"<<SSE<< "; MSE: " <<SSE/NUMBER_OF_TRAINING_PATTERNS << endl;
       ui->lcdNumber_percentageOfGoodClassification->display((1-SSE/NUMBER_OF_TRAINING_PATTERNS)*100);
       qApp->processEvents();
+      //to save as reoport
+      QString report_name="report_epoch"+QString::number(MAX_EPOCHS)
+                            + "_"+QString::number(INPUT_NEURONS)
+                            +"_"+QString::number(HIDDEN_NEURONS)
+                            + "_"+QString::number(HIDDEN_NEURONS_2)
+                            + "_"+QString::number(OUTPUT_NEURONS) +".txt";
+//    QString report_path = Absolute_path+report_name;
+    qDebug() << report_name.toStdString().data();
+
+
+      QFile file (report_name);
+      bool isOk =file.open(QIODevice::ReadWrite | QIODevice::Append);
+      if (isOk){
+           QTextStream stream(&file);
+           stream<<"epoch:"<<(i) <<"; SSE:"<<(SSE)<< "; MSE: " <<(SSE/NUMBER_OF_TRAINING_PATTERNS) << "\n";
+        }
+        file.close();
 
       update();
       e++;
@@ -637,13 +644,11 @@ void MainWindow::on_pushButton_Test_All_Patterns_clicked()
     for(int i=NUMBER_OF_TRAINING_PATTERNS; i < NUMBER_OF_PATTERNS; i++){
 
             symbol_test = letters[i].symbol;
-            // cout << "letters[i].symbol in test:"<<letters[i].symbol<<endl;
-            cout << "symbol_test in test:"<<symbol_test<<endl;
             for (int k = 0; k < OUTPUT_NEURONS; k++)
             {
-                 testPattern.outputs[k]=0; 
+                 testPattern.outputs[k]=0;
             }
-            
+
             for(int j=0; j < INPUT_NEURONS; j++){
                 testPattern.f[j] = letters[i].f[j];
                 // cout <<letters[i].f[j];
@@ -654,7 +659,7 @@ void MainWindow::on_pushButton_Test_All_Patterns_clicked()
             if(symbol_test == LETTER_A){
                 testPattern.symbol = LETTER_A;
                 testPattern.outputs[0] = 1;
-            } 
+            }
             else if(symbol_test == LETTER_B){
                 testPattern.symbol = LETTER_B;
                 testPattern.outputs[1] = 1;
@@ -761,7 +766,7 @@ void MainWindow::on_pushButton_Test_All_Patterns_clicked()
             //     testPattern.outputs[1] = 0;
             //     testPattern.outputs[2] = 1;
             // }
-       
+
             //---------------------------------
             classificationResults = bp->testNetwork(testPattern);
 
@@ -836,7 +841,7 @@ void MainWindow::on_pushButton_testNetOnTrainingSet_clicked()
             symbol_test = letters[i].symbol;
             for (int k = 0; k < OUTPUT_NEURONS; k++)
             {
-                testPattern.outputs[k]=0; 
+                testPattern.outputs[k]=0;
             }
             for(int j=0; j < INPUT_NEURONS; j++){
                 testPattern.f[j] = letters[i].f[j];
@@ -847,7 +852,7 @@ void MainWindow::on_pushButton_testNetOnTrainingSet_clicked()
              if(symbol_test == LETTER_A){
                 testPattern.symbol = LETTER_A;
                 testPattern.outputs[0] = 1;
-            } 
+            }
             else if(symbol_test == LETTER_B){
                 testPattern.symbol = LETTER_B;
                 testPattern.outputs[1] = 1;
@@ -980,7 +985,7 @@ void MainWindow::on_horizScrollBar_LearningRate_actionTriggered(int action)
 }
 /*----------------------------------*/
 void set_letters(){
-    
+
 }
 
 void MainWindow:: show_letters_msg(QString *msg,QString *lineOfData, char characterSymbol, int counterForLetterB){
