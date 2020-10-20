@@ -2,9 +2,10 @@
 
 1. 一个hidden layer， 16 input， 26output    done
 2. add more hidden layer done
-3. differ activation function
-4. read request to modify
-5. report
+3. load model err
+4. differ activation function
+5. read request to modify
+6. report
 
 
 

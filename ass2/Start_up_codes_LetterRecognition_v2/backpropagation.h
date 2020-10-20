@@ -32,6 +32,9 @@ public:
     void backPropagate();
     double sigmoid( double val );
     double sigmoidDerivative( double val );
+    double ReLU( double val );
+    double ReLUDerivative( double val );
+    void softmax();
     void assignRandomWeights( void );
     double trainNetwork();
     double getError_SSE();

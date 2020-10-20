@@ -4,7 +4,7 @@
 //------------------------------------------
 //
 #define INPUT_NEURONS		16
-#define HIDDEN_NEURONS		128
+#define HIDDEN_NEURONS	    128
 #define HIDDEN_NEURONS_2	256
 // #define HIDDEN_NEURONS_3	64
 #define OUTPUT_NEURONS		26 //3

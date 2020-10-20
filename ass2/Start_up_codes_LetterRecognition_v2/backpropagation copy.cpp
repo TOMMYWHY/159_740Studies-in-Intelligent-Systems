@@ -1,5 +1,4 @@
 #include "backpropagation.h"
-#include <cmath>
 
 
 #define sqr(x)	((x) * (x))
@@ -384,7 +383,7 @@ double Backpropagation::sigmoidDerivative( double val )
 
 }
 double Backpropagation::ReLU( double val ){
-//  return max(0, val); //output: x => Math.max(0, x),
+  // return max(0, val); //output: x => Math.max(0, x),
 }
 double Backpropagation::ReLUDerivative( double val )
 {
@@ -396,23 +395,7 @@ double Backpropagation::ReLUDerivative( double val )
  //    der: x => x <= 0 ? 0 : 1
 
 }
-void Backpropagation::softmax(){
-  double max_sum = -INFINITY;
-  int out;
-  for(out = 0 ; out < OUTPUT_NEURONS ; out++){
-    if(actual[out]>max_sum){
-      max_sum= actual[out];
-    }
-  }
-  double all =0.0;
-  for(out = 0 ; out < OUTPUT_NEURONS ; out++){
-      all += exp(actual[out] - max_sum);
-  }
-  double offset = max_sum + logf(all);
-  for(out = 0 ; out < OUTPUT_NEURONS ; out++){
-     actual[out] = expf(actual[out] - offset);
-  }
-}
+
 
 
 
@@ -435,10 +418,13 @@ void Backpropagation::feedForward( )
       sum += inputs[inp] * wih[inp][hid];
       // cout <<"wih[inp][hid]:"<<wih[inp][hid]<<endl;
     }
+
     /* Add in Bias */
     sum += wih[INPUT_NEURONS][hid];
       // cout <<"wih[INPUT_NEURONS][hid]:"<<wih[INPUT_NEURONS][hid]<<endl;
+
     hidden[hid] = sigmoid( sum );
+
   }
 //todo hidden2
   for(hid_2=0;hid_2 < HIDDEN_NEURONS_2;hid_2++){
@@ -450,39 +436,36 @@ void Backpropagation::feedForward( )
     sum += whh_2[HIDDEN_NEURONS][hid_2];
     hidden_2[hid_2] = sigmoid( sum );
   }
-  /* Calculate the hidden to output layer */
 
+  /* Calculate the hidden to output layer */
   for (out = 0 ; out < OUTPUT_NEURONS ; out++) {
+
     sum = 0.0;
     for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
       sum += hidden_2[hid_2] * who[hid_2][out];
     }
+
     /* Add in Bias */
     sum += who[HIDDEN_NEURONS_2][out];
 
- 
-//    actual[out] = sigmoid( sum );
-     actual[out] = ( sum );
+    actual[out] = sigmoid( sum ); // todo softmax
+    // actual[out] =  sum ; // todo softmax
 
   }
-  /*------softmax-------*/
-  softmax();
-  /*
-  double max_sum = -INFINITY;
-  for(out = 0 ; out < OUTPUT_NEURONS ; out++){
-    if(actual[out]>max_sum){
-      max_sum= actual[out];
-    }
-  }
-  double all =0.0;
-  for(out = 0 ; out < OUTPUT_NEURONS ; out++){
-      all += exp(actual[out] - max_sum);
-  }
-  double offset = max_sum + logf(all);
-  for(out = 0 ; out < OUTPUT_NEURONS ; out++){
-     actual[out] = expf(actual[out] - offset);
-  }
-*/
+
+  /*---softmax---*/ 
+  // double all;
+  // double temp[OUTPUT_NEURONS];
+  // for (out = 0 ; out < OUTPUT_NEURONS ; out++) {
+  //   temp[out] = std::exp(	actual[out]);
+  //   all = + temp[out];
+  // }
+  // for (out = 0 ; out < OUTPUT_NEURONS ; out++) {
+  //   actual[out] = std::exp(	temp[out])/all;
+  // }
+  
+
+
 }
 
 
