@@ -34,7 +34,10 @@ public:
     double sigmoidDerivative( double val );
     double ReLU( double val );
     double ReLUDerivative( double val );
+    double Tanh( double val );
+    double TanhDerivative( double val );
     void softmax();
+    double* softmaxDerivative();
     void assignRandomWeights( void );
     double trainNetwork();
     double getError_SSE();

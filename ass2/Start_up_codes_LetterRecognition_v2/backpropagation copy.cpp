@@ -1,4 +1,5 @@
 #include "backpropagation.h"
+#include <cmath>
 
 
 #define sqr(x)	((x) * (x))
@@ -383,7 +384,12 @@ double Backpropagation::sigmoidDerivative( double val )
 
 }
 double Backpropagation::ReLU( double val ){
-  // return max(0, val); //output: x => Math.max(0, x),
+ //output: x => Math.max(0, x),
+    if(val>0){
+        return val;
+    }else{
+        return 0;
+    }
 }
 double Backpropagation::ReLUDerivative( double val )
 {
@@ -393,9 +399,32 @@ double Backpropagation::ReLUDerivative( double val )
     return 1;
   }
  //    der: x => x <= 0 ? 0 : 1
-
+}
+double Backpropagation::Tanh( double val ){
+  return tanh(val);
+}
+double Backpropagation::TanhDerivative( double val ){
+  return 1 - val * val;
 }
 
+
+void Backpropagation::softmax(){
+  double max_sum = -INFINITY;
+  int out;
+  for(out = 0 ; out < OUTPUT_NEURONS ; out++){
+    if(actual[out]>max_sum){
+      max_sum= actual[out];
+    }
+  }
+  double all =0.0;
+  for(out = 0 ; out < OUTPUT_NEURONS ; out++){
+      all += exp(actual[out] - max_sum);
+  }
+  double offset = max_sum + logf(all);
+  for(out = 0 ; out < OUTPUT_NEURONS ; out++){
+     actual[out] = expf(actual[out] - offset);
+  }
+}
 
 
 
@@ -418,13 +447,12 @@ void Backpropagation::feedForward( )
       sum += inputs[inp] * wih[inp][hid];
       // cout <<"wih[inp][hid]:"<<wih[inp][hid]<<endl;
     }
-
     /* Add in Bias */
     sum += wih[INPUT_NEURONS][hid];
       // cout <<"wih[INPUT_NEURONS][hid]:"<<wih[INPUT_NEURONS][hid]<<endl;
-
     hidden[hid] = sigmoid( sum );
-
+    // hidden[hid] = ReLU( sum );
+    // hidden[hid] = Tanh( sum );
   }
 //todo hidden2
   for(hid_2=0;hid_2 < HIDDEN_NEURONS_2;hid_2++){
@@ -435,37 +463,26 @@ void Backpropagation::feedForward( )
     }
     sum += whh_2[HIDDEN_NEURONS][hid_2];
     hidden_2[hid_2] = sigmoid( sum );
+    // hidden_2[hid_2] = ReLU( sum );
+    // hidden_2[hid_2] = Tanh( sum );
   }
-
   /* Calculate the hidden to output layer */
-  for (out = 0 ; out < OUTPUT_NEURONS ; out++) {
 
+  for (out = 0 ; out < OUTPUT_NEURONS ; out++) {
     sum = 0.0;
     for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
       sum += hidden_2[hid_2] * who[hid_2][out];
     }
-
     /* Add in Bias */
     sum += who[HIDDEN_NEURONS_2][out];
 
-    actual[out] = sigmoid( sum ); // todo softmax
-    // actual[out] =  sum ; // todo softmax
+ 
+  //  actual[out] = sigmoid( sum );
+    //  actual[out] = ( sum );
 
   }
-
-  /*---softmax---*/ 
-  // double all;
-  // double temp[OUTPUT_NEURONS];
-  // for (out = 0 ; out < OUTPUT_NEURONS ; out++) {
-  //   temp[out] = std::exp(	actual[out]);
-  //   all = + temp[out];
-  // }
-  // for (out = 0 ; out < OUTPUT_NEURONS ; out++) {
-  //   actual[out] = std::exp(	temp[out])/all;
-  // }
-  
-
-
+  /*------softmax-------*/
+  softmax();
 }
 
 
@@ -484,8 +501,11 @@ void Backpropagation::backPropagate( void )
   /* Calculate the output layer error (step 3 for output cell) */
   for (out = 0 ; out < OUTPUT_NEURONS ; out++) {
     erro[out] = (target[out] - actual[out]) * sigmoidDerivative( actual[out] );
+    // erro[out] = (target[out] - actual[out]);
 
   }
+  //softmaxDerivative();
+
   /*  the hidden_2 layer  */
   for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
 
@@ -495,6 +515,8 @@ void Backpropagation::backPropagate( void )
     }
 
     errh_2[hid_2] *= sigmoidDerivative( hidden_2[hid_2] );
+    // errh_2[hid_2] *= ReLUDerivative( hidden_2[hid_2] );
+    // errh_2[hid_2] *= TanhDerivative( hidden_2[hid_2] );
 
   }
 
@@ -507,6 +529,8 @@ void Backpropagation::backPropagate( void )
     }
 
     errh[hid] *= sigmoidDerivative( hidden[hid] );
+    // errh[hid] *= ReLUDerivative( hidden[hid] );
+    // errh[hid] *= TanhDerivative( hidden[hid] );
 
   }
 
