@@ -11,8 +11,8 @@
 
 //------------------------------------------
 enum Activate_Symbol{
-    ReLU_fun=0,
-    Sigmoid_fun=1,
+    Sigmoid_fun=0,
+    ReLU_fun=1,
     Tanh_fun=2
 };
 enum Symbol{LETTER_A=0, 

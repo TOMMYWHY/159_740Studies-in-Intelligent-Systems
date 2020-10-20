@@ -435,9 +435,12 @@ void Backpropagation::feedForward( )
     }
     /* Add in Bias */
     sum += wih[INPUT_NEURONS][hid];
-    if(Activate_fun==ReLU_fun){hidden[hid] = ReLU( sum );}
-    if(Activate_fun==Sigmoid_fun){hidden[hid] = sigmoid( sum );}
-    if(Activate_fun==Tanh_fun){hidden[hid] = Tanh( sum );}
+    // if(Activate_fun==ReLU_fun){hidden[hid] = ReLU( sum );}
+    // if(Activate_fun==Sigmoid_fun){hidden[hid] = sigmoid( sum );}
+    // if(Activate_fun==Tanh_fun){hidden[hid] = Tanh( sum );}
+    // hidden[hid] = sigmoid( sum );
+    hidden[hid] = ReLU( sum );
+    // hidden[hid] = Tanh( sum );
 
   }
 //todo hidden2
@@ -448,9 +451,10 @@ void Backpropagation::feedForward( )
       sum += hidden[hid] * whh_2[hid][hid_2];
     }
     sum += whh_2[HIDDEN_NEURONS][hid_2];
-    if(Activate_fun==ReLU_fun){hidden_2[hid_2]= ReLU( sum );}
-    if(Activate_fun==Sigmoid_fun){hidden_2[hid_2]= sigmoid( sum );}
-    if(Activate_fun==Tanh_fun){hidden_2[hid_2]= Tanh( sum );}
+    // if(Activate_fun==ReLU_fun){hidden_2[hid_2]= ReLU( sum );}
+    // if(Activate_fun==Sigmoid_fun){hidden_2[hid_2]= sigmoid( sum );}
+    // if(Activate_fun==Tanh_fun){hidden_2[hid_2]= Tanh( sum );}
+    hidden[hid] = ReLU( sum );
   }
   /* Calculate the hidden to output layer */
 
@@ -461,6 +465,7 @@ void Backpropagation::feedForward( )
     }
     /* Add in Bias */
     sum += who[HIDDEN_NEURONS_2][out];
+
   //  actual[out] = sigmoid( sum );
      actual[out] = ( sum );
 
@@ -495,26 +500,38 @@ void Backpropagation::backPropagate( void )
 
   /*  the hidden_2 layer  */
   for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
+
     errh_2[hid_2] = 0.0;
     for (out = 0 ; out < OUTPUT_NEURONS ; out++) {
       errh_2[hid_2] += erro[out] * who[hid_2][out];
     }
-    if(Activate_fun==ReLU_fun){errh_2[hid_2] *= ReLUDerivative( hidden_2[hid_2] );}
-    if(Activate_fun==Sigmoid_fun){errh_2[hid_2] *= sigmoidDerivative( hidden_2[hid_2] );}
-    if(Activate_fun==Tanh_fun){errh_2[hid_2] *= TanhDerivative( hidden_2[hid_2] );}
+
+    // if(Activate_fun==ReLU_fun){errh_2[hid_2] *= ReLUDerivative( hidden_2[hid_2] );}
+    // if(Activate_fun==Sigmoid_fun){errh_2[hid_2] *= sigmoidDerivative( hidden_2[hid_2] );}
+    // if(Activate_fun==Tanh_fun){errh_2[hid_2] *= TanhDerivative( hidden_2[hid_2] );}
+    // errh_2[hid_2] *= sigmoidDerivative( hidden_2[hid_2] );
+    errh_2[hid_2] *= ReLUDerivative( hidden_2[hid_2] );
+    // errh_2[hid_2] *= TanhDerivative( hidden_2[hid_2] );
 
 
   }
 
   /* Calculate the hidden layer error (step 3 for hidden cell) */
   for (hid = 0 ; hid < HIDDEN_NEURONS ; hid++) {
+
     errh[hid] = 0.0;
     for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
       errh[hid] += errh_2[hid_2] * whh_2[hid][hid_2];
     }
-    if(Activate_fun==ReLU_fun){errh[hid] *= ReLUDerivative( hidden[hid] );}
-    if(Activate_fun==Sigmoid_fun){errh[hid] *= sigmoidDerivative( hidden[hid] );}
-    if(Activate_fun==Tanh_fun){errh[hid] *= TanhDerivative( hidden[hid] );}
+    // if(Activate_fun==ReLU_fun){errh[hid] *= ReLUDerivative( hidden[hid] );}
+    // if(Activate_fun==Sigmoid_fun){errh[hid] *= sigmoidDerivative( hidden[hid] );}
+    // if(Activate_fun==Tanh_fun){errh[hid] *= TanhDerivative( hidden[hid] );}
+
+    // errh[hid] *= sigmoidDerivative( hidden[hid] );
+    errh[hid] *= ReLUDerivative( hidden[hid] );
+    // errh[hid] *= TanhDerivative( hidden[hid] );
+
+
   }
 
 /*========updating===========*/

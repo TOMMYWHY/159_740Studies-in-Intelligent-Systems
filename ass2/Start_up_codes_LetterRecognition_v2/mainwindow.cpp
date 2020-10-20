@@ -10,6 +10,9 @@
 #include <QFile>
 #include <QFileInfo>
 #include<QFileDialog>
+#include <algorithm>
+
+
 
 //--------------------------------------
 
@@ -117,7 +120,11 @@ void MainWindow::on_pushButton_Load_File_clicked()
 
         //e.g. T,2,8,3,5,1,8,13,0,6,6,10,8,0,8,0,8
         in >> characterSymbol >> t >> letters[i].f[0] >> t >>  letters[i].f[1] >> t >>  letters[i].f[2] >> t >>  letters[i].f[3] >> t >>  letters[i].f[4] >> t >>  letters[i].f[5] >> t >>  letters[i].f[6] >> t >>  letters[i].f[7] >> t >>  letters[i].f[8] >> t >>  letters[i].f[9] >> t >>  letters[i].f[10] >> t >>  letters[i].f[11] >> t >> letters[i].f[12] >> t >> letters[i].f[13] >> t >> letters[i].f[14] >> t >> letters[i].f[15];
-
+        for (int j = 0; j < 15; j++)
+        {
+//            cout << letters[i].f[j] <<",";
+        }
+        cout <<endl;
 
         line = in.readLine();
 
@@ -259,31 +266,31 @@ void MainWindow::on_pushButton_Load_File_clicked()
             QTextStream(&lineOfData) << "number of patterns for Letter A = " << counterForLetterA << endl;
 
 
-             show_letters_msg(&msg,&lineOfData,'B',counterForLetterB);
-             show_letters_msg(&msg,&lineOfData,'C',counterForLetterC);
-             show_letters_msg(&msg,&lineOfData,'D',counterForLetterD);
-             show_letters_msg(&msg,&lineOfData,'E',counterForLetterE);
-             show_letters_msg(&msg,&lineOfData,'F',counterForLetterF);
-             show_letters_msg(&msg,&lineOfData,'G',counterForLetterG);
-             show_letters_msg(&msg,&lineOfData,'H',counterForLetterH);
-             show_letters_msg(&msg,&lineOfData,'I',counterForLetterI);
-             show_letters_msg(&msg,&lineOfData,'J',counterForLetterJ);
-             show_letters_msg(&msg,&lineOfData,'K',counterForLetterK);
-             show_letters_msg(&msg,&lineOfData,'L',counterForLetterL);
-             show_letters_msg(&msg,&lineOfData,'M',counterForLetterM);
-             show_letters_msg(&msg,&lineOfData,'N',counterForLetterN);
-             show_letters_msg(&msg,&lineOfData,'O',counterForLetterO);
-             show_letters_msg(&msg,&lineOfData,'P',counterForLetterP);
-             show_letters_msg(&msg,&lineOfData,'Q',counterForLetterQ);
-             show_letters_msg(&msg,&lineOfData,'R',counterForLetterR);
-             show_letters_msg(&msg,&lineOfData,'S',counterForLetterS);
-             show_letters_msg(&msg,&lineOfData,'T',counterForLetterT);
-             show_letters_msg(&msg,&lineOfData,'U',counterForLetterU);
-             show_letters_msg(&msg,&lineOfData,'V',counterForLetterV);
-             show_letters_msg(&msg,&lineOfData,'W',counterForLetterW);
-             show_letters_msg(&msg,&lineOfData,'X',counterForLetterX);
-             show_letters_msg(&msg,&lineOfData,'Y',counterForLetterY);
-             show_letters_msg(&msg,&lineOfData,'Z',counterForLetterZ);
+            show_letters_msg(&msg,&lineOfData,'B',counterForLetterB);
+            show_letters_msg(&msg,&lineOfData,'C',counterForLetterC);
+            show_letters_msg(&msg,&lineOfData,'D',counterForLetterD);
+            show_letters_msg(&msg,&lineOfData,'E',counterForLetterE);
+            show_letters_msg(&msg,&lineOfData,'F',counterForLetterF);
+            show_letters_msg(&msg,&lineOfData,'G',counterForLetterG);
+            show_letters_msg(&msg,&lineOfData,'H',counterForLetterH);
+            show_letters_msg(&msg,&lineOfData,'I',counterForLetterI);
+            show_letters_msg(&msg,&lineOfData,'J',counterForLetterJ);
+            show_letters_msg(&msg,&lineOfData,'K',counterForLetterK);
+            show_letters_msg(&msg,&lineOfData,'L',counterForLetterL);
+            show_letters_msg(&msg,&lineOfData,'M',counterForLetterM);
+            show_letters_msg(&msg,&lineOfData,'N',counterForLetterN);
+            show_letters_msg(&msg,&lineOfData,'O',counterForLetterO);
+            show_letters_msg(&msg,&lineOfData,'P',counterForLetterP);
+            show_letters_msg(&msg,&lineOfData,'Q',counterForLetterQ);
+            show_letters_msg(&msg,&lineOfData,'R',counterForLetterR);
+            show_letters_msg(&msg,&lineOfData,'S',counterForLetterS);
+            show_letters_msg(&msg,&lineOfData,'T',counterForLetterT);
+            show_letters_msg(&msg,&lineOfData,'U',counterForLetterU);
+            show_letters_msg(&msg,&lineOfData,'V',counterForLetterV);
+            show_letters_msg(&msg,&lineOfData,'W',counterForLetterW);
+            show_letters_msg(&msg,&lineOfData,'X',counterForLetterX);
+            show_letters_msg(&msg,&lineOfData,'Y',counterForLetterY);
+            show_letters_msg(&msg,&lineOfData,'Z',counterForLetterZ);
 
             msg.append(lineOfData);
 
@@ -294,7 +301,23 @@ void MainWindow::on_pushButton_Load_File_clicked()
         i++;
     }
 
+    /*--------dataset shuffling--------*/
+    cout<< "shuffling....";
+LetterStructure temp_letters[20001];
+for (int j = NUMBER_OF_PATTERNS; j  >0; j--)
+cout<< ".";
+{
+    int pos = rand()%i;
+    temp_letters[i]=letters[pos];
+    for (int k = pos; k < NUMBER_OF_PATTERNS; k++)
+    {
+        temp_letters[k] = temp_letters[k+1];
+    }
+    
+}
+    cout <<"done"<<endl;
     msg.append("done.");
+    /*--------dataset shuffling done--------*/
 
     ui->plainTextEdit_results->setPlainText(msg);
     qApp->processEvents();

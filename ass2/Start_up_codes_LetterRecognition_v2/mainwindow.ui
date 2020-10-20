@@ -1987,12 +1987,12 @@ p, li { white-space: pre-wrap; }
        </property>
        <item>
         <property name="text">
-         <string notr="true">ReLU</string>
+         <string notr="true">sigmoid</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string notr="true">sigmoid</string>
+         <string notr="true">ReLU</string>
         </property>
        </item>
        <item>
