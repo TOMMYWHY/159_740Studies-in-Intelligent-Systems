@@ -19,6 +19,7 @@ LetterStructure testPattern;
 bool patternsLoadedFromFile;
 int MAX_EPOCHS;
 double LEARNING_RATE;
+int Activate_fun;
 //QString Absolute_path;// = "/Users/Tommy/Desktop/studyInMassey/159_740Studies in Intelligent Systems/ass2/";
 
 //QString File_path;
@@ -37,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
     LEARNING_RATE=0.2;
     patternsLoadedFromFile = false;
     MAX_EPOCHS = 50;
+    Activate_fun = 0;
 
     bp = new Backpropagation;
 
@@ -45,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->spinBox_training_Epochs->setValue(MAX_EPOCHS);
     ui->horizScrollBar_LearningRate->setValue(int(LEARNING_RATE*100));
+//     ui->comboBox_activate_function->addItem("ReLU");
 }
 
 MainWindow::~MainWindow()
@@ -994,6 +997,9 @@ void MainWindow::on_horizScrollBar_LearningRate_actionTriggered(int action)
 
    }
 }
+
+
+
 /*----------------------------------*/
 void set_letters(){
 
@@ -1003,4 +1009,12 @@ void MainWindow:: show_letters_msg(QString *msg,QString *lineOfData, char charac
     msg->append(lineOfData);
     lineOfData->clear();
     QTextStream(lineOfData) << "number of patterns for Letter "<<characterSymbol <<" = "  << counterForLetterB << endl;
+}
+
+void MainWindow::on_comboBox_activate_currentIndexChanged(int index)
+{
+    Activate_fun = index;
+    qDebug() << "activate_funciton:" << Activate_fun;
+
+
 }

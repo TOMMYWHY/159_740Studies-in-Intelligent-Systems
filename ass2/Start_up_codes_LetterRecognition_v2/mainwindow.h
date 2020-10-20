@@ -51,6 +51,8 @@ private slots:
 
 
 
+    void on_comboBox_activate_currentIndexChanged(int index);
+
 private:
     Ui::MainWindow *ui;
     //-------------------------

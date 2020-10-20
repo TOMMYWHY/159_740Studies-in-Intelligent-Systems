@@ -10,7 +10,11 @@
 #define OUTPUT_NEURONS		26 //3
 
 //------------------------------------------
-
+enum Activate_Symbol{
+    ReLU_fun=0,
+    Sigmoid_fun=1,
+    Tanh_fun=2
+};
 enum Symbol{LETTER_A=0, 
             LETTER_B=1, 
             LETTER_C=2, 
@@ -55,6 +59,7 @@ const int NUMBER_OF_TEST_PATTERNS = 4000;
 extern bool patternsLoadedFromFile;
 extern int MAX_EPOCHS;
 extern double LEARNING_RATE;
+extern int Activate_fun;
 //extern int GLOBAL_COUNTER;
 
 
