@@ -63,7 +63,7 @@ void Backpropagation::saveWeights(QString fileName){
       for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
           //---save------------------------------------
             ::sprintf(tempBuffer3,"%f,",who[hid_2][out]);
-            qDebug() << tempBuffer3;
+            // qDebug() << tempBuffer3;
             temp3.append(tempBuffer3);
           //---------------------------------------
       }
@@ -72,7 +72,7 @@ void Backpropagation::saveWeights(QString fileName){
         ::sprintf(tempBuffer3,"%f",who[HIDDEN_NEURONS_2][out]);
         temp3.append(tempBuffer3);
         temp3.append("\n");
-        qDebug() << tempBuffer3 << endl;
+        // qDebug() << tempBuffer3 << endl;
         out3 << temp3;
       //---------------------------------------
 
@@ -86,7 +86,7 @@ void Backpropagation::saveWeights(QString fileName){
           //---save------------------------------------
             ::sprintf(tempBuffer3,"%f,",whh_2[hid][hid_2]);
             temp3.append(tempBuffer3);
-            qDebug() << tempBuffer3;
+            // qDebug() << tempBuffer3;
           //---------------------------------------
         }
 
@@ -95,7 +95,7 @@ void Backpropagation::saveWeights(QString fileName){
           ::sprintf(tempBuffer3,"%f",whh_2[HIDDEN_NEURONS][hid_2]);
           temp3.append(tempBuffer3);
           temp3.append("\n");
-          qDebug() << tempBuffer3 << endl;
+          // qDebug() << tempBuffer3 << endl;
           out3 << temp3;
         //---------------------------------------
 
@@ -110,7 +110,7 @@ void Backpropagation::saveWeights(QString fileName){
         //---save------------------------------------
           ::sprintf(tempBuffer3,"%f,",wih[inp][hid]);
           temp3.append(tempBuffer3);
-          qDebug() << tempBuffer3;
+          // qDebug() << tempBuffer3;
         //---------------------------------------
       }
 
@@ -119,7 +119,7 @@ void Backpropagation::saveWeights(QString fileName){
         ::sprintf(tempBuffer3,"%f",wih[INPUT_NEURONS][hid]);
         temp3.append(tempBuffer3);
         temp3.append("\n");
-        qDebug() << tempBuffer3 << endl;
+        // qDebug() << tempBuffer3 << endl;
         out3 << temp3;
       //---------------------------------------
 
@@ -171,10 +171,10 @@ void Backpropagation::loadWeights(QString fileName){
 
             if(hid_2 != HIDDEN_NEURONS_2){
                streamLine >> who[hid_2][out] >> tChar;
-               qDebug() << who[hid_2][out];
+              //  qDebug() << who[hid_2][out];
             } else {
                streamLine >> who[hid_2][out];
-               qDebug() << who[hid_2][out];
+              //  qDebug() << who[hid_2][out];
             }
           //---------------------------------------
       }
@@ -192,12 +192,10 @@ void Backpropagation::loadWeights(QString fileName){
 
             if(hid != HIDDEN_NEURONS){
                streamLine >> whh_2[hid][hid_2] >> tChar;
-              //  in >> whh_2[hid][hid_2] >> tChar;
-               qDebug() << whh_2[hid][hid_2];
+              //  qDebug() << whh_2[hid][hid_2];
             } else {
                streamLine >> whh_2[hid][hid_2];
-              //  in >> whh_2[hid][hid_2];
-               qDebug() << whh_2[hid][hid_2];
+              //  qDebug() << whh_2[hid][hid_2];
             }
           //---------------------------------------
       }
@@ -210,10 +208,10 @@ void Backpropagation::loadWeights(QString fileName){
         //---load------------------------------------
           if(inp != INPUT_NEURONS){
              in >> wih[inp][hid] >> tChar;
-             qDebug() << wih[inp][hid] ;
+            //  qDebug() << wih[inp][hid] ;
           } else {
              in >> wih[inp][hid];
-             qDebug() << wih[inp][hid];
+            //  qDebug() << wih[inp][hid];
           }
         //---------------------------------------
       }
@@ -221,7 +219,7 @@ void Backpropagation::loadWeights(QString fileName){
       // Update the Bias
       //---load------------------------------------
         in >> wih[INPUT_NEURONS][hid] >> tChar;
-        qDebug() << wih[INPUT_NEURONS][hid] << endl;
+        // qDebug() << wih[INPUT_NEURONS][hid] << endl;
       //---------------------------------------
 
     }

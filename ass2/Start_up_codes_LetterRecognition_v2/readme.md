@@ -2,14 +2,19 @@
 
 1. 一个hidden layer， 16 input， 26output    done
 2. add more hidden layer done
-3. load model err
-4. differ activation function -- tanh:不收敛  
-5. read request to modify
+3. load model done
+4. differ activation function -- tanh&relu learning rate <0.02
+5. read request to modify done
 6. report
 
 
 
 ## tip
+report_16_128_256_26_sigmoid_epoch50_lr02.txt
+weights_16_128_256_26_sigmoid_epoch50_lr02.txt
+
+
+
 读取dataset 和 保存 model 需要使用绝对路径
 
 path:

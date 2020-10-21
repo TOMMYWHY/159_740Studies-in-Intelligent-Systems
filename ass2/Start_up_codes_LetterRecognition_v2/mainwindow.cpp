@@ -793,12 +793,18 @@ void MainWindow::on_pushButton_Train_Network_Max_Epochs_clicked()
       ui->lcdNumber_percentageOfGoodClassification->display((1-SSE/NUMBER_OF_TRAINING_PATTERNS)*100);
       qApp->processEvents();
       //to save as reoport
-      QString report_name="report_epoch"+QString::number(MAX_EPOCHS)
-                            + "_"+QString::number(INPUT_NEURONS)
-                            +"_"+QString::number(HIDDEN_NEURONS)
-                            + "_"+QString::number(HIDDEN_NEURONS_2)
-                            + "_"+QString::number(OUTPUT_NEURONS) +".txt";
-//    QString report_path = Absolute_path+report_name;
+    //   QString report_name="report_epoch"+QString::number(MAX_EPOCHS)
+    //                         + "_"+QString::number(INPUT_NEURONS)
+    //                         +"_"+QString::number(HIDDEN_NEURONS)
+    //                         + "_"+QString::number(HIDDEN_NEURONS_2)
+    //                         + "_"+QString::number(OUTPUT_NEURONS) +".txt";
+QString report_name="report_activefun"+QString::number(Activate_fun)
+                            +"_epoch"+QString::number(MAX_EPOCHS)
+                            + "_lr"+QString::number(LEARNING_RATE)
+                            // +"_"+QString::number(HIDDEN_NEURONS)
+                            // + "_"+QString::number(HIDDEN_NEURONS_2)
+                            // + "_"+QString::number(OUTPUT_NEURONS)
+                             +".txt";
     qDebug() << report_name.toStdString().data();
 
 
