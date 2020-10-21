@@ -11,13 +11,14 @@
 #include <QFileInfo>
 #include<QFileDialog>
 #include <algorithm>
-
+#include <ctime>
 
 
 //--------------------------------------
 
 LetterStructure letters[20001];
 LetterStructure testPattern;
+LetterStructure testPattern_file[4001];
 
 bool patternsLoadedFromFile;
 int MAX_EPOCHS;
@@ -26,6 +27,7 @@ int Activate_fun;
 //QString Absolute_path;// = "/Users/Tommy/Desktop/studyInMassey/159_740Studies in Intelligent Systems/ass2/";
 
 //QString File_path;
+  QString File_test_path ;
 
 ///////////////////////////////////////////////////////
 
@@ -50,7 +52,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->spinBox_training_Epochs->setValue(MAX_EPOCHS);
     ui->horizScrollBar_LearningRate->setValue(int(LEARNING_RATE*100));
-//     ui->comboBox_activate_function->addItem("ReLU");
 }
 
 MainWindow::~MainWindow()
@@ -58,19 +59,195 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_Read_File_clicked(){
-//     QString file_path;
-//    File_path = ui->textEdit_file_path->toPlainText();
-    qDebug() << "pass";
+
+
+
+/*load test file on_pushButton_Load_Test_File_clicked*/
+void MainWindow::on_pushButton_Load_Test_File_clicked(){
+    qDebug() << "\nReading complete data file...";
+
+     File_test_path = ui->textEdit_file_path->toPlainText();
+      qDebug() << "File_test_path:"<<File_test_path;
+//      QFile file(File_trian_path);
+
+}
+/*test test_dataset file */
+
+void MainWindow::on_pushButton_Test_File_Data_clicked()
+{
+    QFile file(File_test_path);
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    if(!file.exists()){
+        patternsLoadedFromFile=false;
+        qDebug() << "test_dataset file does not exist!";
+        return;
+    }
+    QTextStream in(&file);
+    char t;
+    char characterSymbol;
+    Symbol symbol_test;
+    double* classificationResults;
+    double* outputs;
+    int correctClassifications=0;
+    QString line;
+
+    QString lineOfData;
+    classificationResults = new double[OUTPUT_NEURONS];
+    outputs = new double[OUTPUT_NEURONS];
+    int i=0;
+   for(int i=0; i < NUMBER_OF_TEST_PATTERNS; i++){
+        in >> characterSymbol >> t >> testPattern_file[i].f[0] >> t >>  testPattern_file[i].f[1] >> t >>testPattern_file[i].f[2] >> t >>  testPattern_file[i].f[3] >> t >>  testPattern_file[i].f[4] >> t >>testPattern_file[i].f[5] >> t >>  testPattern_file[i].f[6] >> t >>  testPattern_file[i].f[7] >> t >>testPattern_file[i].f[8] >> t >>  testPattern_file[i].f[9] >> t >>  testPattern_file[i].f[10] >> t >>testPattern_file[i].f[11] >> t >> testPattern_file[i].f[12] >> t >> testPattern_file[i].f[13] >> t >>testPattern_file[i].f[14] >> t >> testPattern_file[i].f[15];
+        line = in.readLine();
+        for (int k = 0; k < OUTPUT_NEURONS; k++)
+            {
+                testPattern.outputs[k]=0;
+            }
+
+        for(int j=0; j < INPUT_NEURONS; j++){
+            testPattern.f[j] = testPattern_file[i].f[j];
+            // cout << testPattern.f[j] <<" ";
+        }
+        // cout <<endl;
+        if(characterSymbol == 'A'){
+        testPattern.symbol = LETTER_A;
+        testPattern.outputs[LETTER_A] = 1;
+        } else if(characterSymbol == 'B'){
+            testPattern.symbol = LETTER_B;
+            testPattern.outputs[LETTER_B] = 1;
+        }
+        else if(characterSymbol == 'C'){
+        testPattern.symbol = LETTER_C;
+        testPattern.outputs[LETTER_C] = 1;
+        }
+        else if(characterSymbol == 'D'){
+        testPattern.symbol = LETTER_D;
+        testPattern.outputs[LETTER_D] = 1;
+        }
+        else if(characterSymbol == 'E'){
+        testPattern.symbol = LETTER_E;
+        testPattern.outputs[LETTER_E] = 1;
+        }
+        else if(characterSymbol == 'F'){
+        testPattern.symbol = LETTER_F;
+        testPattern.outputs[LETTER_F] = 1;
+        }
+        else if(characterSymbol == 'G'){
+        testPattern.symbol = LETTER_G;
+        testPattern.outputs[LETTER_G] = 1;
+        }
+        else if(characterSymbol == 'H'){
+        testPattern.symbol = LETTER_H;
+        testPattern.outputs[LETTER_H] = 1;
+        }
+        else if(characterSymbol == 'I'){
+        testPattern.symbol = LETTER_I;
+        testPattern.outputs[LETTER_I] = 1;
+        }
+        else if(characterSymbol == 'J'){
+        testPattern.symbol = LETTER_J;
+        testPattern.outputs[LETTER_J] = 1;
+        }
+        else if(characterSymbol == 'K'){
+        testPattern.symbol = LETTER_K;
+        testPattern.outputs[LETTER_K] = 1;
+        }
+        else if(characterSymbol == 'L'){
+        testPattern.symbol = LETTER_L;
+        testPattern.outputs[LETTER_L] = 1;
+        }
+        else if(characterSymbol == 'M'){
+        testPattern.symbol = LETTER_M;
+        testPattern.outputs[LETTER_M] = 1;
+        }
+        else if(characterSymbol == 'N'){
+        testPattern.symbol = LETTER_N;
+        testPattern.outputs[LETTER_N] = 1;
+        }
+        else if(characterSymbol == 'O'){
+        testPattern.symbol = LETTER_O;
+        testPattern.outputs[LETTER_O] = 1;
+        }
+        else if(characterSymbol == 'P'){
+        testPattern.symbol = LETTER_P;
+        testPattern.outputs[LETTER_P] = 1;
+        }
+        else if(characterSymbol == 'Q'){
+        testPattern.symbol = LETTER_Q;
+        testPattern.outputs[LETTER_Q] = 1;
+        }
+        else if(characterSymbol == 'R'){
+        testPattern.symbol = LETTER_R;
+        testPattern.outputs[LETTER_R] = 1;
+        }
+        else if(characterSymbol == 'S'){
+        testPattern.symbol = LETTER_S;
+        testPattern.outputs[LETTER_S] = 1;
+        }
+        else if(characterSymbol == 'T'){
+        testPattern.symbol = LETTER_T;
+        testPattern.outputs[LETTER_T] = 1;
+        }
+        else if(characterSymbol == 'U'){
+        testPattern.symbol = LETTER_U;
+        testPattern.outputs[LETTER_U] = 1;
+        }
+        else if(characterSymbol == 'V'){
+        testPattern.symbol = LETTER_V;
+        testPattern.outputs[LETTER_V] = 1;
+        }
+        else if(characterSymbol == 'W'){
+        testPattern.symbol = LETTER_W;
+        testPattern.outputs[LETTER_W] = 1;
+        }
+        else if(characterSymbol == 'X'){
+        testPattern.symbol = LETTER_X;
+        testPattern.outputs[LETTER_X] = 1;
+        }
+        else if(characterSymbol == 'Y'){
+        testPattern.symbol = LETTER_Y;
+        testPattern.outputs[LETTER_Y] = 1;
+        }
+        else if(characterSymbol == 'Z'){
+        testPattern.symbol = LETTER_Z;
+        testPattern.outputs[LETTER_Z] = 1;
+        }
+
+                    classificationResults = bp->testNetwork(testPattern);
+
+                    for(int k=0; k < OUTPUT_NEURONS; k++){
+                       outputs[k] = testPattern.outputs[k];
+                    //    cout <<outputs[k];
+                    }
+                    cout <<endl;
+                    if (bp->action(classificationResults) == bp->action(outputs)) {
+                        // cout<<bp->action(classificationResults) <<"--"<<bp->action(outputs) <<endl;
+                         correctClassifications++;
+                    }
+
+
+    }
+        qDebug() << "TEST FILE SET: correctClassifications = " << correctClassifications;
+
+         QString msg;
+
+         msg.clear();
+         QTextStream(&msg) << "TEST FILE SET: correctClassifications = " << correctClassifications << endl;
+
+
+         ui->plainTextEdit_results->setPlainText(msg);
+         qApp->processEvents();
+
+
 }
 
-void MainWindow::on_pushButton_Load_File_clicked()
+/*read complete dataset file*/
+void MainWindow::on_pushButton_Read_File_clicked()
 {
     qDebug() << "\nReading file...";
-//     QFile file("complete_data_set.txt");
-    QString File_trian_path = ui->textEdit_file_path->toPlainText();
-    qDebug() << File_trian_path;
-    QFile file(File_trian_path);
+     QFile file("complete_data_set.txt");
+//    QString File_trian_path = ui->textEdit_file_path->toPlainText();
+//    qDebug() << File_trian_path;
+//    QFile file(File_trian_path);
     file.open(QIODevice::ReadOnly | QIODevice::Text);
 
     if(!file.exists()){
@@ -120,11 +297,11 @@ void MainWindow::on_pushButton_Load_File_clicked()
 
         //e.g. T,2,8,3,5,1,8,13,0,6,6,10,8,0,8,0,8
         in >> characterSymbol >> t >> letters[i].f[0] >> t >>  letters[i].f[1] >> t >>  letters[i].f[2] >> t >>  letters[i].f[3] >> t >>  letters[i].f[4] >> t >>  letters[i].f[5] >> t >>  letters[i].f[6] >> t >>  letters[i].f[7] >> t >>  letters[i].f[8] >> t >>  letters[i].f[9] >> t >>  letters[i].f[10] >> t >>  letters[i].f[11] >> t >> letters[i].f[12] >> t >> letters[i].f[13] >> t >> letters[i].f[14] >> t >> letters[i].f[15];
-        for (int j = 0; j < 15; j++)
-        {
+//        for (int j = 0; j < 15; j++)
+//        {
 //            cout << letters[i].f[j] <<",";
-        }
-        cout <<endl;
+//        }
+//        cout <<endl;
 
         line = in.readLine();
 
@@ -302,20 +479,12 @@ void MainWindow::on_pushButton_Load_File_clicked()
     }
 
     /*--------dataset shuffling--------*/
-    cout<< "shuffling....";
-LetterStructure temp_letters[20001];
-for (int j = NUMBER_OF_PATTERNS; j  >0; j--)
-cout<< ".";
-{
-    int pos = rand()%i;
-    temp_letters[i]=letters[pos];
-    for (int k = pos; k < NUMBER_OF_PATTERNS; k++)
-    {
-        temp_letters[k] = temp_letters[k+1];
-    }
-    
-}
-    cout <<"done"<<endl;
+    cout<< "shuffling...."<<endl;
+
+    std::srand ( unsigned ( std::time(0) ) );
+    std::random_shuffle ( &letters[0], &letters[NUMBER_OF_PATTERNS] );
+
+    cout <<"shuffle done~！"<<endl;
     msg.append("done.");
     /*--------dataset shuffling done--------*/
 
@@ -673,6 +842,8 @@ void MainWindow::on_pushButton_Test_All_Patterns_clicked()
     double* classificationResults;
     double* outputs;
     int correctClassifications=0;
+    
+
 
     classificationResults = new double[OUTPUT_NEURONS];
     outputs = new double[OUTPUT_NEURONS];
@@ -682,7 +853,7 @@ void MainWindow::on_pushButton_Test_All_Patterns_clicked()
             symbol_test = letters[i].symbol;
             for (int k = 0; k < OUTPUT_NEURONS; k++)
             {
-                 testPattern.outputs[k]=0;
+                testPattern.outputs[k]=0;
             }
 
             for(int j=0; j < INPUT_NEURONS; j++){
@@ -1041,3 +1212,5 @@ void MainWindow::on_comboBox_activate_currentIndexChanged(int index)
 
 
 }
+
+

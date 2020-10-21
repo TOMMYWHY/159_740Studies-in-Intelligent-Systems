@@ -51,6 +51,7 @@ struct LetterStructure{
 
 extern LetterStructure letters[20001];
 extern LetterStructure testPattern;
+extern LetterStructure testPattern_file[4001];
 
 //extern int NUMBER_OF_PATTERNS;
 const int NUMBER_OF_PATTERNS = 20000;

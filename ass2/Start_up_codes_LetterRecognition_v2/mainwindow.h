@@ -47,11 +47,11 @@ private slots:
 
     void on_horizScrollBar_LearningRate_actionTriggered(int action);
 
-    void on_pushButton_Load_File_clicked();
-
-
+    void on_pushButton_Load_Test_File_clicked();
 
     void on_comboBox_activate_currentIndexChanged(int index);
+
+    void on_pushButton_Test_File_Data_clicked();
 
 private:
     Ui::MainWindow *ui;

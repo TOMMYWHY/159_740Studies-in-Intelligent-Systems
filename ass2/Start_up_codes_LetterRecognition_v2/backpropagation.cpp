@@ -92,7 +92,7 @@ void Backpropagation::saveWeights(QString fileName){
 
         // Update the Bias
         //---save------------------------------------
-          ::sprintf(tempBuffer3,"%f",whh_2[INPUT_NEURONS][hid_2]);
+          ::sprintf(tempBuffer3,"%f",whh_2[HIDDEN_NEURONS][hid_2]);
           temp3.append(tempBuffer3);
           temp3.append("\n");
           qDebug() << tempBuffer3 << endl;
@@ -182,21 +182,21 @@ void Backpropagation::loadWeights(QString fileName){
     }
     // Update the weights for the hidden2 layer (step 4 for hidden cell)
     for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
-      // strLine = in.readLine();
-      // QTextStream streamLine(&strLine);
+      strLine = in.readLine();
+      QTextStream streamLine(&strLine);
 
-      // streamLine.setRealNumberPrecision(12);
+      streamLine.setRealNumberPrecision(12);
       // qDebug() << "strLine = " << strLine << endl;
       for (hid = 0 ; hid <= HIDDEN_NEURONS ; hid++) {
           //---load------------------------------------
 
             if(hid != HIDDEN_NEURONS){
-              //  streamLine >> whh_2[hid][hid_2] >> tChar;
-               in >> whh_2[hid][hid_2] >> tChar;
+               streamLine >> whh_2[hid][hid_2] >> tChar;
+              //  in >> whh_2[hid][hid_2] >> tChar;
                qDebug() << whh_2[hid][hid_2];
             } else {
-              //  streamLine >> whh_2[hid][hid_2];
-               in >> whh_2[hid][hid_2];
+               streamLine >> whh_2[hid][hid_2];
+              //  in >> whh_2[hid][hid_2];
                qDebug() << whh_2[hid][hid_2];
             }
           //---------------------------------------
@@ -208,7 +208,7 @@ void Backpropagation::loadWeights(QString fileName){
       for (inp = 0 ; inp < INPUT_NEURONS ; inp++) {
 
         //---load------------------------------------
-          if(hid != INPUT_NEURONS-1){
+          if(inp != INPUT_NEURONS){
              in >> wih[inp][hid] >> tChar;
              qDebug() << wih[inp][hid] ;
           } else {
@@ -394,23 +394,43 @@ double Backpropagation::TanhDerivative( double val ){
   return 1 - val * val;
 }
 
-void Backpropagation::softmax(){
-  double max_sum = -INFINITY;
-  int out;
-  for(out = 0 ; out < OUTPUT_NEURONS ; out++){
-    if(actual[out]>max_sum){
-      max_sum= actual[out];
-    }
-  }
-  double all =0.0;
-  for(out = 0 ; out < OUTPUT_NEURONS ; out++){
-      all += exp(actual[out] - max_sum);
-  }
-  double offset = max_sum + logf(all);
-  for(out = 0 ; out < OUTPUT_NEURONS ; out++){
-     actual[out] = expf(actual[out] - offset);
-  }
-}
+/*softmax v2*/
+ void Backpropagation::softmax(){
+   double max_sum = -INFINITY;
+   int out;
+   for(out = 0 ; out < OUTPUT_NEURONS ; out++){
+     if(actual[out]>max_sum){
+       max_sum= actual[out];
+     }
+   }
+   double all =0.0;
+   for(out = 0 ; out < OUTPUT_NEURONS ; out++){
+       all += exp(actual[out] - max_sum);
+   }
+   double offset = max_sum + logf(all);
+   for(out = 0 ; out < OUTPUT_NEURONS ; out++){
+      actual[out] = expf(actual[out] - offset);
+   }
+ }
+
+/* softmax v1*/
+//void Backpropagation::softmax()
+//{
+//    double sum = 0.0;
+//    int out;
+
+//    for (out = 0 ; out < OUTPUT_NEURONS ; out++) {
+
+//      sum += exp ( actual[out] );
+
+//    }
+
+//    for (out = 0 ; out < OUTPUT_NEURONS ; out++) {
+
+//      actual[out] = exp(actual[out])  / sum;
+
+//    }
+//}
 
 
 /*
@@ -489,9 +509,9 @@ void Backpropagation::backPropagate( void )
      erro[out] = (target[out] - actual[out]);//softmax
   }
   //softmax
- for(int i = 0 ; i < OUTPUT_NEURONS ; i++){
-   erro[i] = erro[i]*(actual[i] * (1 - actual[i]));
- }
+// for(int i = 0 ; i < OUTPUT_NEURONS ; i++){
+//   erro[i] = erro[i]*(actual[i] * (1 - actual[i]));
+// }
 
   /*  the hidden_2 layer  */
   for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
