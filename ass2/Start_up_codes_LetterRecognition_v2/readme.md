@@ -10,26 +10,24 @@
 
 
 ## tip
-report_16_128_256_26_sigmoid_epoch50_lr02.txt
-weights_16_128_256_26_sigmoid_epoch50_lr02.txt
+### structure:
+> 16,128,256,26
+activate function:
+> Sigmoid_fun=0,
+> ReLU_fun=1,
+> Tanh_fun=2
+### record format:
+> report:report_activefun0_epoch3_lr0.02.txt
+> weight:weights_activefun0_epoch3_lr0.02.txt
+
+1. 
 
 
 
-读取dataset 和 保存 model 需要使用绝对路径
-
-path:
-/Users/Tommy/Desktop/studyInMassey/159_740Studies in Intelligent Systems/ass2/Start_up_codes_LetterRecognition_v2/sigmod_16-128-256-26_50epoch.txt
-
-v1: sigmod_16-128-256-26_50epoch acc:
-v1: sigmod_16-128-256-26_100epoch acc: 94.81
 
 
-v2: relu_16-128-256-26_50epoch acc:
-v2: relu_16-128-256-26_100epoch acc:
-
-v2: tanh_16-128-256-26_50epoch acc:
-v2: tanh_16-128-256-26_100epoch acc:
+abslute path:
+> /Users/Tommy/Desktop/studyInMassey/159_740Studies in Intelligent Systems/ass2/build-LetterRecognition-Desktop_Qt_5_15_1_clang_64bit-Debug/LetterRecognition.app/Contents/MacOS
 
 
-report path:
-/Users/Tommy/Desktop/studyInMassey/159_740Studies in Intelligent Systems/ass2/build-LetterRecognition-Desktop_Qt_5_15_1_clang_64bit-Debug/LetterRecognition.app/Contents/MacOS
+
