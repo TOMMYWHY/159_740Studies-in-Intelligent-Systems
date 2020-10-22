@@ -42,7 +42,7 @@ public:
     double trainNetwork();
     double getError_SSE();
     int action( double *vector );
-    double* testNetwork(LetterStructure testPattern);
+    double* testNetwork(LetterStructure testPattern,double &err);
     double RAND_WEIGHT();
 
 private:

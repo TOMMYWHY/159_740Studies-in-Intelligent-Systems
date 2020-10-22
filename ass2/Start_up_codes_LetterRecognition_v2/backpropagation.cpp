@@ -247,8 +247,12 @@ int Backpropagation::action( double *vector )
   return( sel );
 }
 
-double* Backpropagation::testNetwork(LetterStructure testPattern){
+double* Backpropagation::testNetwork(LetterStructure testPattern,double &err){
     //retrieve input patterns
+
+    // double accumulatedErr=0.0;
+
+    err = 0.0;
     for(int j=0; j < INPUT_NEURONS; j++){
        inputs[j] = testPattern.f[j];
     }
@@ -256,8 +260,13 @@ double* Backpropagation::testNetwork(LetterStructure testPattern){
     for(int i=0; i < OUTPUT_NEURONS; i++){
         target[i] = testPattern.outputs[i];
     }
-
     feedForward();
+    for (int k = 0 ; k < OUTPUT_NEURONS ; k++) {
+      err += sqr( (testPattern.outputs[k] - actual[k]) );
+    }
+    err = 0.5 * err;
+    // accumulatedErr =  accumulatedErr + err;
+   
 
 
     return actual;

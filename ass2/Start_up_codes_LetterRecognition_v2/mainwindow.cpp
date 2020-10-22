@@ -94,6 +94,8 @@ void MainWindow::on_pushButton_Test_File_Data_clicked()
     QString lineOfData;
     classificationResults = new double[OUTPUT_NEURONS];
     outputs = new double[OUTPUT_NEURONS];
+        double accumulatedErr;
+
     int i=0;
    for(int i=0; i < NUMBER_OF_TEST_PATTERNS; i++){
         in >> characterSymbol >> t >> testPattern_file[i].f[0] >> t >>  testPattern_file[i].f[1] >> t >>testPattern_file[i].f[2] >> t >>  testPattern_file[i].f[3] >> t >>  testPattern_file[i].f[4] >> t >>testPattern_file[i].f[5] >> t >>  testPattern_file[i].f[6] >> t >>  testPattern_file[i].f[7] >> t >>testPattern_file[i].f[8] >> t >>  testPattern_file[i].f[9] >> t >>  testPattern_file[i].f[10] >> t >>testPattern_file[i].f[11] >> t >> testPattern_file[i].f[12] >> t >> testPattern_file[i].f[13] >> t >>testPattern_file[i].f[14] >> t >> testPattern_file[i].f[15];
@@ -212,21 +214,24 @@ void MainWindow::on_pushButton_Test_File_Data_clicked()
         testPattern.outputs[LETTER_Z] = 1;
         }
 
-                    classificationResults = bp->testNetwork(testPattern);
+    double err;
+    classificationResults = bp->testNetwork(testPattern,err);
+    accumulatedErr = accumulatedErr + err;
 
-                    for(int k=0; k < OUTPUT_NEURONS; k++){
-                       outputs[k] = testPattern.outputs[k];
-                    //    cout <<outputs[k];
-                    }
-                    cout <<endl;
-                    if (bp->action(classificationResults) == bp->action(outputs)) {
-                        // cout<<bp->action(classificationResults) <<"--"<<bp->action(outputs) <<endl;
-                         correctClassifications++;
-                    }
+    for(int k=0; k < OUTPUT_NEURONS; k++){
+        outputs[k] = testPattern.outputs[k];
+    //    cout <<outputs[k];
+    }
+    // cout <<endl;
+    if (bp->action(classificationResults) == bp->action(outputs)) {
+        // cout<<bp->action(classificationResults) <<"--"<<bp->action(outputs) <<endl;
+            correctClassifications++;
+    }
 
 
     }
-        qDebug() << "TEST FILE SET: correctClassifications = " << correctClassifications;
+        qDebug() << "TEST FILE SET: correctClassifications = " << correctClassifications 
+        <<" PGC: "<< (1-accumulatedErr/NUMBER_OF_TEST_PATTERNS)*100<<" MSE: "<< accumulatedErr/NUMBER_OF_TEST_PATTERNS;
 
          QString msg;
 
@@ -245,9 +250,6 @@ void MainWindow::on_pushButton_Read_File_clicked()
 {
     qDebug() << "\nReading file...";
      QFile file("complete_data_set.txt");
-//    QString File_trian_path = ui->textEdit_file_path->toPlainText();
-//    qDebug() << File_trian_path;
-//    QFile file(File_trian_path);
     file.open(QIODevice::ReadOnly | QIODevice::Text);
 
     if(!file.exists()){
@@ -629,7 +631,10 @@ void MainWindow::on_pushButton_Classify_Test_Pattern_clicked()
 
 
     //---------------------------------
-    classificationResults = bp->testNetwork(testPattern);
+    double err;
+
+    classificationResults = bp->testNetwork(testPattern,err);
+
 
     ui->lcdNumber_A->display(classificationResults[0]);
     ui->lcdNumber_B->display(classificationResults[1]);
@@ -665,9 +670,9 @@ void MainWindow::on_pushButton_Classify_Test_Pattern_clicked()
     cout <<"outputs:";
     for(int k=0; k < OUTPUT_NEURONS; k++){
        outputs[k] = testPattern.outputs[k];
-       cout << outputs[k];
+    //    cout << outputs[k];
     }
-    cout <<endl;
+    // cout <<endl;
     //-----------------------------------------------------------
      QString textClassification;
      switch(bp->action(outputs)){
@@ -849,13 +854,10 @@ void MainWindow::on_pushButton_Test_All_Patterns_clicked()
     double* outputs;
     int correctClassifications=0;
     
-
-
     classificationResults = new double[OUTPUT_NEURONS];
     outputs = new double[OUTPUT_NEURONS];
-
+    double accumulatedErr;
     for(int i=NUMBER_OF_TRAINING_PATTERNS; i < NUMBER_OF_PATTERNS; i++){
-
             symbol_test = letters[i].symbol;
             for (int k = 0; k < OUTPUT_NEURONS; k++)
             {
@@ -866,7 +868,7 @@ void MainWindow::on_pushButton_Test_All_Patterns_clicked()
                 testPattern.f[j] = letters[i].f[j];
                 // cout <<letters[i].f[j];
             }
-            cout <<endl;
+            // cout <<endl;
 
             //This part could be implemented more concisely
             if(symbol_test == LETTER_A){
@@ -981,13 +983,15 @@ void MainWindow::on_pushButton_Test_All_Patterns_clicked()
             // }
 
             //---------------------------------
-            classificationResults = bp->testNetwork(testPattern);
+            double err;
+            classificationResults = bp->testNetwork(testPattern,err);
+            accumulatedErr = accumulatedErr + err;
 
             for(int k=0; k < OUTPUT_NEURONS; k++){
                outputs[k] = testPattern.outputs[k];
             //    cout <<outputs[k];
             }
-            cout <<endl;
+            // cout <<endl;
             if (bp->action(classificationResults) == bp->action(outputs)) {
                 // cout<<bp->action(classificationResults) <<"--"<<bp->action(outputs) <<endl;
                  correctClassifications++;
@@ -996,7 +1000,9 @@ void MainWindow::on_pushButton_Test_All_Patterns_clicked()
         }
 
 
-      qDebug() << "TEST SET: correctClassifications = " << correctClassifications;
+      qDebug() << "TEST SET: correctClassifications = " << correctClassifications<<
+      " PGC: "<< (1-accumulatedErr/NUMBER_OF_TEST_PATTERNS)*100<<
+      " MSE: "<< accumulatedErr/NUMBER_OF_TEST_PATTERNS;
 
       QString msg;
 
@@ -1049,6 +1055,7 @@ void MainWindow::on_pushButton_testNetOnTrainingSet_clicked()
 
     classificationResults = new double[OUTPUT_NEURONS];
     outputs = new double[OUTPUT_NEURONS];
+    double accumulatedErr;
 
     for(int i=0; i < NUMBER_OF_TRAINING_PATTERNS; i++){
 
@@ -1169,7 +1176,10 @@ void MainWindow::on_pushButton_testNetOnTrainingSet_clicked()
             }
 
             //---------------------------------
-            classificationResults = bp->testNetwork(testPattern);
+             double err;
+
+            classificationResults = bp->testNetwork(testPattern,err);
+            accumulatedErr = accumulatedErr + err;
 
             for(int k=0; k < OUTPUT_NEURONS; k++){
                outputs[k] = testPattern.outputs[k];
@@ -1180,7 +1190,9 @@ void MainWindow::on_pushButton_testNetOnTrainingSet_clicked()
             }
 
      }
-     qDebug() << "TRAINING SET: correctClassifications = " << correctClassifications;
+     qDebug() << "TRAINING SET: correctClassifications = " << correctClassifications<<
+     " PGC: "<< (1-accumulatedErr/NUMBER_OF_TRAINING_PATTERNS)*100<<
+      " MSE: "<< accumulatedErr/NUMBER_OF_TRAINING_PATTERNS;
      QString msg;
 
      msg.clear();
