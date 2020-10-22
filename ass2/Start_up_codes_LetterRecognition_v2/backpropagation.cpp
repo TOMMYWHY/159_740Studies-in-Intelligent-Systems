@@ -291,29 +291,20 @@ double Backpropagation::trainNetwork()
     while (1) {
         //retrieve input patterns
         for(int j=0; j < INPUT_NEURONS; j++){
-           inputs[j] = letters[sample].f[j];//features
-          //  cout <<"inputs[j]"<<inputs[j] <<endl;
+           inputs[j] = letters[sample].f[j];//features 
         }
-
         for(int i=0; i < OUTPUT_NEURONS; i++){
             target[i] = letters[sample].outputs[i];//0-25 one hot code
-            //  cout <<"target[i]"<<target[i] <<endl;
         }
         feedForward();
-
         /* need to iterate through all ... */
         err = 0.0;
         for (int k = 0 ; k < OUTPUT_NEURONS ; k++) {
-
           err += sqr( (letters[sample].outputs[k] - actual[k]) );
         }
-
         err = 0.5 * err;
-
         accumulatedErr = accumulatedErr + err;
-
         backPropagate();
-
         if (++sample == NUMBER_OF_TRAINING_PATTERNS) {
             qDebug() << "training used " << sample << " example patterns."  << endl;
             break;
@@ -451,11 +442,8 @@ void Backpropagation::feedForward( )
 {
   int inp, hid,hid_2, out;
   double sum;
-
-
   /* Calculate input to hidden layer */
   for (hid = 0 ; hid < HIDDEN_NEURONS ; hid++) {
-
     sum = 0.0;
     for (inp = 0 ; inp < INPUT_NEURONS ; inp++) {
       sum += inputs[inp] * wih[inp][hid];
@@ -465,7 +453,6 @@ void Backpropagation::feedForward( )
     if(Activate_fun==ReLU_fun){hidden[hid] = ReLU( sum );}
     if(Activate_fun==Sigmoid_fun){hidden[hid] = sigmoid( sum );}
     if(Activate_fun==Tanh_fun){hidden[hid] = Tanh( sum );}
-
   }
 //todo hidden2
   for(hid_2=0;hid_2 < HIDDEN_NEURONS_2;hid_2++){
@@ -490,7 +477,6 @@ void Backpropagation::feedForward( )
     sum += who[HIDDEN_NEURONS_2][out];
   //  actual[out] = sigmoid( sum );
      actual[out] = ( sum );
-
   }
   /*------softmax-------*/
   softmax();
@@ -515,11 +501,6 @@ void Backpropagation::backPropagate( void )
 //     erro[out] = (target[out] - actual[out])* sigmoidDerivative( actual[out] );
      erro[out] = (target[out] - actual[out]);//softmax
   }
-  //softmax
-// for(int i = 0 ; i < OUTPUT_NEURONS ; i++){
-//   erro[i] = erro[i]*(actual[i] * (1 - actual[i]));
-// }
-
   /*  the hidden_2 layer  */
   for (hid_2 = 0 ; hid_2 < HIDDEN_NEURONS_2 ; hid_2++) {
     errh_2[hid_2] = 0.0;
@@ -529,8 +510,6 @@ void Backpropagation::backPropagate( void )
     if(Activate_fun==ReLU_fun){errh_2[hid_2] *= ReLUDerivative( hidden_2[hid_2] );}
     if(Activate_fun==Sigmoid_fun){errh_2[hid_2] *= sigmoidDerivative( hidden_2[hid_2] );}
     if(Activate_fun==Tanh_fun){errh_2[hid_2] *= TanhDerivative( hidden_2[hid_2] );}
-
-
   }
 
   /* Calculate the hidden layer error (step 3 for hidden cell) */

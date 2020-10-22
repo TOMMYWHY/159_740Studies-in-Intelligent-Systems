@@ -49,14 +49,20 @@ struct LetterStructure{
     float f[INPUT_NEURONS];
 };
 
-extern LetterStructure letters[20001];
+extern LetterStructure letters[16001];
 extern LetterStructure testPattern;
 extern LetterStructure testPattern_file[4001];
 
 //extern int NUMBER_OF_PATTERNS;
-const int NUMBER_OF_PATTERNS = 20000;
+// const int NUMBER_OF_PATTERNS = 20000;
+// const int NUMBER_OF_TRAINING_PATTERNS = 16000;
+// const int NUMBER_OF_TEST_PATTERNS = 4000;
+
+const int NUMBER_OF_PATTERNS = 16000;
 const int NUMBER_OF_TRAINING_PATTERNS = 16000;
 const int NUMBER_OF_TEST_PATTERNS = 4000;
+
+
 extern bool patternsLoadedFromFile;
 extern int MAX_EPOCHS;
 extern double LEARNING_RATE;

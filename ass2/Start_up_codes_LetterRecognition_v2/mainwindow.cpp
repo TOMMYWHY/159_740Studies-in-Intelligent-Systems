@@ -16,7 +16,7 @@
 
 //--------------------------------------
 
-LetterStructure letters[20001];
+LetterStructure letters[16001];
 LetterStructure testPattern;
 LetterStructure testPattern_file[4001];
 
@@ -233,11 +233,28 @@ void MainWindow::on_pushButton_Test_File_Data_clicked()
         qDebug() << "TEST FILE SET: correctClassifications = " << correctClassifications 
         <<" PGC: "<< (1-accumulatedErr/NUMBER_OF_TEST_PATTERNS)*100<<" MSE: "<< accumulatedErr/NUMBER_OF_TEST_PATTERNS;
 
+    
          QString msg;
 
          msg.clear();
          QTextStream(&msg) << "TEST FILE SET: correctClassifications = " << correctClassifications << endl;
 
+    QString report_name="report_test_activefun"+QString::number(Activate_fun)
+                            +"_epoch"+QString::number(MAX_EPOCHS)
+                            + "_lr"+QString::number(LEARNING_RATE)
+                            // +"_"+QString::number(HIDDEN_NEURONS)
+                            // + "_"+QString::number(HIDDEN_NEURONS_2)
+                            // + "_"+QString::number(OUTPUT_NEURONS)
+                             +".txt";
+    qDebug() << report_name.toStdString().data();
+      QFile file_report (report_name);
+      bool isOk =file_report.open(QIODevice::ReadWrite | QIODevice::Append);
+      if (isOk){
+           QTextStream stream(&file_report);
+           stream<<"epoch:"<<(i) <<"; SSE:"<<(accumulatedErr)
+           << "; MSE: " <<(accumulatedErr/NUMBER_OF_TEST_PATTERNS) << "\n";
+        }
+        file_report.close();
 
          ui->plainTextEdit_results->setPlainText(msg);
          qApp->processEvents();
@@ -788,6 +805,7 @@ void MainWindow::on_pushButton_Train_Network_Max_Epochs_clicked()
     MAX_EPOCHS = ui->spinBox_training_Epochs->value();
     QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
     int e=0;
+    
     for(int i=0; i < MAX_EPOCHS; i++){
       msg.clear();
       msg.append("\nTraining in progress...\n");
@@ -798,18 +816,11 @@ void MainWindow::on_pushButton_Train_Network_Max_Epochs_clicked()
       ui->lcdNumber_percentageOfGoodClassification->display((1-SSE/NUMBER_OF_TRAINING_PATTERNS)*100);
       qApp->processEvents();
       //to save as reoport
-    //   QString report_name="report_epoch"+QString::number(MAX_EPOCHS)
-    //                         + "_"+QString::number(INPUT_NEURONS)
-    //                         +"_"+QString::number(HIDDEN_NEURONS)
-    //                         + "_"+QString::number(HIDDEN_NEURONS_2)
-    //                         + "_"+QString::number(OUTPUT_NEURONS) +".txt";
+
 QString report_name="report_activefun"+QString::number(Activate_fun)
                             +"_epoch"+QString::number(MAX_EPOCHS)
                             + "_lr"+QString::number(LEARNING_RATE)
-                            // +"_"+QString::number(HIDDEN_NEURONS)
-                            // + "_"+QString::number(HIDDEN_NEURONS_2)
-                            // + "_"+QString::number(OUTPUT_NEURONS)
-                             +".txt";
+                            +".txt";
     qDebug() << report_name.toStdString().data();
 
 
@@ -848,6 +859,7 @@ void MainWindow::on_pushButton_Initialise_Network_clicked()
 
 void MainWindow::on_pushButton_Test_All_Patterns_clicked()
 {
+
     char characterSymbol;
     Symbol symbol_test;
     double* classificationResults;
@@ -999,15 +1011,15 @@ void MainWindow::on_pushButton_Test_All_Patterns_clicked()
 
         }
 
-
-      qDebug() << "TEST SET: correctClassifications = " << correctClassifications<<
-      " PGC: "<< (1-accumulatedErr/NUMBER_OF_TEST_PATTERNS)*100<<
-      " MSE: "<< accumulatedErr/NUMBER_OF_TEST_PATTERNS;
+    qDebug() << "Useless button~!";
+    //   qDebug() << "TEST SET: correctClassifications = " << correctClassifications<<
+    //   " PGC: "<< (1-accumulatedErr/NUMBER_OF_TEST_PATTERNS)*100<<
+    //   " MSE: "<< accumulatedErr/NUMBER_OF_TEST_PATTERNS;
 
       QString msg;
 
       msg.clear();
-      QTextStream(&msg) << "TEST SET: correctClassifications = " << correctClassifications << endl;
+      QTextStream(&msg) << "Useless button~! " << endl;
 
 
       ui->plainTextEdit_results->setPlainText(msg);
