@@ -16,7 +16,7 @@
 
 //--------------------------------------
 
-LetterStructure letters[16001];
+LetterStructure letters[20001];
 LetterStructure testPattern;
 LetterStructure testPattern_file[4001];
 
@@ -214,30 +214,31 @@ void MainWindow::on_pushButton_Test_File_Data_clicked()
         testPattern.outputs[LETTER_Z] = 1;
         }
 
-    double err;
-    classificationResults = bp->testNetwork(testPattern,err);
-    accumulatedErr = accumulatedErr + err;
+        double err;
+        classificationResults = bp->testNetwork(testPattern,err);
+        accumulatedErr = accumulatedErr + err;
 
-    for(int k=0; k < OUTPUT_NEURONS; k++){
-        outputs[k] = testPattern.outputs[k];
-    //    cout <<outputs[k];
+        for(int k=0; k < OUTPUT_NEURONS; k++){
+            outputs[k] = testPattern.outputs[k];
+        //    cout <<outputs[k];
+        }
+        // cout <<endl;
+        if (bp->action(classificationResults) == bp->action(outputs)) {
+            // cout<<bp->action(classificationResults) <<"--"<<bp->action(outputs) <<endl;
+                correctClassifications++;
+        }
     }
-    // cout <<endl;
-    if (bp->action(classificationResults) == bp->action(outputs)) {
-        // cout<<bp->action(classificationResults) <<"--"<<bp->action(outputs) <<endl;
-            correctClassifications++;
-    }
+
+    ui->lcdNumber_percentageOfGoodClassification->display(((float)correctClassifications/NUMBER_OF_TEST_PATTERNS) *100);
+    qDebug() << "TEST FILE SET: correctClassifications = " << correctClassifications 
+    <<" PGC: "<<  ((float)correctClassifications/NUMBER_OF_TEST_PATTERNS) *100<<
+    " MSE: "<< accumulatedErr/NUMBER_OF_TEST_PATTERNS;
 
 
-    }
-        qDebug() << "TEST FILE SET: correctClassifications = " << correctClassifications 
-        <<" PGC: "<< (1-accumulatedErr/NUMBER_OF_TEST_PATTERNS)*100<<" MSE: "<< accumulatedErr/NUMBER_OF_TEST_PATTERNS;
+    QString msg;
 
-    
-         QString msg;
-
-         msg.clear();
-         QTextStream(&msg) << "TEST FILE SET: correctClassifications = " << correctClassifications << endl;
+    msg.clear();
+    QTextStream(&msg) << "TEST FILE SET: correctClassifications = " << correctClassifications << endl;
 
     QString report_name="report_test_activefun"+QString::number(Activate_fun)
                             +"_epoch"+QString::number(MAX_EPOCHS)
@@ -252,7 +253,8 @@ void MainWindow::on_pushButton_Test_File_Data_clicked()
       if (isOk){
            QTextStream stream(&file_report);
            stream<<"epoch:"<<(i) <<"; SSE:"<<(accumulatedErr)
-           << "; MSE: " <<(accumulatedErr/NUMBER_OF_TEST_PATTERNS) << "\n";
+           << "; MSE: " <<(accumulatedErr/NUMBER_OF_TEST_PATTERNS) 
+           << "; PGC: " <<  ((float)correctClassifications/NUMBER_OF_TEST_PATTERNS) *100 << "\n";
         }
         file_report.close();
 
@@ -813,6 +815,7 @@ void MainWindow::on_pushButton_Train_Network_Max_Epochs_clicked()
       SSE = bp->trainNetwork(); //trains for 1 epoch
       ui->lcdNumber_SSE->display(SSE);
       cout <<"SSE:"<<SSE<< "; MSE: " <<SSE/NUMBER_OF_TRAINING_PATTERNS << endl;
+
       ui->lcdNumber_percentageOfGoodClassification->display((1-SSE/NUMBER_OF_TRAINING_PATTERNS)*100);
       qApp->processEvents();
       //to save as reoport
@@ -1011,10 +1014,12 @@ void MainWindow::on_pushButton_Test_All_Patterns_clicked()
 
         }
 
-    qDebug() << "Useless button~!";
-    //   qDebug() << "TEST SET: correctClassifications = " << correctClassifications<<
-    //   " PGC: "<< (1-accumulatedErr/NUMBER_OF_TEST_PATTERNS)*100<<
-    //   " MSE: "<< accumulatedErr/NUMBER_OF_TEST_PATTERNS;
+
+    ui->lcdNumber_percentageOfGoodClassification->display(((float)correctClassifications/NUMBER_OF_TEST_PATTERNS) *100);
+
+      qDebug() << "TEST SET: correctClassifications = " << correctClassifications<<
+      " PGC: "<< ((float)correctClassifications/NUMBER_OF_TEST_PATTERNS) *100<<
+      " MSE: "<< accumulatedErr/NUMBER_OF_TEST_PATTERNS;
 
       QString msg;
 
@@ -1202,8 +1207,10 @@ void MainWindow::on_pushButton_testNetOnTrainingSet_clicked()
             }
 
      }
+    ui->lcdNumber_percentageOfGoodClassification->display(((float)correctClassifications/NUMBER_OF_TRAINING_PATTERNS) *100);
+
      qDebug() << "TRAINING SET: correctClassifications = " << correctClassifications<<
-     " PGC: "<< (1-accumulatedErr/NUMBER_OF_TRAINING_PATTERNS)*100<<
+     " PGC: "<<  ((float)correctClassifications/NUMBER_OF_TRAINING_PATTERNS) *100<<
       " MSE: "<< accumulatedErr/NUMBER_OF_TRAINING_PATTERNS;
      QString msg;
 
