@@ -267,7 +267,7 @@ double* Backpropagation::testNetwork(LetterStructure testPattern,double &err){
     err = 0.5 * err;
     // accumulatedErr =  accumulatedErr + err;
    
-
+  
 
     return actual;
 
@@ -312,6 +312,7 @@ double Backpropagation::trainNetwork()
 
       }
       qDebug() << "1 epoch training complete.";
+    
       return accumulatedErr;
 }
 

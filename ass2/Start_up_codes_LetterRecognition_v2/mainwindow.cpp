@@ -12,6 +12,7 @@
 #include<QFileDialog>
 #include <algorithm>
 #include <ctime>
+#include <vector>
 
 
 //--------------------------------------
@@ -94,7 +95,8 @@ void MainWindow::on_pushButton_Test_File_Data_clicked()
     QString lineOfData;
     classificationResults = new double[OUTPUT_NEURONS];
     outputs = new double[OUTPUT_NEURONS];
-        double accumulatedErr;
+    double accumulatedErr;
+    vector<vector <int> > confusion_matrix(OUTPUT_NEURONS ,vector<int>(OUTPUT_NEURONS,0));
 
     int i=0;
    for(int i=0; i < NUMBER_OF_TEST_PATTERNS; i++){
@@ -222,7 +224,8 @@ void MainWindow::on_pushButton_Test_File_Data_clicked()
             outputs[k] = testPattern.outputs[k];
         //    cout <<outputs[k];
         }
-        // cout <<endl;
+        confusion_matrix[bp->action(outputs)][bp->action(classificationResults)]++;   
+
         if (bp->action(classificationResults) == bp->action(outputs)) {
             // cout<<bp->action(classificationResults) <<"--"<<bp->action(outputs) <<endl;
                 correctClassifications++;
@@ -233,12 +236,13 @@ void MainWindow::on_pushButton_Test_File_Data_clicked()
     qDebug() << "TEST FILE SET: correctClassifications = " << correctClassifications 
     <<" PGC: "<<  ((float)correctClassifications/NUMBER_OF_TEST_PATTERNS) *100<<
     " MSE: "<< accumulatedErr/NUMBER_OF_TEST_PATTERNS;
-
-
     QString msg;
 
     msg.clear();
     QTextStream(&msg) << "TEST FILE SET: correctClassifications = " << correctClassifications << endl;
+
+    
+
 
     QString report_name="report_test_activefun"+QString::number(Activate_fun)
                             +"_epoch"+QString::number(MAX_EPOCHS)
@@ -247,19 +251,41 @@ void MainWindow::on_pushButton_Test_File_Data_clicked()
                             // + "_"+QString::number(HIDDEN_NEURONS_2)
                             // + "_"+QString::number(OUTPUT_NEURONS)
                              +".txt";
-    qDebug() << report_name.toStdString().data();
-      QFile file_report (report_name);
-      bool isOk =file_report.open(QIODevice::ReadWrite | QIODevice::Append);
-      if (isOk){
-           QTextStream stream(&file_report);
-           stream<<"epoch:"<<(i) <<"; SSE:"<<(accumulatedErr)
-           << "; MSE: " <<(accumulatedErr/NUMBER_OF_TEST_PATTERNS) 
-           << "; PGC: " <<  ((float)correctClassifications/NUMBER_OF_TEST_PATTERNS) *100 << "\n";
-        }
-        file_report.close();
+    // qDebug() << report_name.toStdString().data();
+    QFile file_report (report_name);
+    bool isOk =file_report.open(QIODevice::ReadWrite | QIODevice::Append);
+    if (isOk){
+        QTextStream stream(&file_report);
+        stream<<"epoch:"<<(i) <<"; SSE:"<<(accumulatedErr)
+        << "; MSE: " <<(accumulatedErr/NUMBER_OF_TEST_PATTERNS) 
+        << "; PGC: " <<  ((float)correctClassifications/NUMBER_OF_TEST_PATTERNS) *100 << "\n";
+    }
+    qDebug() <<"report save as:" <<report_name.toStdString().data();
 
-         ui->plainTextEdit_results->setPlainText(msg);
-         qApp->processEvents();
+    file_report.close();
+
+    QString confusion_matrix_name = "confusion_matrix"+report_name;
+    // qDebug() << confusion_matrix_name.toStdString().data();
+    QFile file_CM (confusion_matrix_name);
+    bool isOk_cm =file_CM.open(QIODevice::ReadWrite | QIODevice::Append);
+    if (isOk_cm){
+        QTextStream stream(&file_CM);
+        for (int m = 0; m < OUTPUT_NEURONS; m++)
+        {
+            for (int n = 0; n < OUTPUT_NEURONS; n++)
+            {
+                stream<<confusion_matrix[m][n] <<",";
+            }
+            stream<< "\n";
+        }
+
+        qDebug() <<"confusion_matrix save as:" <<confusion_matrix_name.toStdString().data();
+
+    }
+    file_CM.close();
+
+    ui->plainTextEdit_results->setPlainText(msg);
+    qApp->processEvents();
 
 
 }
@@ -814,6 +840,7 @@ void MainWindow::on_pushButton_Train_Network_Max_Epochs_clicked()
 
       SSE = bp->trainNetwork(); //trains for 1 epoch
       ui->lcdNumber_SSE->display(SSE);
+      
       cout <<"SSE:"<<SSE<< "; MSE: " <<SSE/NUMBER_OF_TRAINING_PATTERNS << endl;
 
       ui->lcdNumber_percentageOfGoodClassification->display((1-SSE/NUMBER_OF_TRAINING_PATTERNS)*100);
@@ -871,125 +898,129 @@ void MainWindow::on_pushButton_Test_All_Patterns_clicked()
     
     classificationResults = new double[OUTPUT_NEURONS];
     outputs = new double[OUTPUT_NEURONS];
+
+//    vector< vector<double>> confusion_matrix;
+    vector<vector <int> > confusion_matrix(OUTPUT_NEURONS ,vector<int>(OUTPUT_NEURONS,0));
     double accumulatedErr;
     for(int i=NUMBER_OF_TRAINING_PATTERNS; i < NUMBER_OF_PATTERNS; i++){
-            symbol_test = letters[i].symbol;
-            for (int k = 0; k < OUTPUT_NEURONS; k++)
-            {
-                testPattern.outputs[k]=0;
-            }
 
-            for(int j=0; j < INPUT_NEURONS; j++){
-                testPattern.f[j] = letters[i].f[j];
-                // cout <<letters[i].f[j];
-            }
-            // cout <<endl;
+        symbol_test = letters[i].symbol;
+        for (int k = 0; k < OUTPUT_NEURONS; k++)
+        {
+            testPattern.outputs[k]=0;
+        }
 
-            //This part could be implemented more concisely
-            if(symbol_test == LETTER_A){
-                testPattern.symbol = LETTER_A;
-                testPattern.outputs[0] = 1;
-            }
-            else if(symbol_test == LETTER_B){
-                testPattern.symbol = LETTER_B;
-                testPattern.outputs[1] = 1;
-            }
-            else if(symbol_test == LETTER_C){
-            testPattern.symbol = LETTER_C;
-            testPattern.outputs[2] = 1;
-            }
-            else if(symbol_test == LETTER_D){
-            testPattern.symbol = LETTER_D;
-            testPattern.outputs[3] = 1;
-            }
-            else if(symbol_test == LETTER_E){
-            testPattern.symbol = LETTER_E;
-            testPattern.outputs[4] = 1;
-            }
-            else if(symbol_test == LETTER_F){
-            testPattern.symbol = LETTER_F;
-            testPattern.outputs[5] = 1;
-            }
-            else if(symbol_test == LETTER_G){
-            testPattern.symbol = LETTER_G;
-            testPattern.outputs[6] = 1;
-            }
-            else if(symbol_test == LETTER_H){
-            testPattern.symbol = LETTER_H;
-            testPattern.outputs[7] = 1;
-            }
-            else if(symbol_test == LETTER_I){
-            testPattern.symbol = LETTER_I;
-            testPattern.outputs[8] = 1;
-            }
-            else if(symbol_test == LETTER_J){
-            testPattern.symbol = LETTER_J;
-            testPattern.outputs[9] = 1;
-            }
-            else if(symbol_test == LETTER_K){
-            testPattern.symbol = LETTER_K;
-            testPattern.outputs[10] = 1;
-            }
-            else if(symbol_test == LETTER_L){
-            testPattern.symbol = LETTER_L;
-            testPattern.outputs[11] = 1;
-            }
-            else if(symbol_test == LETTER_M){
-            testPattern.symbol = LETTER_M;
-            testPattern.outputs[12] = 1;
-            }
-            else if(symbol_test == LETTER_N){
-            testPattern.symbol = LETTER_N;
-            testPattern.outputs[13] = 1;
-            }
-            else if(symbol_test == LETTER_O){
-            testPattern.symbol = LETTER_O;
-            testPattern.outputs[14] = 1;
-            }
-            else if(symbol_test == LETTER_P){
-            testPattern.symbol = LETTER_P;
-            testPattern.outputs[15] = 1;
-            }
-            else if(symbol_test == LETTER_Q){
-            testPattern.symbol = LETTER_Q;
-            testPattern.outputs[16] = 1;
-            }
-            else if(symbol_test == LETTER_R){
-            testPattern.symbol = LETTER_R;
-            testPattern.outputs[17] = 1;
-            }
-            else if(symbol_test == LETTER_S){
-            testPattern.symbol = LETTER_S;
-            testPattern.outputs[18] = 1;
-            }
-            else if(symbol_test == LETTER_T){
-            testPattern.symbol = LETTER_T;
-            testPattern.outputs[19] = 1;
-            }
-            else if(symbol_test == LETTER_U){
-            testPattern.symbol = LETTER_U;
-            testPattern.outputs[20] = 1;
-            }
-            else if(symbol_test == LETTER_V){
-            testPattern.symbol = LETTER_V;
-            testPattern.outputs[21] = 1;
-            }
-            else if(symbol_test == LETTER_W){
-            testPattern.symbol = LETTER_W;
-            testPattern.outputs[22] = 1;
-            }
-            else if(symbol_test == LETTER_X){
-            testPattern.symbol = LETTER_X;
-            testPattern.outputs[23] = 1;
-            }
-            else if(symbol_test == LETTER_Y){
-            testPattern.symbol = LETTER_Y;
-            testPattern.outputs[24] = 1;
-            }
-            else if(symbol_test == LETTER_Z){
-            testPattern.symbol = LETTER_Z;
-            testPattern.outputs[25] = 1;
-            }
+        for(int j=0; j < INPUT_NEURONS; j++){
+            testPattern.f[j] = letters[i].f[j];
+            // cout <<letters[i].f[j];
+        }
+        // cout <<endl;
+
+        //This part could be implemented more concisely
+        if(symbol_test == LETTER_A){
+            testPattern.symbol = LETTER_A;
+            testPattern.outputs[0] = 1;
+        }
+        else if(symbol_test == LETTER_B){
+            testPattern.symbol = LETTER_B;
+            testPattern.outputs[1] = 1;
+        }
+        else if(symbol_test == LETTER_C){
+        testPattern.symbol = LETTER_C;
+        testPattern.outputs[2] = 1;
+        }
+        else if(symbol_test == LETTER_D){
+        testPattern.symbol = LETTER_D;
+        testPattern.outputs[3] = 1;
+        }
+        else if(symbol_test == LETTER_E){
+        testPattern.symbol = LETTER_E;
+        testPattern.outputs[4] = 1;
+        }
+        else if(symbol_test == LETTER_F){
+        testPattern.symbol = LETTER_F;
+        testPattern.outputs[5] = 1;
+        }
+        else if(symbol_test == LETTER_G){
+        testPattern.symbol = LETTER_G;
+        testPattern.outputs[6] = 1;
+        }
+        else if(symbol_test == LETTER_H){
+        testPattern.symbol = LETTER_H;
+        testPattern.outputs[7] = 1;
+        }
+        else if(symbol_test == LETTER_I){
+        testPattern.symbol = LETTER_I;
+        testPattern.outputs[8] = 1;
+        }
+        else if(symbol_test == LETTER_J){
+        testPattern.symbol = LETTER_J;
+        testPattern.outputs[9] = 1;
+        }
+        else if(symbol_test == LETTER_K){
+        testPattern.symbol = LETTER_K;
+        testPattern.outputs[10] = 1;
+        }
+        else if(symbol_test == LETTER_L){
+        testPattern.symbol = LETTER_L;
+        testPattern.outputs[11] = 1;
+        }
+        else if(symbol_test == LETTER_M){
+        testPattern.symbol = LETTER_M;
+        testPattern.outputs[12] = 1;
+        }
+        else if(symbol_test == LETTER_N){
+        testPattern.symbol = LETTER_N;
+        testPattern.outputs[13] = 1;
+        }
+        else if(symbol_test == LETTER_O){
+        testPattern.symbol = LETTER_O;
+        testPattern.outputs[14] = 1;
+        }
+        else if(symbol_test == LETTER_P){
+        testPattern.symbol = LETTER_P;
+        testPattern.outputs[15] = 1;
+        }
+        else if(symbol_test == LETTER_Q){
+        testPattern.symbol = LETTER_Q;
+        testPattern.outputs[16] = 1;
+        }
+        else if(symbol_test == LETTER_R){
+        testPattern.symbol = LETTER_R;
+        testPattern.outputs[17] = 1;
+        }
+        else if(symbol_test == LETTER_S){
+        testPattern.symbol = LETTER_S;
+        testPattern.outputs[18] = 1;
+        }
+        else if(symbol_test == LETTER_T){
+        testPattern.symbol = LETTER_T;
+        testPattern.outputs[19] = 1;
+        }
+        else if(symbol_test == LETTER_U){
+        testPattern.symbol = LETTER_U;
+        testPattern.outputs[20] = 1;
+        }
+        else if(symbol_test == LETTER_V){
+        testPattern.symbol = LETTER_V;
+        testPattern.outputs[21] = 1;
+        }
+        else if(symbol_test == LETTER_W){
+        testPattern.symbol = LETTER_W;
+        testPattern.outputs[22] = 1;
+        }
+        else if(symbol_test == LETTER_X){
+        testPattern.symbol = LETTER_X;
+        testPattern.outputs[23] = 1;
+        }
+        else if(symbol_test == LETTER_Y){
+        testPattern.symbol = LETTER_Y;
+        testPattern.outputs[24] = 1;
+        }
+        else if(symbol_test == LETTER_Z){
+        testPattern.symbol = LETTER_Z;
+        testPattern.outputs[25] = 1;
+        }
             //  else {
             //     testPattern.symbol = UNKNOWN;
             //     testPattern.outputs[0] = 0;
@@ -998,22 +1029,43 @@ void MainWindow::on_pushButton_Test_All_Patterns_clicked()
             // }
 
             //---------------------------------
-            double err;
-            classificationResults = bp->testNetwork(testPattern,err);
-            accumulatedErr = accumulatedErr + err;
+        double err;
+        classificationResults = bp->testNetwork(testPattern,err);
+        accumulatedErr = accumulatedErr + err;
 
-            for(int k=0; k < OUTPUT_NEURONS; k++){
-               outputs[k] = testPattern.outputs[k];
-            //    cout <<outputs[k];
-            }
-            // cout <<endl;
-            if (bp->action(classificationResults) == bp->action(outputs)) {
-                // cout<<bp->action(classificationResults) <<"--"<<bp->action(outputs) <<endl;
-                 correctClassifications++;
-            }
-
+        for(int k=0; k < OUTPUT_NEURONS; k++){
+            outputs[k] = testPattern.outputs[k];
+        //    cout <<outputs[k];
         }
+        // cout<<bp->action(classificationResults) <<"--"<<bp->action(outputs) <<endl;
+        confusion_matrix[bp->action(outputs)][bp->action(classificationResults)]++;   
+        // for (int i = 0; i < OUTPUT_NEURONS; i++)
+        // {
+        //     for (int j = 0; j < OUTPUT_NEURONS; j++)
+        //     {
+               
+        //         // confusion_matrix[20][22]++;
+        //         // cout <<"0" <<" ";
+        //     }
+        //     //   cout << endl;
+        // }
 
+        if (bp->action(classificationResults) == bp->action(outputs)) {
+            // cout<<bp->action(classificationResults) <<"--"<<bp->action(outputs) <<endl;
+                correctClassifications++;
+        }
+        
+    }
+
+    cout <<"confusion_matrix"<< endl;
+    for (int m = 0; m < OUTPUT_NEURONS; m++)
+    {
+        for (int n = 0; n < OUTPUT_NEURONS; n++)
+        {
+            cout <<confusion_matrix[m][n] <<",";
+        }
+        cout << endl;
+    }
 
     ui->lcdNumber_percentageOfGoodClassification->display(((float)correctClassifications/NUMBER_OF_TEST_PATTERNS) *100);
 
@@ -1024,7 +1076,7 @@ void MainWindow::on_pushButton_Test_All_Patterns_clicked()
       QString msg;
 
       msg.clear();
-      QTextStream(&msg) << "Useless button~! " << endl;
+    //   QTextStream(&msg) << "Useless button~! " << endl;
 
 
       ui->plainTextEdit_results->setPlainText(msg);
