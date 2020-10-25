@@ -5,7 +5,7 @@
 3. load model done
 4. differ activation function -- tanh&relu learning rate <0.02
 5. read request to modify done
-6. report
+6. report confusion matrix
 
 
 

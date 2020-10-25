@@ -835,14 +835,15 @@ void MainWindow::on_pushButton_Train_Network_Max_Epochs_clicked()
     int e=0;
     
     for(int i=0; i < MAX_EPOCHS; i++){
-      msg.clear();
-      msg.append("\nTraining in progress...\n");
+        msg.clear();
+        msg.append("\nTraining in progress...\n");
 
-      SSE = bp->trainNetwork(); //trains for 1 epoch
-      ui->lcdNumber_SSE->display(SSE);
-      
-      cout <<"SSE:"<<SSE<< "; MSE: " <<SSE/NUMBER_OF_TRAINING_PATTERNS << endl;
-
+        SSE = bp->trainNetwork(); //trains for 1 epoch
+        ui->lcdNumber_SSE->display(SSE);
+        cout <<"SSE:"<<SSE<< "; MSE: " <<SSE/NUMBER_OF_TRAINING_PATTERNS << endl;
+        
+       
+        // cout << "pgc:" <<correctClassifications/NUMBER_OF_TRAINING_PATTERNS <<endl;
       ui->lcdNumber_percentageOfGoodClassification->display((1-SSE/NUMBER_OF_TRAINING_PATTERNS)*100);
       qApp->processEvents();
       //to save as reoport
